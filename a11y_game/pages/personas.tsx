@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Button from '../components/Button/Button'
+import CodeEditor from '../components/CodeEditor/CodeEditor'
 import Persona from '../components/Persona/Persona'
 
 export default function Home() {
@@ -60,7 +61,7 @@ export default function Home() {
                         age={73}
                         pronouns='She / Her'
                         text='"Online shopping with Keyboard-only is hard, but physical shops arent accessible either"' />
-                </div>    
+                </div>
             </main>
         </div>
     )
