@@ -85,6 +85,7 @@ const GlobalStyle = createGlobalStyle`
 
     p {
         font-family: 'Roboto', sans-serif;
+        max-width: 602px;
     }
 
 `
