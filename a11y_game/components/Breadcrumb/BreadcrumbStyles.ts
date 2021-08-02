@@ -25,7 +25,7 @@ const BreadcrumbStyles = styled.div<Props>`
             
         }
 
-        li.active-item a{
+        li.active-item a, li:last-of-type a{
             font-weight: 500;
             text-decoration: none;
         }

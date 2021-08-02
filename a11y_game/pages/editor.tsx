@@ -10,7 +10,7 @@ export default function Home() {
             </Head>
 
             <main >
-                <CodeEditor />
+                <CodeEditor initialHTML="<h1 id='myHeading'>Helloou</h1>" initialCSS="h1 {color: blue};" initialJS="var x = document.getElementById('myHeading'); x.classList.add('hi');"/>
             </main>
         </div>
     )
