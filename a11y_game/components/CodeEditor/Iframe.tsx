@@ -8,16 +8,18 @@ type IframeProps = {
     level?: string
 }
 
-export default function IFrame ({ children, head, ...props }:IframeProps)  {
+export default function IFrame ({ children, head, level, ...props }:IframeProps)  {
     const [contentRef, setContentRef] = useState<any>(null);
     const mountNode = contentRef?.contentWindow?.document?.body
     const mountHead =
     contentRef?.contentWindow?.document?.head
 
     return (
-    <iframe {...props} ref={setContentRef} width="100%">
-        {mountHead && createPortal(head, mountHead)}
-        {mountNode && createPortal(children, mountNode)}
-    </iframe>
+        <IframeStyles level={level}>
+            <iframe {...props} ref={setContentRef} width="100%">
+                {mountHead && createPortal(head, mountHead)}
+                {mountNode && createPortal(children, mountNode)}
+            </iframe>
+        </IframeStyles>
     )
 }

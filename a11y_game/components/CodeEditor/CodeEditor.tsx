@@ -1,6 +1,8 @@
+
 import CodeEditorStyles from "./CodeEditorStyles";
 import IFrame from "./Iframe";
 import React, { useRef, useEffect, useState, createElement } from "react";
+import Tabs from "../Tabs/Tabs";
 
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
@@ -8,7 +10,27 @@ import { basicSetup } from "@codemirror/basic-setup";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
 import {javascript} from "@codemirror/lang-javascript";
-import { oneDark } from "@codemirror/theme-one-dark";
+
+let oneDark = EditorView.theme({
+  "&": {
+    color: "#3b6b76",
+    backgroundColor: "#dce6eb"
+  },
+  ".cm-content": {
+    caretColor: "#0e9"
+  },
+  "&.cm-focused .cm-cursor": {
+    borderLeftColor: "#0e9"
+  },
+  "&.cm-focused .cm-selectionBackground, ::selection": {
+    backgroundColor: "#074"
+  },
+  ".cm-gutters": {
+    backgroundColor: "#045",
+    color: "#3b6b76",
+    border: "none"
+  }
+}, {dark: false})
 
 
 type EditorProps = {
@@ -18,7 +40,7 @@ type EditorProps = {
   level?: string;
 }
 
-export default function CodeEditor({initialHTML, initialCSS, initialJS, level}:EditorProps) {
+export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }: EditorProps) {
 
   // Local state
   const [editorTreeValue, setEditorTreeValue] = useState<string[]>([]);
@@ -107,9 +129,9 @@ export default function CodeEditor({initialHTML, initialCSS, initialJS, level}:E
 	
   // Component for display text
   const OutputIframe = () => (
-    <IFrame level={level} head={<style dangerouslySetInnerHTML={{__html: CSS}}></style>}>
-      <div className="Container" dangerouslySetInnerHTML={{__html: HTML}}></div>
-      <script type="text/javascript" dangerouslySetInnerHTML={{__html: JS}}></script>
+    <IFrame level={level} head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}>
+      <div className="Container" dangerouslySetInnerHTML={{ __html: HTML }}></div>
+      <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JS }}></script>
     </IFrame>
   );
 
@@ -122,18 +144,20 @@ export default function CodeEditor({initialHTML, initialCSS, initialJS, level}:E
     </div>
   );
 
-    return (
-        <CodeEditorStyles>
-         <div className='row col-12'>
-          <div className="col-6">
-            <div id="codemirror-editor-wrapper-html" />
-            <div id="codemirror-editor-wrapper-css" />
-            <div id="codemirror-editor-wrapper-js" />
-          </div>
-          <div className='col-6'>
-            <OutputIframe />            
-          </div>
+  return (
+    <CodeEditorStyles level={level}>
+      <div className='row col-12'>
+      <div className="col-6 editor">
+        <Tabs
+          tabkeys={["tab--html", "tab--css", "tab--js"]}
+          tabnames={["HTML", "CSS", "JS"]}
+          contents={[<div key="0" id="codemirror-editor-wrapper-html" />, <div key="1" id="codemirror-editor-wrapper-css" />, <div key="2" id="codemirror-editor-wrapper-js" />]}
+        />
         </div>
-        </CodeEditorStyles>
+        <div className='col-6 output'>
+          <OutputIframe />            
+        </div>
+      </div>
+    </CodeEditorStyles>
     )
 }
