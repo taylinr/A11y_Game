@@ -43,7 +43,9 @@ type EditorProps = {
 export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }: EditorProps) {
 
   // Local state
-  const [editorTreeValue, setEditorTreeValue] = useState<string[]>([]);
+  const [editorTreeValueHTML, setEditorTreeValueHTML] = useState<string[]>([]);
+  const [editorTreeValueCSS, setEditorTreeValueCSS] = useState<string[]>([]);
+  const [editorTreeValueJS, setEditorTreeValueJS] = useState<string[]>([]);
   const [HTML, setHTML] = useState<string>("");
   const [CSS, setCSS] = useState<string>("");
   const [JS, setJS] = useState<string>("");
@@ -51,7 +53,8 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
   // Ref of the editor
   const editor = useRef<EditorView>();
 
-	
+  const tree = {editorTreeValueHTML, editorTreeValueCSS, editorTreeValueJS}
+
   // Event listener on editor updates
   const onUpdateHTML = () =>
     EditorView.updateListener.of((v: ViewUpdate) => {
@@ -62,7 +65,7 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
       let treeArray = new Array();
       treeArray = [...doc.toJSON()];
 
-      if (treeArray !== editorTreeValue) setEditorTreeValue(treeArray);
+      if (treeArray !== editorTreeValueHTML) setEditorTreeValueHTML(treeArray);
     });
   
   
@@ -77,7 +80,7 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
       let treeArray = new Array();
       treeArray = [...doc.toJSON()];
 
-      if (treeArray !== editorTreeValue) setEditorTreeValue(treeArray);
+      if (treeArray !== editorTreeValueCSS) setEditorTreeValueCSS(treeArray);
     });
   
   
@@ -91,7 +94,7 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
       let treeArray = new Array();
       treeArray = [...doc.toJSON()];
 
-      if (treeArray !== editorTreeValue) setEditorTreeValue(treeArray);
+      if (treeArray !== editorTreeValueJS) setEditorTreeValueJS(treeArray);
     });
 	
   // Initilize view
@@ -139,7 +142,7 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
   const OutputArray = () => (
     <div className="output__array">
       <pre>
-        <code>{JSON.stringify(editorTreeValue, null, 2)}</code>
+        <code>{JSON.stringify(tree, null, 2)}</code>
       </pre>
     </div>
   );
@@ -151,11 +154,16 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
         <Tabs
           tabkeys={["tab--html", "tab--css", "tab--js"]}
           tabnames={["HTML", "CSS", "JS"]}
-          contents={[<div key="0" id="codemirror-editor-wrapper-html" />, <div key="1" id="codemirror-editor-wrapper-css" />, <div key="2" id="codemirror-editor-wrapper-js" />]}
+          contents={[
+            <div key="0" id="codemirror-editor-wrapper-html" />,
+            <div key="1" id="codemirror-editor-wrapper-css" />,
+            <div key="2" id="codemirror-editor-wrapper-js" />
+          ]}
         />
         </div>
         <div className='col-6 output'>
-          <OutputIframe />            
+          <OutputIframe />
+          <OutputArray/>
         </div>
       </div>
     </CodeEditorStyles>
