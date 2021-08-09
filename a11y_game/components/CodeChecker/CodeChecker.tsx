@@ -2,7 +2,7 @@
 import { Code } from '../../model/code.model';
 import { CSSObject } from '../../model/css.model';
 import { HTMLStyles } from '../../model/htmlStyles.model';
-import { parse } from 'node-html-parser';
+import { parse, HTMLElement, Node } from 'node-html-parser';
 import { html } from '@codemirror/lang-html';
 
 var htmlStylesArray: HTMLStyles[] = [];
@@ -12,11 +12,11 @@ const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
     var exsistsAlready: boolean = false;
 
     htmlStylesArray.forEach(htmlStyle => {
-        if (node.toString() == htmlStyle.Node.toString()) {
+        if (node.toString() == htmlStyle.node.toString()) {
             //the node is already in the Array
             exsistsAlready = true;
 
-            htmlStyle.Properties.forEach(exsistingProp => {
+            htmlStyle.properties.forEach(exsistingProp => {
 
                 properties.forEach(newProp => {
                     if (newProp != "" && exsistingProp != "") {
@@ -28,7 +28,7 @@ const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
                             exsistingProp = newProp;
                         } else {
                             //add property to current styles
-                            htmlStyle.Properties.push(newProp);
+                            htmlStyle.properties.push(newProp);
                         }
                     }
                 });
@@ -42,12 +42,12 @@ const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
 }
 
 
-const getCSSPropsFromStylesArray = (node: Node) => {
+const getCSSPropsFromStylesArray = (node: Node | ParentNode) => {
     var props: string[] = [];
 
     htmlStylesArray.forEach(htmlStyle => {
-        if (node.toString() == htmlStyle.Node.toString()) {
-            props = htmlStyle.Properties;
+        if (node.toString() == htmlStyle.node.toString()) {
+            props = htmlStyle.properties;
         }
     });
 
@@ -90,19 +90,19 @@ const parseHTMLObject = (code: Code) => {
     });
 
     HTML = '<html><body>' + HTML + '</body></html>';    
-    const htmlObject = parse(HTML);
+    const htmlObject: HTMLElement = parse(HTML);
     htmlObject.removeWhitespace();
 
     return htmlObject;
 }
 
-const getCSSForNode = (element: any, cssObject: CSSObject[], htmlArray: any) => {
+const getCSSForNode = (element: Node, cssObject: CSSObject[], htmlArray: HTMLElement) => {
     var props: string[] = [];
     var isInCSS: boolean = false;
 
     cssObject.forEach(selectorArray => {
         selectorArray.Selectors.forEach(selector => {
-            let testElements: any[] = htmlArray.querySelectorAll(selector);
+            let testElements: HTMLElement[] = htmlArray.querySelectorAll(selector);
 
             testElements.forEach(testElement => {
                 var isSameElement: boolean = (testElement && element) ? testElement.toString() == element.toString() : false;
@@ -119,17 +119,17 @@ const getCSSForNode = (element: any, cssObject: CSSObject[], htmlArray: any) => 
     return props;    
 }
 
-const recurseDomChildren = (start: any, cssObject: CSSObject[], htmlArray: any) =>
+const recurseDomChildren = (start: Node, cssObject: CSSObject[], htmlArray: HTMLElement) =>
 {
-    var nodes;
+    var nodes: Node [];
     if(start.childNodes)
     {
-        nodes = start.childNodes;
+        nodes = start.childNodes as Node[];
         loopNodeChildren(nodes, cssObject, htmlArray);
     }
 }
 
-const loopNodeChildren = (nodes: any, cssObject: CSSObject[], htmlArray: any) =>
+const loopNodeChildren = (nodes: Node[], cssObject: CSSObject[], htmlArray: HTMLElement) =>
 {
     var node;
     if (nodes) {
@@ -138,7 +138,7 @@ const loopNodeChildren = (nodes: any, cssObject: CSSObject[], htmlArray: any) =>
             node = nodes[i];
             // setCSSPropsForHTMLElement(node, cssObject, htmlArray);
 
-            htmlStylesArray.push(new HTMLStyles(node, getCSSForNode(node, cssObject, htmlArray)));
+            addNodeToHTMLStylesArray(node, getCSSForNode(node, cssObject, htmlArray));
             
             if(node.childNodes)
             {
@@ -152,8 +152,8 @@ export function checkContrast(code: Code) {
 
     var valid : boolean = true;
 
-    const cssObject = parseCSSObjectArray(code);
-    const htmlObject = parseHTMLObject(code);
+    const cssObject: CSSObject[] = parseCSSObjectArray(code);
+    const htmlObject: HTMLElement = parseHTMLObject(code);
 
     htmlStylesArray = [];
 
@@ -281,8 +281,8 @@ export function checkContrast(code: Code) {
         var backgroundColor: string = '';
         var fontColor: string = '';
 
-        const currentProperties: string[] = htmlStylesArray[i].Properties;
-        const currentNode: Node = htmlStylesArray[i].Node;
+        const currentProperties: string[] = htmlStylesArray[i].properties;
+        const currentNode = htmlStylesArray[i].node;
 
         if (currentNode.nodeType == 3) {
             currentProperties.forEach(property => {

@@ -1,6 +1,8 @@
+
+import { Node } from 'node-html-parser';
 export class HTMLStyles {
-    constructor(public Node: Node,
-                public Properties: string[]) {
+    constructor(public node: Node,
+                public properties: string[]) {
         
     }
 }
