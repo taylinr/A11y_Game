@@ -1,6 +1,6 @@
 import TabsStyles from './TabsStyles'
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
 
 interface TabProps {
@@ -58,13 +58,13 @@ type TabsProps = {
 
 export default function Tabs({ tabnames, contents, tabkeys }: TabsProps) {
     
-    const [tabActive, setActive] = useState(tabkeys[0]);
+  const [tabActive, setActive] = useState(tabkeys[0]);
 
     return (
         <TabsStyles>
             <div className="tab__buttons">
                 {tabnames.map(function(name, index){
-                    return <Tab key={name} className={tabkeys[index]} tabActive={tabActive === tabkeys[index]} onClick={() => setActive(tabkeys[index])}>{name}</Tab>;
+                  return <Tab key={name} className={tabkeys[index]} tabActive={tabActive === tabkeys[index]} onClick={() => { setActive(tabkeys[index]); }}>{name}</Tab>;
                   })}
                 
             </div>

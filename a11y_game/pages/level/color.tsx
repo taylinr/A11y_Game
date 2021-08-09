@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import CodeEditor from '../../components/CodeEditor/CodeEditor'
-
+import ColorContrastChecker from '../../components/ColorContrastChecker/ColorContrastChecker'
 export default function Home() {
     return (
         <div >
@@ -19,7 +18,7 @@ export default function Home() {
                         
                     </div>
                 </div>
-                <CodeEditor initialHTML="<h1 id='myHeading'>Helloou</h1>" initialCSS="h1 {color: blue};" initialJS="var x = document.getElementById('myHeading'); x.classList.add('hi');" level='color'/>
+                <ColorContrastChecker />
             </main>
         </div>
     )

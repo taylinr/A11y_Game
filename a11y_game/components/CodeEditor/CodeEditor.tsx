@@ -1,8 +1,9 @@
 
 import CodeEditorStyles from "./CodeEditorStyles";
 import IFrame from "./Iframe";
-import React, { useRef, useEffect, useState, createElement } from "react";
+import React, { useRef, useEffect, useState, createElement, JSXElementConstructor } from "react";
 import Tabs from "../Tabs/Tabs";
+import { Code } from "../../model/code.model";
 
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
@@ -34,38 +35,38 @@ let oneDark = EditorView.theme({
 
 
 type EditorProps = {
+  setCode: Function;
   initialCSS?: string;
   initialHTML?: string;
   initialJS?: string;
   level?: string;
 }
 
-export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }: EditorProps) {
+export default function CodeEditor({ initialHTML, initialCSS, initialJS, level, setCode }: EditorProps) {
 
   // Local state
   const [editorTreeValueHTML, setEditorTreeValueHTML] = useState<string[]>([]);
   const [editorTreeValueCSS, setEditorTreeValueCSS] = useState<string[]>([]);
-  const [editorTreeValueJS, setEditorTreeValueJS] = useState<string[]>([]);
   const [HTML, setHTML] = useState<string>("");
   const [CSS, setCSS] = useState<string>("");
-  const [JS, setJS] = useState<string>("");
 
   // Ref of the editor
   const editor = useRef<EditorView>();
 
-  const tree = {editorTreeValueHTML, editorTreeValueCSS, editorTreeValueJS}
-
+  const tree: Code = new Code(editorTreeValueHTML, editorTreeValueCSS);
+  
   // Event listener on editor updates
   const onUpdateHTML = () =>
     EditorView.updateListener.of((v: ViewUpdate) => {
       const doc = v.state.doc;
       const value = doc.toString();
       if (value !== HTML) setHTML(value);
-
       let treeArray = new Array();
       treeArray = [...doc.toJSON()];
 
-      if (treeArray !== editorTreeValueHTML) setEditorTreeValueHTML(treeArray);
+      if (treeArray !== editorTreeValueHTML) {
+        setEditorTreeValueHTML(treeArray);
+      }     
     });
   
   
@@ -76,26 +77,13 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
 
       const value = doc.toString();
       if (value !== CSS) setCSS(value);
-
       let treeArray = new Array();
       treeArray = [...doc.toJSON()];
-
-      if (treeArray !== editorTreeValueCSS) setEditorTreeValueCSS(treeArray);
+      if (treeArray !== editorTreeValueCSS) {
+        setEditorTreeValueCSS(treeArray);
+      }
     });
-  
-  
-  const onUpdateJS = () =>
-    EditorView.updateListener.of((v: ViewUpdate) => {
-      const doc = v.state.doc;
 
-      const value = doc.toString();
-      if (value !== CSS) setJS(value);
-
-      let treeArray = new Array();
-      treeArray = [...doc.toJSON()];
-
-      if (treeArray !== editorTreeValueJS) setEditorTreeValueJS(treeArray);
-    });
 	
   // Initilize view
   useEffect(function initEditorView() {
@@ -118,33 +106,20 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
       parent: elCSS as Element,
     });
 
-    const elJS = document.getElementById("codemirror-editor-wrapper-js");
-    editor.current = new EditorView({
-      state: EditorState.create({
-        doc: initialJS,
-        extensions: [basicSetup, javascript(), oneDark, onUpdateJS()],
-      }),
-      parent: elJS as Element,
-    });
-
-
   }, []);
+
+
+  useEffect(function () {
+    setCode(tree);
+  }, [editorTreeValueHTML, editorTreeValueCSS]);
+
 	
   // Component for display text
   const OutputIframe = () => (
     <IFrame level={level} head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}>
       <div className="Container" dangerouslySetInnerHTML={{ __html: HTML }}></div>
-      <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JS }}></script>
+      {/* <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JS }}></script> */}
     </IFrame>
-  );
-
-  // // Component for display array from editor
-  const OutputArray = () => (
-    <div className="output__array">
-      <pre>
-        <code>{JSON.stringify(tree, null, 2)}</code>
-      </pre>
-    </div>
   );
 
   return (
@@ -152,18 +127,16 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level }
       <div className='row col-12'>
       <div className="col-6 editor">
         <Tabs
-          tabkeys={["tab--html", "tab--css", "tab--js"]}
-          tabnames={["HTML", "CSS", "JS"]}
+          tabkeys={["tab--html", "tab--css"]}
+          tabnames={["HTML", "CSS"]}
           contents={[
             <div key="0" id="codemirror-editor-wrapper-html" />,
-            <div key="1" id="codemirror-editor-wrapper-css" />,
-            <div key="2" id="codemirror-editor-wrapper-js" />
+            <div key="1" id="codemirror-editor-wrapper-css" />
           ]}
         />
         </div>
         <div className='col-6 output'>
           <OutputIframe />
-          <OutputArray/>
         </div>
       </div>
     </CodeEditorStyles>
