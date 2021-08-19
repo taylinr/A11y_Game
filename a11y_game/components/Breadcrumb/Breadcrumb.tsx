@@ -4,7 +4,7 @@ import Breadcrumbs from 'nextjs-breadcrumbs';
 
 
 
-export default function Breadcrumb({ }) {
+const Breadcrumb = ({ }) => {
 
     return (
 
@@ -18,3 +18,5 @@ export default function Breadcrumb({ }) {
     )
     
 }
+
+export default Breadcrumb;

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import PersonaStyles from './PersonaStyles'
 
 type PersonaProps = {
+    target: string
     alt: string
     image: string
     disability: string
@@ -12,13 +13,12 @@ type PersonaProps = {
     text: string
 }
 
-export default function Persona({image, alt, disability, name, age, pronouns, text } : PersonaProps) {
+const Persona = ({target, image, alt, disability, name, age, pronouns, text } : PersonaProps) => {
     return (
-        <Link href={'/personas/' + name}>
+        <Link href={'/personas/' + target}>
             <PersonaStyles >
                 <div className={'persona__wrapper'}>
                     <Image
-                        
                         src={image}
                         height={240}
                         width={240}
@@ -40,3 +40,5 @@ export default function Persona({image, alt, disability, name, age, pronouns, te
         </Link>
     )
 }
+
+export default Persona

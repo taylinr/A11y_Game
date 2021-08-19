@@ -9,19 +9,12 @@ interface Props {
 const CodeEditorStyles = styled.div<Props>`
 
     .editor {
-        padding-right: ${({ theme }) => (theme.baseSpace + "px")};     
+        padding-right: ${({ theme }) => (theme.baseSpace * 0.5 + "px")};     
        
     }
 
     .output {
-        padding-left: ${({ theme }) => (theme.baseSpace + "px")};
-        margin-top: ${({ theme }) => (theme.baseSpace * 3.5 + "px")};
-
-        iframe {
-            border: ${({ theme }) => ("1px solid " + theme.primary)};
-            border-radius:  ${({ theme }) => (theme.baseSpace * 1.5 + 'px ')};
-            min-height: 500px;
-        }
+        padding-left: ${({ theme }) => (theme.baseSpace * 0.5 + "px")};
     }
    
 `

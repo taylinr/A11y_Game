@@ -5,13 +5,11 @@ interface Props {
  
 }
 
-
 const HeaderStyles = styled.div<Props>`
-
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-   
+    margin: 10px auto 10px auto;
+    padding: 1rem 4rem;
+    display: flex;
+    justify-content: space-between;
 `
 export default HeaderStyles

@@ -8,7 +8,9 @@ interface Props {
 const BreadcrumbStyles = styled.div<Props>`
 
     font-family: 'Poppins', sans-serif;
-    color: ${({ theme}) => (theme.primary)};
+    color: ${({ theme }) => (theme.primary)};
+    z-index: 999999999;
+    position: relative;
 
     ul, ol {
         list-style: none;

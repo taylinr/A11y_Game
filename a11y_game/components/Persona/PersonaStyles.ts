@@ -48,6 +48,8 @@ const PersonaStyles = styled.button<Props>`
             }
 
             hr {
+                border: 0;
+                border-top: ${({ theme }) => ("2px solid " +theme.white) };
                 width: 80px;
                 margin: ${({ theme }) => (theme.baseSpace * 4 + 'px auto ' + theme.baseSpace * 3 + 'px' +' auto' ) } ;
             }

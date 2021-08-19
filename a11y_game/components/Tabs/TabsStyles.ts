@@ -7,6 +7,12 @@ interface Props {
 
 const TabsStyles = styled.div<Props>`
 
+ul.tab__buttons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .tab__contents{
     height: 500px;
     max-width: 100%;

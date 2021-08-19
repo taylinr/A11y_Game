@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Button from '../components/Button/Button'
-import CodeEditor from '../components/CodeEditor/CodeEditor'
 import Persona from '../components/Persona/Persona'
+import arrowRight from '../assets/arrow-right.svg'
+import Image from 'next/image';
 
 export default function Home() {
     return (
@@ -18,11 +19,9 @@ export default function Home() {
                         <h2>Make it accessible to us!</h2>
                     </div>
                     <div className={'col-3'}>
-                        <Button target={'/personas/Dave'} primary={true}>
+                        <Button target={'/personas/dave'} primary={true}>
                             Help Dave
-                            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.37114e-07 7.5L14.17 7.5L10.59 11.09L12 12.5L18 6.5L12 0.499999L10.59 1.91L14.17 5.5L6.11959e-07 5.5L4.37114e-07 7.5Z" fill="#ffffff"/>
-                            </svg>
+                            <Image src={arrowRight} alt="arrow-right-icon" />
                         </Button>
                     </div>
                 </div>
@@ -30,6 +29,7 @@ export default function Home() {
 
                 <div className={'row col-12'}>
                     <Persona
+                        target='dave'
                         image='/images/profile.jpg'
                         alt='Image of Dave'
                         disability='Visual Disability'
@@ -38,6 +38,7 @@ export default function Home() {
                         pronouns='He / Him'
                         text='"I hate when products dont have good descriptions but 25 Images."' />
                     <Persona
+                        target='clara'
                         image='/images/profile.jpg'
                         alt='image of Clara'
                         disability='Auditory Disability'
@@ -46,6 +47,7 @@ export default function Home() {
                         pronouns='She / Her'
                         text='"Social Media is great, but all these Storys and Clips without subtitles drive me nuts!"'/>
                     <Persona
+                        target='alex'
                         image='/images/profile.jpg'
                         alt='image of Alex'
                         disability='Cognitive Disability'
@@ -54,6 +56,7 @@ export default function Home() {
                         pronouns='They / Them'
                         text='"Online-Newspaper articles shouldnt riquire a masters-degree to be readable"' />
                     <Persona
+                        target='semiha'
                         image='/images/profile.jpg'
                         alt='image of Semiha'
                         disability='Motor Disability'

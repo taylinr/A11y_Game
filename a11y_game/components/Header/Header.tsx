@@ -1,23 +1,26 @@
-import Link from 'next/link'
 import HeaderStyles from './HeaderStyles'
 import Breadcrumb from '../Breadcrumb/Breadcrumb'
+import Points from '../Points/Points'
+import Context from '../Context/Context';
+import { useContext } from 'react';
 
 type HeaderProps = {
     
 
 }
 
-export default function Header({}: HeaderProps) {
+const Header = ({}: HeaderProps) => {
+
+    const context = useContext(Context);
 
     return (
             
             <HeaderStyles>
             <Breadcrumb />
 
-            {/* <Points>
-            </Points>
-             */}
+            <Points currVal={context.points}/>
             </HeaderStyles>
-    )
-    
+    )   
 }
+
+export default Header

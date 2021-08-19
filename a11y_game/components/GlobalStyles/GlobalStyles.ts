@@ -3,12 +3,16 @@ import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 
-
     html,
     body {
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    }
+
+    .circles {
+        overflow: hidden;
+        position: relative;
     }
 
     a {
@@ -45,6 +49,104 @@ const GlobalStyle = createGlobalStyle`
             align-items: center;
             display: flex;
         }
+
+        .circles:before {
+            content: "";
+            display: block;
+            z-index: -3;
+            position: absolute;
+            left: -250px;
+            bottom: -250px;
+            height: 40em;
+            width: 40em;
+            border-radius: 30em;
+            background-color: #E6F0F5;
+            animation: bounce-1 25s ease-in-out 1s infinite alternate;
+            
+        }
+
+        .circles:after {
+            content: "";
+            display: block;
+            z-index: -3;
+            position: absolute;
+            right: -250px;
+            top: -250px;
+            height: 30em;
+            width: 30em;
+            border-radius: 30em;
+            background-color: #dce6eb;
+            animation: bounce-2 20s ease-in-out 0s infinite alternate;
+        }
+
+        main:before{
+            content: "";
+            display: block;
+            z-index: -3;
+            position: absolute;
+            left: 15px;
+            bottom: 350px;
+            height: 10em;
+            width: 10em;
+            border-radius: 30em;
+            background-color: #dce6eb;
+            animation: bounce-3 20s ease-in-out 0s infinite alternate;
+        }
+
+        main:after {
+            content: "";
+            display: block;
+            z-index: -3;
+            position: absolute;
+            right: 15px;
+            top: 250px;
+            height: 10em;
+            width: 10em;
+            border-radius: 30em;
+            background-color: #E6F0F5;
+            animation: bounce-3 20s ease-in-out 0s infinite alternate;
+        }
+
+        @keyframes bounce-1 {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(100px, 20px);
+                width: 35em;
+                height: 35em;
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes bounce-2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(10px, -30px);
+            }
+            50% {
+                transform: translate(-10px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes bounce-3 {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, 20px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
     }
 
     .row::after {
@@ -68,6 +170,7 @@ const GlobalStyle = createGlobalStyle`
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
+        min-height: calc(100vh - 110px);
     }
 
     h1, h2, h3, h4 {
@@ -76,6 +179,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
+        margin-top: 0.2em;
         font-size: 3em;
     }
 

@@ -3,7 +3,6 @@ import { Code } from '../../model/code.model';
 import { CSSObject } from '../../model/css.model';
 import { HTMLStyles } from '../../model/htmlStyles.model';
 import { parse, HTMLElement, Node } from 'node-html-parser';
-import { html } from '@codemirror/lang-html';
 
 var htmlStylesArray: HTMLStyles[] = [];
 
@@ -40,7 +39,6 @@ const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
         htmlStylesArray.push(new HTMLStyles(node, properties));
     }
 }
-
 
 const getCSSPropsFromStylesArray = (node: Node | ParentNode) => {
     var props: string[] = [];
@@ -150,7 +148,8 @@ const loopNodeChildren = (nodes: Node[], cssObject: CSSObject[], htmlArray: HTML
 
 export function checkContrast(code: Code) {
 
-    var valid : boolean = true;
+    var valid: boolean = true;
+    var lowestContrast: number = 100.0;
 
     const cssObject: CSSObject[] = parseCSSObjectArray(code);
     const htmlObject: HTMLElement = parseHTMLObject(code);
@@ -158,9 +157,6 @@ export function checkContrast(code: Code) {
     htmlStylesArray = [];
 
     recurseDomChildren(htmlObject, cssObject, htmlObject);
-
-    console.log(htmlStylesArray);
-    // console.log(htmlObject);
 
     function hexToRgb(hex: string) {
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -281,6 +277,7 @@ export function checkContrast(code: Code) {
         var backgroundColor: string = '';
         var fontColor: string = '';
 
+
         const currentProperties: string[] = htmlStylesArray[i].properties;
         const currentNode = htmlStylesArray[i].node;
 
@@ -315,10 +312,12 @@ export function checkContrast(code: Code) {
 
             const contrastRatio: number = calculateContrastRatio(backgroundColor, fontColor)
 
-            valid = contrastRatio >= 5.0;
+            if (contrastRatio < lowestContrast) {
+                lowestContrast = contrastRatio;
+            }
         }
     }
 
     // const valid : boolean = contrastRatio >= 5.0;
-    return valid;
+    return lowestContrast;
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import ColorContrastChecker from '../../components/ColorContrastChecker/ColorContrastChecker'
+import ColorContrastChecker from '../../../components/Level/ColorContrastChecker'
+import PersonaSmall from '../../../components/PersonaSmall/PersonaSmall'
 export default function Home() {
     return (
         <div >
@@ -15,7 +16,11 @@ export default function Home() {
                         <p>Change the Text and Background Color Contrast to be accessible. The higher the contrast ratio the better!</p>
                     </div>
                     <div className="col-6">
-                        
+                        {/* <PersonaSmall
+                            target='dave'
+                            image='/images/profile.jpg'
+                            alt='Image of Dave'
+                            text='"I hate when products dont have good descriptions but 25 Images."' /> */}
                     </div>
                 </div>
                 <ColorContrastChecker />

@@ -17,7 +17,7 @@ const ButtonStyles = styled.button<Props>`
   border: ${({ theme, inactive }) => (inactive  ? '1px solid' + theme.primary : 'none')};
   padding: ${({ theme }) => (theme.baseSpace * 2 + 'px')} ;
   border-radius:  ${({ theme }) => (theme.baseSpace * 1.5 + 'px')};
-  color: ${({ theme, primary, accomplished }) => (accomplished || primary  ? theme.white : theme.primary)};
+  color: ${({ theme, primary, accomplished }) => ((accomplished || primary)  ? theme.white : theme.primary)};
   background-color: ${({ theme, primary, secondary, inactive, accomplished }) => (
     (primary )
       ? theme.primary
@@ -30,12 +30,12 @@ const ButtonStyles = styled.button<Props>`
             : theme.primary
   
   )};
-  box-shadow: ${({ theme }) => (theme.boxShadow)};
-  cursor: pointer;
+  box-shadow: ${({ theme, inactive }) => (inactive ? 'none' : theme.boxShadow)};
+  cursor: ${({ theme, inactive }) => (inactive ? 'default' : 'pointer')};
 
 
   :hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: ${({ theme, inactive }) => (inactive ? 'none' : '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)')};
   }
   
 `

@@ -24,7 +24,7 @@ let oneDark = EditorView.theme({
     borderLeftColor: "#0e9"
   },
   "&.cm-focused .cm-selectionBackground, ::selection": {
-    backgroundColor: "#074"
+    backgroundColor: "#fff"
   },
   ".cm-gutters": {
     backgroundColor: "#045",
@@ -40,9 +40,10 @@ type EditorProps = {
   initialHTML?: string;
   initialJS?: string;
   level?: string;
+  toggleSwitchLabel?: string;
 }
 
-export default function CodeEditor({ initialHTML, initialCSS, initialJS, level, setCode }: EditorProps) {
+const CodeEditor = ({toggleSwitchLabel, initialHTML, initialCSS, initialJS, level, setCode }: EditorProps) => {
 
   // Local state
   const [editorTreeValueHTML, setEditorTreeValueHTML] = useState<string[]>([]);
@@ -116,7 +117,7 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level, 
 	
   // Component for display text
   const OutputIframe = () => (
-    <IFrame level={level} head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}>
+    <IFrame level={level} toggleSwitchLabel={toggleSwitchLabel} head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}>
       <div className="Container" dangerouslySetInnerHTML={{ __html: HTML }}></div>
       {/* <script type="text/javascript" dangerouslySetInnerHTML={{ __html: JS }}></script> */}
     </IFrame>
@@ -142,3 +143,5 @@ export default function CodeEditor({ initialHTML, initialCSS, initialJS, level, 
     </CodeEditorStyles>
     )
 }
+
+export default CodeEditor

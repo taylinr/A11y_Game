@@ -8,8 +8,9 @@ interface TabProps {
 }
 
 
-const Tab = styled.button<TabProps>`
+const Tab = styled.li<TabProps>`
   width: 150px;
+  display: inline-block;
   background-color: ${({ theme }) => (theme.primary)};
   border: none;
   border-radius:  ${({ theme }) => (theme.baseSpace * 1.5 + 'px ' + theme.baseSpace * 1.5 + 'px 0 0')};
@@ -17,6 +18,7 @@ const Tab = styled.button<TabProps>`
   padding: ${({ theme }) => (theme.baseSpace  + 'px')} ;
   box-shadow: ${({ theme }) => (theme.boxShadow)};
   cursor: pointer;
+  text-align: center;
   ${({ tabActive}) =>
     tabActive && 
 
@@ -36,7 +38,7 @@ interface ContentProps {
 const TabContent = styled.div<ContentProps>`
   position: absolute;
   left: 10px; /* change as needed */
-  top: 10px; /* change as needed */
+  bottom: 10px; /* change as needed */
   opacity: 0;
   ${({ tabActive }) =>
     tabActive &&
@@ -56,21 +58,20 @@ type TabsProps = {
     contents: any[]
 }
 
-export default function Tabs({ tabnames, contents, tabkeys }: TabsProps) {
+const Tabs = ({ tabnames, contents, tabkeys }: TabsProps) => {
     
   const [tabActive, setActive] = useState(tabkeys[0]);
 
     return (
         <TabsStyles>
-            <div className="tab__buttons">
+            <ul className="tab__buttons" role="tablist">
                 {tabnames.map(function(name, index){
-                  return <Tab key={name} className={tabkeys[index]} tabActive={tabActive === tabkeys[index]} onClick={() => { setActive(tabkeys[index]); }}>{name}</Tab>;
+                  return <Tab key={name} className={tabkeys[index]} tabActive={tabActive === tabkeys[index]} role={'tab'} aria-controls={name +  ' code-tab'} aria-selected={tabActive === tabkeys[index]} onClick={() => { setActive(tabkeys[index]); }}>{name}</Tab>;
                   })}
-                
-            </div>
-            <div className="tab__contents">
+            </ul>
+            <div className="tab__contents" role="tabpanel">
                 {contents.map(function(content, index){
-                    return <TabContent key={tabkeys[index]} id={tabkeys[index]} tabActive={tabActive === tabkeys[index]}>{content}</TabContent>;
+                  return <TabContent key={tabkeys[index]} id={tabkeys[index]} tabActive={tabActive === tabkeys[index]} role={'tabpanel'} aria-labelledby={tabnames[index] +'-tab'} aria-hidden={!(tabActive === tabkeys[index])}>{content}</TabContent>;
                   })}
                 
             </div>
@@ -79,3 +80,5 @@ export default function Tabs({ tabnames, contents, tabkeys }: TabsProps) {
     )
     
 }
+
+export default Tabs
