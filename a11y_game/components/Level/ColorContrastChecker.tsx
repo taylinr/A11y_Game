@@ -91,7 +91,7 @@ const ColorContrastChecker = () => {
                 <div className='col-3'>
                     <div className='col-3'>
                     
-                    <Button primary={true} onClick={activateModal}>
+                    <Button primary={true} target={/personas/dave}>
                         <Image src={arrowLeft} alt="arrow-left-icon" />
                         Dave Overview
                     </Button>
