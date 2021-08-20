@@ -1,23 +1,23 @@
-import PointsStyles from './PointsStyles'
-import points from '../../assets/points.svg'
+import PointsStyles from "./PointsStyles";
+import points from "../../assets/points.svg";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 type PointsProps = {
-    currVal: number
-    maxVal?: number
-}
+  currVal: number;
+  maxVal?: number;
+};
 
-const Points = ({currVal, maxVal }: PointsProps) => {
+const Points = ({ currVal, maxVal }: PointsProps) => {
+  return (
+    <PointsStyles>
+      <Image src={points} alt="points-icon" />
 
-    return (
-        <PointsStyles>
-            <Image src={points} alt="points-icon" />
-
-            <span>{currVal} {maxVal ? ' / ' + maxVal : null} Point{currVal == 1  ? null : 's'}</span>
-        </PointsStyles>
-    )
-    
-    
-}
-export default Points
+      <span>
+        {currVal} {maxVal ? " / " + maxVal : null} Point
+        {currVal == 1 ? null : "s"}
+      </span>
+    </PointsStyles>
+  );
+};
+export default Points;

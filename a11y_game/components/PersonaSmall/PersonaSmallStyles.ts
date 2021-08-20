@@ -1,33 +1,24 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
-
-interface Props {
- 
-}
-
+interface Props {}
 
 const PersonaStyles = styled.div<Props>`
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 240px;
 
+  .persona__wrapper {
+    width: 100%;
     padding: 0;
-    border: none;
-    background-color: transparent;
-    width: 240px;
+    border-radius: 100%;
+    float: left;
 
-    .persona__wrapper {
-        width: 100%;
-        padding: 0;
-        border-radius: 100%;
-        float: left;
-
-    
-        img.persona__image {
-            border-radius: 50%;
-            width: 240px;
-            height: auto;
-        }
-
+    img.persona__image {
+      border-radius: 50%;
+      width: 240px;
+      height: auto;
     }
-   
-  
-`
-export default PersonaStyles
+  }
+`;
+export default PersonaStyles;
