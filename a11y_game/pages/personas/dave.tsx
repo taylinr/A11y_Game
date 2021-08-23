@@ -24,6 +24,8 @@ export default function Home() {
   const level3Done: boolean = levelDone(3);
   const level4Done: boolean = levelDone(4);
 
+  const allLevelDone = level1Done && level2Done && level3Done && level4Done;
+
   return (
     <div>
       <Head>
@@ -35,8 +37,8 @@ export default function Home() {
         <div className={"col-12 row"}>
           <div className={"col-3"}>
             <PersonaSmall
-              target="dave"
-              image="/images/dave_body.png"
+              name={"dave"}
+              emotion={allLevelDone ? "happy" : "neutral"}
               alt="Image of Dave"
               text="I hate when products have no descriptions but many images!"
             />

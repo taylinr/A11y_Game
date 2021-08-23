@@ -1,7 +1,10 @@
 import Head from "next/head";
+import { useState } from "react";
 import ColorContrastChecker from "../../../components/Level/ColorContrastChecker";
-import PersonaSmall from "../../../components/PersonaSmall/PersonaSmall";
+import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
 export default function Home() {
+  const [contrastRatio, setContrastratio] = useState<number>(0);
+
   return (
     <div>
       <Head>
@@ -11,22 +14,38 @@ export default function Home() {
 
       <main>
         <div className="col-12 row ">
-          <div className="col-6">
+          <div className="col-9">
             <h1>Color & Contrast</h1>
             <p>
-              Change the Text and Background Color Contrast to be accessible.
-              The higher the contrast ratio the better!
+              Help Dave to read the text on the right.
+              <br />
+              Change the Text and Background Color Contrast to be accessible,
+              the higher the contrast ratio the better!
             </p>
           </div>
-          <div className="col-6">
-            {/* <PersonaSmall
-                            target='dave'
-                            image='/images/profile.jpg'
-                            alt='Image of Dave'
-                            text='"I hate when products dont have good descriptions but 25 Images."' /> */}
+          <div className="col-3">
+            <PersonaLevel
+              name={"dave"}
+              emotion={contrastRatio > 5 ? "happy" : "neutral"}
+              alt="Image of Dave"
+              text={[
+                <p key="help">
+                  Click <a href="">here</a> for help!
+                </p>,
+                <p key="toggle">
+                  Want to see color? <br /> Click the greyscale toggle!
+                </p>,
+              ]}
+              valid={contrastRatio > 5}
+              validationText={
+                contrastRatio > 5
+                  ? "Contrast Ratio is " + contrastRatio?.toFixed(2)
+                  : "Contrast Ratio is too small"
+              }
+            />
           </div>
         </div>
-        <ColorContrastChecker />
+        <ColorContrastChecker setContrastInParent={setContrastratio} />
       </main>
     </div>
   );

@@ -20,6 +20,7 @@ type PersonaProps = {
   inactive?: boolean;
   batch?: number;
   showText: boolean;
+  emotion: string;
 };
 
 const Persona = ({
@@ -34,6 +35,7 @@ const Persona = ({
   inactive,
   batch,
   showText,
+  emotion,
 }: PersonaProps) => {
   console.log(name, showText);
   return (
@@ -51,9 +53,9 @@ const Persona = ({
         <div className={"persona__wrapper"}>
           <div className="image__wrapper">
             <Image
-              src={image}
-              height={240}
-              width={240}
+              src={"/images/" + name + "_head_" + emotion + ".png"}
+              height={260}
+              width={260}
               className={"persona__image"}
               alt={alt}
             />

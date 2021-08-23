@@ -10,7 +10,7 @@ const TabsStyles = styled.div<Props>`
   }
 
   .tab__contents {
-    height: 500px;
+    height: 450px;
     max-width: 100%;
     background-color: ${({ theme }) => theme.lightgrey};
     overflow-y: auto;

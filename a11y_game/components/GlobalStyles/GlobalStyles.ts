@@ -194,9 +194,15 @@ const GlobalStyle = createGlobalStyle`
     p {
         font-family: 'Roboto', sans-serif;
         line-height: 24px;
-        max-width: 602px;
+        max-width: 480px;
         margin-bottom: 2em;
+
+        a {
+            text-decoration: underline;
+        }
     }
+
+    
 
 `;
 export default GlobalStyle;

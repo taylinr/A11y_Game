@@ -13,14 +13,11 @@ import arrowRight from "../../assets/arrow-right.svg";
 import arrowLeft from "../../assets/arrow-left.svg";
 import Image from "next/image";
 
-
-type ContrastLevelProps = {
-  setContrastInParent: Function;
+type FontSizeLevelProps = {
+  setFontSizeInParent: Function;
 };
 
-const ColorContrastChecker = ({
-  setContrastInParent: setContrastinParent,
-}: ContrastLevelProps) => {
+const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
   const context = useContext(Context);
   const [code, setCode] = useState<Code>(new Code([""], [""]));
   const [valid, setValid] = useState<boolean>(false);
@@ -52,9 +49,9 @@ const ColorContrastChecker = ({
       newVal = contrastRatio > 15 ? 3 : contrastRatio > 10 ? 2 : 1;
 
       setPoints(newVal);
-      setContrastinParent(contrastRatio);
+      setFontSizeInParent(contrastRatio);
     },
-    [contrastRatio, setContrastinParent]
+    [contrastRatio, setFontSizeInParent]
   );
 
   const activateModal = () => {
@@ -165,4 +162,4 @@ const ColorContrastChecker = ({
   );
 };
 
-export default ColorContrastChecker;
+export default FontSizeChecker;

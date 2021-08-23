@@ -16,7 +16,7 @@ const IframeStyles = styled.div<Props>`
       toggleActive ? "grayscale(1)" : "grayscale(0)"};
     border: ${({ theme }) => "2px solid " + theme.primary};
     border-radius: ${({ theme }) => theme.baseSpace * 1.5 + "px "};
-    min-height: 500px;
+    min-height: 450px;
   }
 
   .md_switch {

@@ -14,6 +14,12 @@ export default function Home() {
     return context.submittedLevel.has(level);
   };
 
+  const allLevelDone1 =
+    levelDone(1) && levelDone(2) && levelDone(3) && levelDone(4);
+  const allLevelDone2 = levelDone(5) && levelDone(6);
+  const allLevelDone3 = levelDone(7) && levelDone(8);
+  const allLevelDone4 = levelDone(9);
+
   return (
     <div>
       <Head>
@@ -68,6 +74,7 @@ export default function Home() {
             showText={
               !(levelDone(1) && levelDone(2) && levelDone(3) && levelDone(4))
             }
+            emotion={allLevelDone1 ? "happy" : "neutral"}
           />
           <Persona
             target="clara"
@@ -88,6 +95,7 @@ export default function Home() {
               !levelDone(5) &&
               !levelDone(6)
             }
+            emotion={allLevelDone2 ? "happy" : "neutral"}
           />
           <Persona
             target="alex"
@@ -110,6 +118,7 @@ export default function Home() {
               !levelDone(7) &&
               !levelDone(8)
             }
+            emotion={allLevelDone3 ? "happy" : "neutral"}
           />
           <Persona
             target="semiha"
@@ -133,6 +142,7 @@ export default function Home() {
               levelDone(8) &&
               !levelDone(9)
             }
+            emotion={allLevelDone4 ? "happy" : "neutral"}
           />
         </div>
       </main>
