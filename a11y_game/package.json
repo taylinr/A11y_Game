@@ -17,6 +17,7 @@
     "@codemirror/view": "^0.18.19",
     "@types/styled-components": "^5.1.11",
     "codemirror": "^5.62.2",
+    "formik": "^2.2.9",
     "next": "11.0.1",
     "next-optimized-images": "^2.6.2",
     "nextjs-breadcrumbs": "^1.1.4",

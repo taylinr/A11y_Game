@@ -21,13 +21,20 @@ export default function Home() {
               <p>
                 Since Developers often cannot see, feel or hear the difference
                 of their code-changes we want to help them by visualizing these
-                changes. We are clearly not able and not trying to simulate
-                disabilities, but rather give developers without these
-                disabilities a glimpse of which important impact their decisions
-                in coding accessible websites have. It is not a comprehensive
-                tutorial on Website Accessibility but a great start to learn
-                what is most important - keeping accessibility in mind while
-                coding.
+                changes.
+              </p>
+              <h3>Dive into Accessibility Programming!</h3>
+              <p>
+                A11y Game is not a comprehensive tutorial on Website
+                Accessibility but a great start to learn what is most important
+                - keeping accessibility in mind while coding.
+              </p>
+              <h3>Not a Simulation</h3>
+              <p>
+                We want to give developers without these disabilities a glimpse
+                of which important impact their decisions in coding accessible
+                websites have, but we are clearly not able and not trying to
+                simulate disabilities.
               </p>
             </div>
           </div>

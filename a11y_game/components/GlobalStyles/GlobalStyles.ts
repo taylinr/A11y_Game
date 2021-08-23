@@ -165,7 +165,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        padding: 0 5rem 2rem 5rem;
+        padding: 0 4rem 2rem 4rem;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
@@ -186,9 +186,16 @@ const GlobalStyle = createGlobalStyle`
         font-size: 2em;
     }
 
+    h3 {
+        font-size: 1em;
+        line-height: 21px;
+    }
+
     p {
         font-family: 'Roboto', sans-serif;
+        line-height: 24px;
         max-width: 602px;
+        margin-bottom: 2em;
     }
 
 `;

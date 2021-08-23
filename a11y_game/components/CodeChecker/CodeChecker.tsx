@@ -6,7 +6,7 @@ import { parse, HTMLElement, Node } from "node-html-parser";
 var htmlStylesArray: HTMLStyles[] = [];
 
 const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
-  var exsistsAlready: boolean = false;
+  let exsistsAlready: boolean = false;
 
   htmlStylesArray.forEach((htmlStyle) => {
     if (node.toString() == htmlStyle.node.toString()) {
@@ -38,7 +38,7 @@ const addNodeToHTMLStylesArray = (node: Node, properties: string[]) => {
 };
 
 const getCSSPropsFromStylesArray = (node: Node | ParentNode) => {
-  var props: string[] = [];
+  let props: string[] = [];
 
   htmlStylesArray.forEach((htmlStyle) => {
     if (node.toString() == htmlStyle.node.toString()) {
@@ -51,7 +51,7 @@ const getCSSPropsFromStylesArray = (node: Node | ParentNode) => {
 
 const parseCSSObjectArray = (code: Code) => {
   const CSSArray: string[] = code.CSS;
-  var CSS: string = "";
+  let CSS: string = "";
 
   CSSArray.forEach((line) => {
     CSS += line;
@@ -61,11 +61,11 @@ const parseCSSObjectArray = (code: Code) => {
   const cssObject: CSSObject[] = [new CSSObject([], [])];
 
   cssLineArray.forEach((line) => {
-    var x: string[] = line.split("{");
-    var selectors: string = x[0];
-    var cssProperties: string = x[1];
-    var selectorsArray: string[] = [];
-    var cssPropertiesArray: string[] = [];
+    let x: string[] = line.split("{");
+    let selectors: string = x[0];
+    let cssProperties: string = x[1];
+    let selectorsArray: string[] = [];
+    let cssPropertiesArray: string[] = [];
 
     if (selectors && cssProperties) {
       selectorsArray = selectors.split(",");
@@ -96,15 +96,15 @@ const getCSSForNode = (
   cssObject: CSSObject[],
   htmlArray: HTMLElement
 ) => {
-  var props: string[] = [];
-  var isInCSS: boolean = false;
+  let props: string[] = [];
+  let isInCSS: boolean = false;
 
   cssObject.forEach((selectorArray) => {
     selectorArray.Selectors.forEach((selector) => {
       let testElements: HTMLElement[] = htmlArray.querySelectorAll(selector);
 
       testElements.forEach((testElement) => {
-        var isSameElement: boolean =
+        let isSameElement: boolean =
           testElement && element
             ? testElement.toString() == element.toString()
             : false;
@@ -126,7 +126,7 @@ const recurseDomChildren = (
   cssObject: CSSObject[],
   htmlArray: HTMLElement
 ) => {
-  var nodes: Node[];
+  let nodes: Node[];
   if (start.childNodes) {
     nodes = start.childNodes as Node[];
     loopNodeChildren(nodes, cssObject, htmlArray);
@@ -138,9 +138,9 @@ const loopNodeChildren = (
   cssObject: CSSObject[],
   htmlArray: HTMLElement
 ) => {
-  var node;
+  let node;
   if (nodes) {
-    for (var i = 0; i < nodes.length; i++) {
+    for (let i = 0; i < nodes.length; i++) {
       node = nodes[i];
       // setCSSPropsForHTMLElement(node, cssObject, htmlArray);
 
@@ -154,8 +154,8 @@ const loopNodeChildren = (
 };
 
 export function checkContrast(code: Code) {
-  var valid: boolean = true;
-  var lowestContrast: number = 100.0;
+  let valid: boolean = true;
+  let lowestContrast: number = 100.0;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
   const htmlObject: HTMLElement = parseHTMLObject(code);
@@ -165,7 +165,7 @@ export function checkContrast(code: Code) {
   recurseDomChildren(htmlObject, cssObject, htmlObject);
 
   function hexToRgb(hex: string) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? [
           parseInt(result[1], 16),
@@ -181,7 +181,7 @@ export function checkContrast(code: Code) {
     if (color.startsWith("#")) {
       rgb = hexToRgb(color);
     } else if (color.startsWith("rgb")) {
-      var colorsubstr: string[] = color.split(")")[0].substr(3).split(",");
+      let colorsubstr: string[] = color.split(")")[0].substr(3).split(",");
       colorsubstr.forEach((str) => {
         rgb.push(parseInt(str));
       });
@@ -248,9 +248,9 @@ export function checkContrast(code: Code) {
 
     rgb = transformColors(color);
 
-    var r: number = 0;
-    var g: number = 0;
-    var b: number = 0;
+    let r: number = 0;
+    let g: number = 0;
+    let b: number = 0;
 
     if (rgb) {
       r = rgb[0] / 255;
@@ -278,8 +278,8 @@ export function checkContrast(code: Code) {
   };
 
   for (let i = 0; i < htmlStylesArray.length && valid; i++) {
-    var backgroundColor: string = "";
-    var fontColor: string = "";
+    let backgroundColor: string = "";
+    let fontColor: string = "";
 
     const currentProperties: string[] = htmlStylesArray[i].properties;
     const currentNode = htmlStylesArray[i].node;
@@ -296,11 +296,11 @@ export function checkContrast(code: Code) {
         }
       });
 
-      var parentNode = currentNode.parentNode;
+      let parentNode = currentNode.parentNode;
 
       while (parentNode && (backgroundColor == "" || fontColor == "")) {
         if (parentNode) {
-          var props: string[] = getCSSPropsFromStylesArray(parentNode);
+          let props: string[] = getCSSPropsFromStylesArray(parentNode);
           props.forEach((property) => {
             if (
               property.includes("background-color") &&

@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
 
-interface Props {}
-
-const BreadcrumbStyles = styled.div<Props>`
+const BreadcrumbStyles = styled.div`
   font-family: "Poppins", sans-serif;
   color: ${({ theme }) => theme.primary};
   z-index: 999999999;

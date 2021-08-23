@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import PersonaStyles from "./PersonaStyles";
+import inactiveBatch from "../../assets/batch-inactive.svg";
+import goldBatch from "../../assets/batch-gold.svg";
+import silverBatch from "../../assets/batch-silver.svg";
+import bronzeBatch from "../../assets/batch-bronze.svg";
+import Context from "../Context/Context";
+import { useContext } from "react";
 
 type PersonaProps = {
   target: string;
@@ -11,6 +17,9 @@ type PersonaProps = {
   age: number;
   pronouns: string;
   text: string;
+  inactive?: boolean;
+  batch?: number;
+  showText: boolean;
 };
 
 const Persona = ({
@@ -22,30 +31,59 @@ const Persona = ({
   age,
   pronouns,
   text,
+  inactive,
+  batch,
+  showText,
 }: PersonaProps) => {
+  console.log(name, showText);
   return (
-    <Link href={"/personas/" + target} passHref>
-      <PersonaStyles>
+    <PersonaStyles className="col-3" inactive={inactive}>
+      {showText ? (
+        <Link href={"/personas/" + target} passHref>
+          <div className="speechbubble__wrapper">
+            <div className="speechbubble">
+              <p>{text}</p>
+            </div>
+          </div>
+        </Link>
+      ) : null}
+      <Link href={"/personas/" + target} passHref>
         <div className={"persona__wrapper"}>
-          <Image
-            src={image}
-            height={240}
-            width={240}
-            className={"persona__image"}
-            alt={alt}
-          />
+          <div className="image__wrapper">
+            <Image
+              src={image}
+              height={240}
+              width={240}
+              className={"persona__image"}
+              alt={alt}
+            />
+            <div className={"badge__wrapper"}>
+              {batch == 0 || batch == undefined ? (
+                <Image src={inactiveBatch} alt="empty batch icon" />
+              ) : batch == 1 ? (
+                <Image src={bronzeBatch} alt="bronze batch icon" />
+              ) : batch == 2 ? (
+                <Image src={silverBatch} alt="silver batch icon" />
+              ) : (
+                <Image src={goldBatch} alt="gold batch icon" />
+              )}
+            </div>
+          </div>
           <div className={"persona__info-wrapper"}>
             <p className={"persona__name"}>{name}</p>
 
             <p className={"persona__age"}>{age} years old</p>
             <p className={"persona__pronouns"}>{pronouns}</p>
-            <p className={"persona__disability"}>{disability}</p>
             <hr />
-            <p className={"persona__text"}>{text}</p>
+            <p className={"persona__disability"}>
+              <strong>{disability}</strong>
+            </p>
+            {/* <hr />
+            <p className={"persona__text"}>{text}</p> */}
           </div>
         </div>
-      </PersonaStyles>
-    </Link>
+      </Link>
+    </PersonaStyles>
   );
 };
 

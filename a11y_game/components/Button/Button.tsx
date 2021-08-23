@@ -21,7 +21,6 @@ const Button = ({
   inactive,
   onClick,
   onAddPoints,
-  ...props
 }: ButtonProps) => {
   if (!inactive && target) {
     return (

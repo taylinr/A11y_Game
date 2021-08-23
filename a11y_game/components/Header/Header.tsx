@@ -4,9 +4,7 @@ import Points from "../Points/Points";
 import Context from "../Context/Context";
 import { useContext } from "react";
 
-type HeaderProps = {};
-
-const Header = ({}: HeaderProps) => {
+const Header = () => {
   const context = useContext(Context);
 
   return (

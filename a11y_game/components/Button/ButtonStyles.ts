@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ButtonStyles = styled.button<Props>`
-  width: 260px;
+  width: 100%;
   margin: ${({ theme }) => theme.baseSpace * 2 + "px"} 0;
   display: flex;
   justify-content: space-between;

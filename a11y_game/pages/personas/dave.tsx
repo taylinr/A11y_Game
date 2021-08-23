@@ -2,10 +2,10 @@ import Head from "next/head";
 import Button from "../../components/Button/Button";
 import PersonaSmall from "../../components/PersonaSmall/PersonaSmall";
 import Context from "../../components/Context/Context";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import checkmark from "../../assets/checkmark.svg";
-
+import { Form, TextField } from "../../components/Form/Form";
 import Image from "next/image";
 
 export default function Home() {
@@ -14,6 +14,15 @@ export default function Home() {
   const levelDone = (level: number) => {
     return context.submittedLevel.has(level);
   };
+
+  const getPoints = (level: number) => {
+    return context.submittedLevel.get(level);
+  };
+
+  const level1Done: boolean = levelDone(1);
+  const level2Done: boolean = levelDone(2);
+  const level3Done: boolean = levelDone(3);
+  const level4Done: boolean = levelDone(4);
 
   return (
     <div>
@@ -27,9 +36,9 @@ export default function Home() {
           <div className={"col-3"}>
             <PersonaSmall
               target="dave"
-              image="/images/profile.jpg"
+              image="/images/dave_body.png"
               alt="Image of Dave"
-              text='"I hate when products dont have good descriptions but 25 Images."'
+              text="I hate when products have no descriptions but many images!"
             />
           </div>
           <div className={"col-6"}>
@@ -39,16 +48,16 @@ export default function Home() {
             </div>
             <div className={"col-11"}>
               <p>
-                People with Visual Disabilities like Dave can have problems with
+                People with visual disabilities like Dave can have problems with
                 seeing (certain) colors, their field of view might be blurred or
                 they have low to no eyesight. But also the usage of beamers in
                 light rooms or direct sunlight on the screen can cause visual
                 barriers.
               </p>
               <p>
-                Usage of Assistive Devices like Screen magnifiers, screen
-                Readers, speech recognition Systems and many more can help
-                People with visual disabilites to overcome some of these
+                Usage of assistive devices like screen magnifiers, screen
+                readers, speech recognition systems and many more can help
+                people with visual disabilites to overcome some of these
                 barriers.
               </p>
               <p>
@@ -59,13 +68,20 @@ export default function Home() {
           </div>
           <div className={"col-3"}>
             <div className="button-group">
+              {/* {console.log(
+                " accomplished={" +
+                  levelDone(1) +
+                  "} primary={ " +
+                  !levelDone(1) +
+                  "}"
+              )} */}
               <Button
                 target={"/personas/dave/contrast"}
-                primary={!levelDone(1)}
-                accomplished={levelDone(1)}
+                accomplished={level1Done}
+                primary={!level1Done}
               >
                 Color & Contrast
-                {levelDone(1) ? (
+                {level1Done ? (
                   <Image src={checkmark} alt="checkmark-icon" />
                 ) : (
                   <Image src={arrowRight} alt="arrow-right-icon" />
@@ -73,12 +89,12 @@ export default function Home() {
               </Button>
               <Button
                 target={"/personas/dave/font"}
-                inactive={!levelDone(1)}
-                primary={!levelDone(2)}
-                accomplished={levelDone(2)}
+                inactive={!level1Done}
+                primary={!level2Done}
+                accomplished={level2Done}
               >
                 Font-Size
-                {levelDone(2) ? (
+                {level2Done ? (
                   <Image src={checkmark} alt="checkmark-icon" />
                 ) : (
                   <Image src={arrowRight} alt="arrow-right-icon" />
@@ -86,12 +102,12 @@ export default function Home() {
               </Button>
               <Button
                 target={"/personas/dave/screenreader"}
-                inactive={!levelDone(2)}
-                primary={!levelDone(3)}
-                accomplished={levelDone(3)}
+                inactive={!level2Done}
+                primary={!level3Done}
+                accomplished={level3Done}
               >
                 Screen Reader
-                {levelDone(3) ? (
+                {level3Done ? (
                   <Image src={checkmark} alt="checkmark-icon" />
                 ) : (
                   <Image src={arrowRight} alt="arrow-right-icon" />
@@ -99,12 +115,12 @@ export default function Home() {
               </Button>
               <Button
                 target={"/personas/dave/aria"}
-                inactive={!levelDone(3)}
-                primary={!levelDone(4)}
-                accomplished={levelDone(4)}
+                inactive={!level3Done}
+                primary={!level4Done}
+                accomplished={level4Done}
               >
                 Aria
-                {levelDone(4) ? (
+                {level4Done ? (
                   <Image src={checkmark} alt="checkmark-icon" />
                 ) : (
                   <Image src={arrowRight} alt="arrow-right-icon" />

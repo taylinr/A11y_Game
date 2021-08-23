@@ -13,8 +13,6 @@ import arrowRight from "../../assets/arrow-right.svg";
 import arrowLeft from "../../assets/arrow-left.svg";
 import Image from "next/image";
 
-type ColorContrastCheckerProps = {};
-
 const ColorContrastChecker = () => {
   const context = useContext(Context);
   const [code, setCode] = useState<Code>(new Code([""], [""]));
@@ -42,7 +40,7 @@ const ColorContrastChecker = () => {
 
   useEffect(
     function () {
-      var newVal: number;
+      let newVal: number;
 
       newVal = contrastRatio > 15 ? 3 : contrastRatio > 10 ? 2 : 1;
 
@@ -60,8 +58,8 @@ const ColorContrastChecker = () => {
   };
 
   const addPoints = () => {
-    var submitAgain: boolean = false;
-    var oldPoints: number = 0;
+    let submitAgain: boolean = false;
+    let oldPoints: number = 0;
 
     submitAgain = context.submittedLevel.has(1);
 
@@ -94,12 +92,10 @@ const ColorContrastChecker = () => {
       />
       <div className="col-12 row">
         <div className="col-3">
-          <div className="col-3">
-            <Button primary={true} target={"/personas/dave"}>
-              <Image src={arrowLeft} alt="arrow-left-icon" />
-              Dave Overview
-            </Button>
-          </div>
+          <Button primary={true} target={"/personas/dave"}>
+            <Image src={arrowLeft} alt="arrow-left-icon" />
+            Dave Overview
+          </Button>
         </div>
         <div className="col-6">
           {valid ? (

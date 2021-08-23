@@ -6,21 +6,28 @@ type PersonaProps = {
   target: string;
   alt: string;
   image: string;
-  text: string;
+  text?: string;
 };
 
-const Persona = ({ target, image, alt, text }: PersonaProps) => {
+const Persona = ({ image, alt, text }: PersonaProps) => {
   return (
     <PersonaStyles>
       <div className={"persona__wrapper"}>
         <Image
           src={image}
-          height={240}
+          height={391}
           width={240}
           className={"persona__image"}
           alt={alt}
         />
       </div>
+      {text ? (
+        <div className="speechbubble__wrapper">
+          <div className="speechbubble">
+            <p>{text}</p>
+          </div>
+        </div>
+      ) : null}
     </PersonaStyles>
   );
 };
