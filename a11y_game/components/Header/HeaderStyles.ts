@@ -1,17 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
-
-interface Props {
- 
-}
-
+interface Props {}
 
 const HeaderStyles = styled.div<Props>`
-
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-   
-`
-export default HeaderStyles
+  max-width: 1200px;
+  margin: 10px auto 10px auto;
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+`;
+export default HeaderStyles;

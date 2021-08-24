@@ -14,7 +14,7 @@
 /* roboto-500 - latin */
 @font-face {
   font-family: 'Roboto';
-  font-style: normal;
+  font-style: bold;
   font-weight: 500;
   src: url('../fonts/roboto-v27-latin-500.eot'); /* IE9 Compat Modes */
   src: local(''),
@@ -27,7 +27,7 @@
 /* roboto-700 - latin */
 @font-face {
   font-family: 'Roboto';
-  font-style: normal;
+  font-style: black;
   font-weight: 700;
   src: url('../fonts/roboto-v27-latin-700.eot'); /* IE9 Compat Modes */
   src: local(''),
@@ -54,7 +54,7 @@
 /* poppins-500 - latin */
 @font-face {
   font-family: 'Poppins';
-  font-style: normal;
+  font-style: bold;
   font-weight: 500;
   src: url('../fonts/poppins-v15-latin-500.eot'); /* IE9 Compat Modes */
   src: local(''),
@@ -67,7 +67,7 @@
 /* poppins-700 - latin */
 @font-face {
   font-family: 'Poppins';
-  font-style: normal;
+  font-style: black;
   font-weight: 700;
   src: url('../fonts/poppins-v15-latin-700.eot'); /* IE9 Compat Modes */
   src: local(''),

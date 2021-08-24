@@ -1,64 +1,147 @@
-import styled, { css } from 'styled-components'
-
+import styled, { css } from "styled-components";
 
 interface Props {
- 
+  inactive?: boolean;
 }
 
+const PersonaStyles = styled.div<Props>`
+  padding: 0 ${({ theme }) => theme.baseSpace * 1.5 + "px"};
+  border: none;
+  background-color: transparent;
+  cursor: ${({ inactive }) => (inactive ? "normal" : "pointer")};
+  text-align: center;
+  position: relative;
+  margin-top: 70px;
 
-const PersonaStyles = styled.button<Props>`
+  .persona__wrapper {
+    background-color: ${({ theme, inactive }) =>
+      inactive ? theme.white : theme.primary};
 
-    margin: 0 ${({ theme }) => (theme.baseSpace + 'px')};
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    width: 240px;
-    cursor: pointer;
+    color: ${({ theme, inactive }) => (inactive ? theme.primary : theme.white)};
+    border: ${({ theme, inactive }) =>
+      inactive ? "1px solid " + theme.primary : "none"};
+    border-radius: 155px 155px
+      ${({ theme }) =>
+        theme.baseSpace * 1.5 + "px " + theme.baseSpace * 1.5 + "px"};
+    box-shadow: ${({ theme, inactive }) =>
+      inactive ? "none" : theme.boxShadow};
+    max-width: 238px;
 
-    .persona__wrapper {
-        width: 100%;
-        background-color: ${({ theme }) => (theme.primary)};
-        padding: 0;
-        border-radius:  155px 155px ${({ theme }) => (theme.baseSpace * 1.5 + 'px ' + theme.baseSpace * 1.5 + 'px')};
-        float: left;
-        box-shadow: ${({ theme }) => (theme.boxShadow)};
-        margin: ${({ theme }) => (theme.baseSpace * 2 + 'px')} 0;
-
-        :hover {
-            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-        }
-    
-        img.persona__image {
-            border-radius: 50%;
-            width: 240px;
-            height: auto;
-        }
-
-        p {
-            color: ${({ theme }) => (theme.white)}
-        }
-
-        .persona__info-wrapper {
-            padding: 0 ${({ theme }) => (theme.baseSpace * 2  + 'px ') };
-            min-height: 360px;
-            
-            p.persona__name {
-                font-size: 1.5rem;
-                font-weight: bold;
-            }
-
-            hr {
-                width: 80px;
-                margin: ${({ theme }) => (theme.baseSpace * 4 + 'px auto ' + theme.baseSpace * 3 + 'px' +' auto' ) } ;
-            }
-
-            p.persona__text {
-                font-family: 'Poppins', sans-serif;
-                font-size: 1.1rem;
-            }
-        }
+    margin: ${({ theme }) =>
+      theme.baseSpace * 2 + "px auto " + theme.baseSpace * 2 + "px auto"};
+    :hover {
+      box-shadow: ${({ inactive }) =>
+        inactive
+          ? "none"
+          : " 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)"};
     }
-   
-  
-`
-export default PersonaStyles
+
+    position: relative;
+
+    img.persona__image {
+      max-width: 150%;
+      height: auto;
+    }
+
+    p {
+      color: ${({ theme, inactive }) =>
+        inactive ? theme.primary : theme.white};
+      margin-bottom: 1em;
+    }
+
+    .persona__info-wrapper {
+      padding: 0
+        ${({ theme }) =>
+          theme.baseSpace * 2 + "px " + theme.baseSpace * 2 + "px "};
+      /* min-height: 360px; */
+
+      p.persona__name {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      hr {
+        border: 0;
+        border-top: ${({ theme, inactive }) =>
+          inactive ? "2px solid " + theme.primary : "2px solid " + theme.white};
+        width: 80px;
+        margin: ${({ theme }) =>
+          theme.baseSpace * 4 +
+          "px auto " +
+          theme.baseSpace * 3 +
+          "px" +
+          " auto"};
+      }
+
+      p.persona__text {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.1rem;
+      }
+    }
+
+    .image__wrapper {
+      position: relative;
+    }
+
+    .badge__wrapper {
+      position: absolute;
+      bottom: -60px;
+      right: 0px;
+    }
+  }
+
+  .speechbubble__wrapper {
+    animation: 0.3s chat 1s;
+    animation-fill-mode: forwards;
+    transform: scale(0);
+    float: left;
+    position: absolute;
+    top: -70px;
+    left: -50px;
+    right: 50px;
+    z-index: 99;
+  }
+
+  @keyframes chat {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .speechbubble {
+    background-color: rgba(220, 230, 235, 0.9);
+    color: ${({ theme }) => theme.primary};
+    padding: 25px 25px 25px 25px;
+    margin-bottom: 75px;
+    cursor: default;
+    border-radius: 25px;
+
+    p {
+      margin: 0;
+      text-align: center;
+      font-size: 1.2em;
+    }
+  }
+
+  .speechbubble:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 44px solid transparent;
+    border-top-color: rgba(220, 230, 235, 0.9);
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -55px;
+    margin-bottom: 31px;
+  }
+`;
+export default PersonaStyles;
