@@ -17,7 +17,8 @@ export default function Home() {
           <div className="col-9">
             <h1>Color & Contrast</h1>
             <p>
-              Help Dave to read the text on the right.
+              Some people with visual disabilities can't see or distinguish
+              (specific) colors.
               <br />
               Change the Text and Background Color Contrast to be accessible,
               the higher the contrast ratio the better!

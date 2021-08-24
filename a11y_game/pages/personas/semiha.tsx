@@ -23,14 +23,7 @@ export default function Home() {
 
       <main>
         <div className={"col-12 row"}>
-          <div className={"col-3"}>
-            <PersonaSmall
-              target="dave"
-              image="/images/profile.jpg"
-              alt="Image of Dave"
-              text='"I hate when products dont have good descriptions but 25 Images."'
-            />
-          </div>
+          <div className={"col-3"}></div>
           <div className={"col-6"}>
             <div className={"col-12"}>
               <h1>Motor Disabilities</h1>

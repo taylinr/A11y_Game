@@ -120,7 +120,7 @@ const PersonaStyles = styled.div<Props>`
     padding: 25px 25px 25px 25px;
     margin-bottom: 75px;
     cursor: default;
-    border-radius: 15px;
+    border-radius: 25px;
 
     p {
       margin: 0;
