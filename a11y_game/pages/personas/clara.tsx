@@ -23,14 +23,7 @@ export default function Home() {
 
       <main>
         <div className={"col-12 row"}>
-          <div className={"col-3"}>
-            <PersonaSmall
-              target="dave"
-              image="/images/profile.jpg"
-              alt="Image of Dave"
-              text="Social Media is great, but all these Storys and Clips without subtitles drive me nuts!"
-            />
-          </div>
+          <div className={"col-3"}></div>
           <div className={"col-6"}>
             <div className={"col-12"}>
               <h1>Cognitive Disabilities</h1>
