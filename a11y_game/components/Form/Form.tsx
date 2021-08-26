@@ -1,6 +1,7 @@
 // FormElements.jsx
 
 import React from "react";
+import { Options } from "../../model/options.model";
 import {
   Formik,
   Form as FormikForm,
@@ -8,7 +9,6 @@ import {
   ErrorMessage,
   useFormikContext,
 } from "formik";
-import { Options } from "../../model/options.model";
 
 type FromProps = {
   children?: React.ReactNode;
@@ -40,10 +40,10 @@ export function TextField({ name, label, placeholder }: FromProps) {
         id={name}
         placeholder={placeholder || ""}
       />
-      <ErrorMessage
+      {/* <ErrorMessage
         name={"test"}
         render={(msg) => <div style={{ color: "red" }}>{msg}</div>}
-      />
+      /> */}
     </>
   );
 }
@@ -64,10 +64,10 @@ export function SelectField({ name, label, options }: FromProps) {
             ))
           : null}
       </Field>
-      <ErrorMessage
+      {/* <ErrorMessage
         name={name ? name : "select"}
         render={(msg) => <div style={{ color: "red" }}>{msg}</div>}
-      />
+      /> */}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Options } from "../model/options.model";
 import {
   Form,
   TextField,
@@ -28,14 +29,8 @@ export default function FormPage() {
               name="role"
               label="Role"
               options={[
-                {
-                  label: "Admin",
-                  value: "admin",
-                },
-                {
-                  label: "User",
-                  value: "user",
-                },
+                new Options("Admin", "admin"),
+                new Options("User", "user"),
               ]}
             />
           </div>
