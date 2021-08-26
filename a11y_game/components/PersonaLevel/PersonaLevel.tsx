@@ -28,6 +28,7 @@ const Persona = ({
           width={200}
           className={"persona__image"}
           alt={alt}
+          priority={true}
         />
       </div>
       {text ? (

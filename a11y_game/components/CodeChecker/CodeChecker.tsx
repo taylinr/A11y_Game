@@ -337,3 +337,129 @@ export function checkContrast(code: Code) {
   // const valid : boolean = contrastRatio >= 5.0;
   return lowestContrast;
 }
+
+export function checkFontSize(code: Code) {
+  let valid: boolean = true;
+
+  let lowestFontSize: number = 10000;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  for (let i = 0; i < htmlStylesArray.length && valid; i++) {
+    let fontSize: string = "";
+
+    const currentProperties: string[] = htmlStylesArray[i].properties;
+    const currentNode = htmlStylesArray[i].node;
+
+    if (currentNode.nodeType == 3) {
+      currentProperties.forEach((property) => {
+        if (property.includes("font-size")) {
+          fontSize = property.split(":")[1];
+        }
+      });
+
+      let parentNode = currentNode.parentNode;
+
+      while (parentNode && fontSize == "") {
+        if (parentNode) {
+          let props: string[] = getCSSPropsFromStylesArray(parentNode);
+          props.forEach((property) => {
+            if (property.includes("font-size") && fontSize == "") {
+              fontSize = property.split(":")[1];
+            }
+          });
+
+          parentNode = parentNode.parentNode;
+        }
+      }
+
+      if (fontSize.includes("em") && !fontSize.includes("rem")) {
+        if (fontSize.includes(".")) {
+          fontSize =
+            "" + parseFloat(fontSize.substring(0, fontSize.indexOf("em"))) * 16;
+        } else {
+          fontSize =
+            "" + parseInt(fontSize.substring(0, fontSize.indexOf("em"))) * 16;
+        }
+      } else if (fontSize.includes("rem")) {
+        if (fontSize.includes(".")) {
+          fontSize =
+            "" +
+            parseFloat(fontSize.substring(0, fontSize.indexOf("rem"))) * 16;
+        } else {
+          fontSize =
+            "" + parseInt(fontSize.substring(0, fontSize.indexOf("rem"))) * 16;
+        }
+      }
+
+      if (parseInt(fontSize) < lowestFontSize) {
+        lowestFontSize = parseInt(fontSize);
+      }
+
+      if (lowestFontSize < 16) {
+        valid = false;
+      }
+    }
+  }
+
+  if (lowestFontSize == 10000) {
+    lowestFontSize = 16;
+  }
+
+  return lowestFontSize;
+}
+
+export function checkFontSizeRelative(code: Code) {
+  let valid: boolean = true;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  for (let i = 0; i < htmlStylesArray.length && valid; i++) {
+    let fontSizeRelative: string = "";
+
+    const currentProperties: string[] = htmlStylesArray[i].properties;
+    const currentNode = htmlStylesArray[i].node;
+
+    if (currentNode.nodeType == 3) {
+      currentProperties.forEach((property) => {
+        if (property.includes("font-size")) {
+          fontSizeRelative = property.split(":")[1];
+        }
+      });
+
+      let parentNode = currentNode.parentNode;
+
+      while (parentNode && fontSizeRelative == "") {
+        if (parentNode) {
+          let props: string[] = getCSSPropsFromStylesArray(parentNode);
+          props.forEach((property) => {
+            if (property.includes("font-size") && fontSizeRelative == "") {
+              fontSizeRelative = property.split(":")[1];
+            }
+          });
+
+          parentNode = parentNode.parentNode;
+        }
+      }
+
+      if (fontSizeRelative.includes("em") || fontSizeRelative.includes("rem")) {
+        valid = true;
+      } else {
+        valid = false;
+      }
+    }
+  }
+
+  console.log(valid);
+  return valid;
+}

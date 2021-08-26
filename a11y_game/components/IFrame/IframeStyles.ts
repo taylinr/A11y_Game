@@ -12,8 +12,14 @@ const IframeStyles = styled.div<Props>`
   }
 
   iframe {
-    filter: ${({ toggleActive }) =>
-      toggleActive ? "grayscale(1)" : "grayscale(0)"};
+    filter: ${({ toggleActive, level }) =>
+      toggleActive
+        ? level == "contrast"
+          ? "grayscale(1)"
+          : level == "fontsize"
+          ? "blur(1.3px)"
+          : "blur(0)"
+        : "grayscale(0)"};
     border: ${({ theme }) => "2px solid " + theme.primary};
     border-radius: ${({ theme }) => theme.baseSpace * 1.5 + "px "};
     min-height: 450px;
