@@ -10,9 +10,8 @@ import Progress from "../ProgressBar/ProgressBar";
 import Points from "../Points/Points";
 import Context from "../Context/Context";
 import arrowRight from "../../assets/arrow-right.svg";
-import arrowLeft from "../../assets/arrow-left.svg";
+import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
-
 
 type ContrastLevelProps = {
   setContrastInParent: Function;
@@ -100,8 +99,8 @@ const ColorContrastChecker = ({
       />
       <div className="col-12 row">
         <div className="col-3">
-          <Button primary={true} target={"/personas/dave"}>
-            <Image src={arrowLeft} alt="arrow-left-icon" />
+          <Button secondary={true} target={"/personas/dave"}>
+            <Image src={arrowLeftDark} alt="arrow-left-icon" />
             Dave Overview
           </Button>
         </div>
@@ -144,7 +143,7 @@ const ColorContrastChecker = ({
             <div className={"col-12"}>
               <div className={"col-4"}>
                 <Button secondary={true} onClick={handleClose}>
-                  <Image src={arrowLeft} alt="arrow-left-icon" />
+                  <Image src={arrowLeftDark} alt="arrow-left-icon" />
                   Try Again
                 </Button>
               </div>

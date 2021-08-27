@@ -2,7 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 
 import Button from "../Button/Button";
 import CodeEditor from "../CodeEditor/CodeEditor";
-import { checkContrast } from "../CodeChecker/CodeChecker";
+import {
+  checkFontSize,
+  checkFontSizeRelative,
+} from "../CodeChecker/CodeChecker";
 import LevelStyles from "./LevelStyles";
 import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";
@@ -10,18 +13,23 @@ import Progress from "../ProgressBar/ProgressBar";
 import Points from "../Points/Points";
 import Context from "../Context/Context";
 import arrowRight from "../../assets/arrow-right.svg";
-import arrowLeft from "../../assets/arrow-left.svg";
+import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
 
 type FontSizeLevelProps = {
   setFontSizeInParent: Function;
+  setRelativeInParent: Function;
 };
 
-const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
+const FontSizeChecker = ({
+  setFontSizeInParent,
+  setRelativeInParent,
+}: FontSizeLevelProps) => {
   const context = useContext(Context);
   const [code, setCode] = useState<Code>(new Code([""], [""]));
   const [valid, setValid] = useState<boolean>(false);
-  const [contrastRatio, setContrastratio] = useState<number>(0);
+  const [fontSize, setFontSize] = useState<number>(0);
+  const [fontSizeRelative, setFontSizeRelative] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
 
@@ -31,9 +39,12 @@ const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
 
   useEffect(
     function () {
-      setContrastratio(checkContrast(code));
+      let fontSize = checkFontSize(code);
+      let fontSizeRelative = checkFontSizeRelative(code);
+      setFontSize(fontSize);
+      setFontSizeRelative(fontSizeRelative);
 
-      if (checkContrast(code) > 5.0) {
+      if (fontSize >= 16 || fontSizeRelative) {
         setValid(true);
       } else {
         setValid(false);
@@ -46,12 +57,34 @@ const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
     function () {
       let newVal: number;
 
-      newVal = contrastRatio > 15 ? 3 : contrastRatio > 10 ? 2 : 1;
+      newVal =
+        fontSize > 18 && fontSizeRelative
+          ? 3
+          : fontSize >= 16 && fontSizeRelative
+          ? 2
+          : 1;
 
       setPoints(newVal);
-      setFontSizeInParent(contrastRatio);
+      setFontSizeInParent(fontSize);
     },
-    [contrastRatio, setFontSizeInParent]
+    [fontSize, setFontSizeInParent, fontSizeRelative]
+  );
+
+  useEffect(
+    function () {
+      let newVal: number;
+
+      newVal =
+        fontSize > 18 && fontSizeRelative
+          ? 3
+          : fontSize >= 16 && fontSizeRelative
+          ? 2
+          : 1;
+
+      setPoints(newVal);
+      setRelativeInParent(fontSizeRelative);
+    },
+    [fontSizeRelative, setRelativeInParent, fontSize]
   );
 
   const activateModal = () => {
@@ -66,16 +99,16 @@ const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
     let submitAgain: boolean = false;
     let oldPoints: number = 0;
 
-    submitAgain = context.submittedLevel.has(1);
+    submitAgain = context.submittedLevel.has(2);
 
     if (!submitAgain) {
-      context.addSubmittedLevel(1, points);
+      context.addSubmittedLevel(2, points);
     } else {
-      const testOldPoints = context.submittedLevel.get(1);
+      const testOldPoints = context.submittedLevel.get(2);
       if (testOldPoints) {
         oldPoints = testOldPoints;
       }
-      context.submittedLevel.set(1, points);
+      context.submittedLevel.set(2, points);
     }
 
     const newPoints: number = points - oldPoints;
@@ -85,20 +118,20 @@ const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
   return (
     <LevelStyles valid={valid}>
       <CodeEditor
-        level={"contrast"}
-        toggleSwitchLabel={"Greyscale"}
+        level={"fontsize"}
+        toggleSwitchLabel={"Blur"}
         setCode={setCodeFromChild}
         initialHTML={
-          '<div class="wrapper">\n  <h1 class="hello">Hello <strong>World</strong></h1> \n</div>\n<div>\n  <p> NOOO!!!</p>\n</div>'
+          '<div>\n  <h1 class="hello">Hello World</h1> \n  <p>\n    If you can read this text, \n    people with low eyesight may be able to read it too \n  </p>\n</div>'
         }
         initialCSS={
-          "body { \n   background-color: #dce6eb; \n } \n\n h1.hello { \n    color: blue; \n} \n\n strong{ text-decoration: underline;} \n\n p { color: green; } \n\n div { background-color: yellow; } \n\n .wrapper { background-color: green;}"
+          "h1.hello { \n  font-size: 12px; \n}\n div { \n padding: 50px; \n font-size: 10px;  \n }"
         }
       />
       <div className="col-12 row">
         <div className="col-3">
-          <Button primary={true} target={"/personas/dave"}>
-            <Image src={arrowLeft} alt="arrow-left-icon" />
+          <Button secondary={true} target={"/personas/dave"}>
+            <Image src={arrowLeftDark} alt="arrow-left-icon" />
             Dave Overview
           </Button>
         </div>
@@ -125,23 +158,24 @@ const FontSizeChecker = ({ setFontSizeInParent }: FontSizeLevelProps) => {
           <div className={"col-12 row"}>
             <h2>Great!</h2>
             <div className={"col-6"}>
-              <h3>You have succeded the Color and Contrast Level with</h3>
+              <h3>You have succeded the Font-Size Level with</h3>
               <Points currVal={points} maxVal={3} />
-              {contrastRatio < 16 ? (
+              {fontSize < 18 || fontSizeRelative == false ? (
                 <p>Try Again to get all points or try the next level!</p>
               ) : null}
             </div>
             <div className={"col-6"}>
               <Progress
-                val={contrastRatio}
-                maxval={21}
+                //TODO: max points, current Points etc.
+                val={points}
+                maxval={3}
                 label={"Contrast Ratio"}
               />
             </div>
             <div className={"col-12"}>
               <div className={"col-4"}>
                 <Button secondary={true} onClick={handleClose}>
-                  <Image src={arrowLeft} alt="arrow-left-icon" />
+                  <Image src={arrowLeftDark} alt="arrow-left-icon" />
                   Try Again
                 </Button>
               </div>

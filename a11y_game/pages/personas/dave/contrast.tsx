@@ -40,8 +40,12 @@ export default function Home() {
               valid={contrastRatio > 5}
               validationText={
                 contrastRatio > 5
-                  ? "Contrast Ratio is " + contrastRatio?.toFixed(2)
-                  : "Contrast Ratio is too small"
+                  ? "Contrast Ratio of " +
+                    contrastRatio?.toFixed(1) +
+                    " is great!"
+                  : "Contrast Ratio of " +
+                    contrastRatio?.toFixed(1) +
+                    " is too small."
               }
             />
           </div>

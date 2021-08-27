@@ -2,7 +2,6 @@ import Head from "next/head";
 import Button from "../components/Button/Button";
 import Persona from "../components/Persona/Persona";
 import arrowRight from "../assets/arrow-right.svg";
-import dave from "../assets/dave_head.png";
 import Image from "next/image";
 import Context from "../components/Context/Context";
 import { useContext } from "react";
@@ -63,7 +62,7 @@ export default function Home() {
         <div className={"row col-12"}>
           <Persona
             target="dave"
-            image="/images/dave_head.png"
+            image="/images/dave_head_neutral.png"
             alt="Image of Dave"
             disability="Visual Disability"
             name="Dave"

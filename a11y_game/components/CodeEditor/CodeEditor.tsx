@@ -1,6 +1,6 @@
 import CodeEditorStyles from "./CodeEditorStyles";
-import IFrame from "./Iframe";
-import React, { useRef, useEffect, useState } from "react";
+import IFrame from "../IFrame/Iframe";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import Tabs from "../Tabs/Tabs";
 import { Code } from "../../model/code.model";
 
@@ -56,6 +56,7 @@ const CodeEditor = ({
   const [editorTreeValueCSS, setEditorTreeValueCSS] = useState<string[]>([]);
   const [HTML, setHTML] = useState<string>("");
   const [CSS, setCSS] = useState<string>("");
+  const [initEditor, setInitEditor] = useState<boolean>(false);
 
   // Ref of the editor
   const editor = useRef<EditorView>();
@@ -89,30 +90,32 @@ const CodeEditor = ({
       }
     });
 
-  const initializeEditor = () => {
-    const elHTML = document.getElementById("codemirror-editor-wrapper-html");
-
-    editor.current = new EditorView({
-      state: EditorState.create({
-        doc: initialHTML,
-        extensions: [basicSetup, html(), oneDark, onUpdateHTML()],
-      }),
-      parent: elHTML as Element,
-    });
-
-    const elCSS = document.getElementById("codemirror-editor-wrapper-css");
-
-    editor.current = new EditorView({
-      state: EditorState.create({
-        doc: initialCSS,
-        extensions: [basicSetup, css(), oneDark, onUpdateCSS()],
-      }),
-      parent: elCSS as Element,
-    });
-  };
-
   // Initilize view
-  useEffect(initializeEditor, []);
+  useEffect(() => {
+    if (!initEditor) {
+      setInitEditor(true);
+
+      const elHTML = document.getElementById("codemirror-editor-wrapper-html");
+
+      editor.current = new EditorView({
+        state: EditorState.create({
+          doc: initialHTML,
+          extensions: [basicSetup, html(), oneDark, onUpdateHTML()],
+        }),
+        parent: elHTML as Element,
+      });
+
+      const elCSS = document.getElementById("codemirror-editor-wrapper-css");
+
+      editor.current = new EditorView({
+        state: EditorState.create({
+          doc: initialCSS,
+          extensions: [basicSetup, css(), oneDark, onUpdateCSS()],
+        }),
+        parent: elCSS as Element,
+      });
+    }
+  }, [initEditor, initialHTML, onUpdateHTML, initialCSS, onUpdateCSS]);
 
   useEffect(
     function () {

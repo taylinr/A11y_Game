@@ -58,6 +58,7 @@ const Persona = ({
               width={260}
               className={"persona__image"}
               alt={alt}
+              priority={true}
             />
             <div className={"badge__wrapper"}>
               {batch == 0 || batch == undefined ? (

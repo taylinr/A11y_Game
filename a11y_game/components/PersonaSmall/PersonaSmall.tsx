@@ -19,6 +19,7 @@ const Persona = ({ name, alt, text, emotion }: PersonaProps) => {
           width={240}
           className={"persona__image"}
           alt={alt}
+          priority={true}
         />
       </div>
       {text ? (
