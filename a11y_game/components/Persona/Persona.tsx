@@ -37,7 +37,6 @@ const Persona = ({
   showText,
   emotion,
 }: PersonaProps) => {
-  console.log(name, showText);
   return (
     <PersonaStyles className="col-3" inactive={inactive}>
       {showText ? (

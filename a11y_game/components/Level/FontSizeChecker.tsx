@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import Button from "../Button/Button";
 import CodeEditor from "../CodeEditor/CodeEditor";
-import {
-  checkFontSize,
-  checkFontSizeRelative,
-} from "../CodeChecker/CodeChecker";
+import { checkFontSize, checkFontSizeRelative } from "../Checker/CodeChecker";
 import LevelStyles from "./LevelStyles";
 import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";

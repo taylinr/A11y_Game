@@ -8,6 +8,7 @@ type IframeProps = {
   head: React.ReactNode;
   level?: string;
   toggleSwitchLabel?: string;
+  toggle: boolean;
 };
 
 interface ToggleProps {
@@ -33,6 +34,7 @@ const IFrame = ({
   children,
   head,
   level,
+  toggle,
   toggleSwitchLabel,
   ...props
 }: IframeProps) => {
@@ -43,20 +45,23 @@ const IFrame = ({
   const [toggleActive, setActive] = useState<boolean>(true);
 
   return (
-    <IframeStyles level={level} toggleActive={toggleActive}>
-      <div className="switch__wrapper">
-        <label className="md_switch">
-          <ToggleSwitch
-            type="checkbox"
-            onClick={() => {
-              setActive(!toggleActive);
-            }}
-            defaultChecked={toggleActive}
-          />
-          {toggleSwitchLabel}
-          <span className="md_switch__toggle"></span>
-        </label>
-      </div>
+    <IframeStyles level={level} toggleActive={toggleActive} toggle={toggle}>
+      {toggle ? (
+        <div className="switch__wrapper">
+          <label className="md_switch">
+            <ToggleSwitch
+              type="checkbox"
+              onClick={() => {
+                setActive(!toggleActive);
+              }}
+              defaultChecked={toggleActive}
+            />
+            {toggleSwitchLabel}
+            <span className="md_switch__toggle"></span>
+          </label>
+        </div>
+      ) : null}
+
       <iframe
         {...props}
         ref={setContentRef}

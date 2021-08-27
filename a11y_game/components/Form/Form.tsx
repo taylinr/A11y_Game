@@ -1,83 +1,81 @@
-// FormElements.jsx
+import Select from "./Select/Select";
+import { SelectProps } from "./Select/Select";
 
-import React from "react";
-import {
-  Formik,
-  Form as FormikForm,
-  Field,
-  ErrorMessage,
-  useFormikContext,
-} from "formik";
-import { Options } from "../../model/options.model";
+import * as React from "react";
+import { Formik, Form } from "formik";
+import Button from "../Button/Button";
+import FormSchema from "./FormSchema";
+import { useEffect } from "react";
 
-type FromProps = {
-  children?: React.ReactNode;
-  name?: string;
-  label?: string;
-  placeholder?: string;
-  props?: any;
-  msg?: string;
-  options?: Array<Options>;
-  onSubmit?: Function;
+export type FormProps = {
+  formFields: Array<SelectProps>;
+  // | InputProps | TextareaProps>;
+  cta: string;
+  successHeadline: string;
+  successText: string;
+  propSuccess?: boolean;
+  onChange: React.FormEventHandler;
 };
 
-export function Form({ children, props, onSubmit }: FromProps) {
+export function selectComponent({ component, ...field }: any) {
+  switch (component) {
+    case "select":
+      return <Select key={field.name} {...field} />;
+
+    // case "input":
+    //   return <Input key={field.name} {...field} />;
+
+    // case "textarea":
+    //   return <Textarea key={field.name} {...field} />;
+
+    default:
+      return null;
+  }
+}
+
+export default function FormComponent({
+  propSuccess,
+  cta,
+  formFields,
+  onChange,
+}: FormProps) {
+  const [success, setSuccess] = React.useState(propSuccess);
+  useEffect(() => {
+    setSuccess(propSuccess);
+  }, [propSuccess]);
+
+  function getInitalValues() {
+    const initialValues: any = {};
+    formFields.forEach((field) => {
+      initialValues[field.name] = "";
+    });
+    return initialValues;
+  }
+
+  if (typeof formFields === "undefined") {
+    return <p>No Formfields specified!</p>;
+  }
+
+  if (success) {
+    return <p>Success!!</p>;
+  }
+
   return (
-    <Formik {...props} onSubmit={onSubmit}>
-      <FormikForm>{children}</FormikForm>
+    <Formik
+      initialValues={getInitalValues()}
+      onSubmit={(values) => {
+        preventDefault();
+      }}
+      validationSchema={FormSchema}
+    >
+      <div>
+        <form onChange={onChange}>
+          {formFields.map((field) => selectComponent(field))}
+        </form>
+      </div>
     </Formik>
   );
 }
-
-export function TextField({ name, label, placeholder }: FromProps) {
-  return (
-    <>
-      {label && <label htmlFor={name}>{label}</label>}
-      <Field
-        className="form-control"
-        type="text"
-        name={name}
-        id={name}
-        placeholder={placeholder || ""}
-      />
-      <ErrorMessage
-        name={"test"}
-        render={(msg) => <div style={{ color: "red" }}>{msg}</div>}
-      />
-    </>
-  );
-}
-
-export function SelectField({ name, label, options }: FromProps) {
-  return (
-    <>
-      {label && <label htmlFor={name}>{label}</label>}
-      <Field as="select" id={name} name={name}>
-        <option value="">Choose...</option>
-        {options
-          ? options.map((optn, index) => (
-              <option
-                key={index}
-                value={optn.value}
-                label={optn.label || optn.value}
-              />
-            ))
-          : null}
-      </Field>
-      <ErrorMessage
-        name={name ? name : "select"}
-        render={(msg) => <div style={{ color: "red" }}>{msg}</div>}
-      />
-    </>
-  );
-}
-
-export function SubmitButton({ children }: FromProps) {
-  const { isSubmitting } = useFormikContext();
-
-  return (
-    <button type="submit" disabled={isSubmitting}>
-      {children}
-    </button>
-  );
+function preventDefault() {
+  throw new Error("Function not implemented.");
 }
