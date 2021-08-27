@@ -44,7 +44,7 @@ const FormEditor = ({
     return target.id;
   };
 
-  const changeHTML = (event: FormDataEvent) => {
+  const changeHTML = (event: Event) => {
     setFormInParent((event.target as HTMLFormElement).form);
     const newHTML: string = getNewHTML(event.target, HTML);
 
