@@ -1,13 +1,17 @@
 import FormEditorStyles from "./FormEditorStyles";
 import IFrame from "../IFrame/Iframe";
 import { useState } from "react";
+import { FormProps } from "../Form/Form";
+import FormComponent from "../Form/Form";
 
 type FormEditorProps = {
   initialCSS: string;
   initialHTML: string;
   level?: string;
   toggleSwitchLabel?: string;
-  formFields: JSON;
+  formProps: Array<FormProps>;
+  getNewHTML: Function;
+  setFormInParent: Function;
 };
 
 const FormEditor = ({
@@ -15,6 +19,9 @@ const FormEditor = ({
   toggleSwitchLabel,
   initialCSS,
   initialHTML,
+  formProps,
+  getNewHTML,
+  setFormInParent,
 }: FormEditorProps) => {
   const [HTML, setHTML] = useState<string>(initialHTML);
   const [CSS, setCSS] = useState<string>(initialCSS);
@@ -23,7 +30,7 @@ const FormEditor = ({
   const OutputIframe = () => (
     <IFrame
       level={level}
-      toggleSwitchLabel={toggleSwitchLabel}
+      toggle={false}
       head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}
     >
       <div
@@ -33,10 +40,30 @@ const FormEditor = ({
     </IFrame>
   );
 
+  const getID = (target: Element) => {
+    return target.id;
+  };
+
+  const changeHTML = (event: FormDataEvent) => {
+    setFormInParent((event.target as HTMLFormElement).form);
+    const newHTML: string = getNewHTML(event.target, HTML);
+
+    setHTML(newHTML);
+  };
+
+  const setProps = ({ ...field }: any) => {
+    return <FormComponent {...field} onChange={changeHTML} />;
+  };
+
   return (
     <FormEditorStyles>
       <div className="row col-12">
-        <div className="col-6 editor"></div>
+        <div className="col-6 editor__wrapper">
+          <div className="headline"> Quiz </div>
+          <div className="editor">
+            {formProps.map((field) => setProps(field))}
+          </div>
+        </div>
         <div className="col-6 output">
           <OutputIframe />
         </div>

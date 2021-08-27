@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 interface Props {
   level?: string;
   toggleActive?: boolean;
+  toggle: boolean;
 }
 
 const IframeStyles = styled.div<Props>`
@@ -23,6 +24,9 @@ const IframeStyles = styled.div<Props>`
     border: ${({ theme }) => "2px solid " + theme.primary};
     border-radius: ${({ theme }) => theme.baseSpace * 1.5 + "px "};
     min-height: 450px;
+
+    margin-top: ${({ toggle, theme }) =>
+      toggle ? "" : theme.baseSpace * 3.9 + "px "};
   }
 
   .md_switch {

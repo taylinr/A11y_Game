@@ -1,5 +1,5 @@
 import CodeEditorStyles from "./CodeEditorStyles";
-import IFrame from "./Iframe";
+import IFrame from "../IFrame/Iframe";
 import React, { useRef, useEffect, useState } from "react";
 import Tabs from "../Tabs/Tabs";
 import { Code } from "../../model/code.model";
@@ -124,6 +124,7 @@ const CodeEditor = ({
   // Component for display text
   const OutputIframe = () => (
     <IFrame
+      toggle={true}
       level={level}
       toggleSwitchLabel={toggleSwitchLabel}
       head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}

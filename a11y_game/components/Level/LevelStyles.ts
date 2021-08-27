@@ -6,11 +6,13 @@ interface Props {
 }
 
 const LevelStyles = styled.div<Props>`
-  p {
-    color: ${({ theme, valid }) => (valid ? theme.green : theme.red)};
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
+  .speechbubble {
+    p {
+      color: ${({ theme, valid }) => (valid ? theme.green : theme.red)};
+      padding: 20px;
+      margin: 20px;
+      text-align: center;
+    }
 
     svg {
       height: auto;

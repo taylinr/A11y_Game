@@ -10,6 +10,7 @@ type ButtonProps = {
   inactive?: boolean;
   onClick?: () => void;
   onAddPoints?: (num: number) => void;
+  type?: "button" | "submit" | "reset" | undefined;
 };
 
 const Button = ({
@@ -21,6 +22,7 @@ const Button = ({
   inactive,
   onClick,
   onAddPoints,
+  type,
 }: ButtonProps) => {
   if (!inactive && target) {
     return (
@@ -32,6 +34,7 @@ const Button = ({
             accomplished={accomplished}
             role={"button"}
             onClick={onClick}
+            type={type}
           >
             {children}
           </ButtonStyles>
@@ -46,6 +49,7 @@ const Button = ({
         accomplished={accomplished}
         onClick={onClick}
         role={"button"}
+        type={type}
       >
         {children}
       </ButtonStyles>
@@ -56,6 +60,7 @@ const Button = ({
         inactive={inactive}
         disabled
         aria-describedby={"Disabled because previous level is not finished yet"}
+        type={type}
       >
         {children}
       </ButtonStyles>

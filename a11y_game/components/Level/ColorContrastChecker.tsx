@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import Button from "../Button/Button";
 import CodeEditor from "../CodeEditor/CodeEditor";
-import { checkContrast } from "../CodeChecker/CodeChecker";
+import { checkContrast } from "../Checker/CodeChecker";
 import LevelStyles from "./LevelStyles";
 import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";
@@ -12,7 +11,6 @@ import Context from "../Context/Context";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowLeft from "../../assets/arrow-left.svg";
 import Image from "next/image";
-
 
 type ContrastLevelProps = {
   setContrastInParent: Function;

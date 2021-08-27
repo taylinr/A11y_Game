@@ -5,7 +5,6 @@ import Context from "../../components/Context/Context";
 import React, { useContext } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import checkmark from "../../assets/checkmark.svg";
-import { Form, TextField } from "../../components/Form/Form";
 import Image from "next/image";
 
 export default function Home() {

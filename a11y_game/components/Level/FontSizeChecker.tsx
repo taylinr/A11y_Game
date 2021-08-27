@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 import Button from "../Button/Button";
 import CodeEditor from "../CodeEditor/CodeEditor";
-import { checkContrast } from "../CodeChecker/CodeChecker";
+import { checkContrast } from "../Checker/CodeChecker";
 import LevelStyles from "./LevelStyles";
 import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";
