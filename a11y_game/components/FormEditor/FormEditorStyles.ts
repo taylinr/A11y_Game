@@ -30,7 +30,7 @@ const FormStyles = styled.div<Props>`
   .editor {
     min-height: 450px;
     max-width: 100%;
-    padding: 0 35px 25px;
+    padding: 25px 35px;
     background-color: ${({ theme }) => theme.lightgrey};
     overflow-y: auto;
     border-radius: ${({ theme }) =>

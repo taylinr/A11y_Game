@@ -127,16 +127,12 @@ const CodeEditor = ({
   // Component for display text
   const OutputIframe = () => (
     <IFrame
-      toggle={true}
       level={level}
+      toggle={true}
       toggleSwitchLabel={toggleSwitchLabel}
-      head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}
-    >
-      <div
-        className="Container"
-        dangerouslySetInnerHTML={{ __html: HTML }}
-      ></div>
-    </IFrame>
+      css={CSS}
+      html={HTML}
+    />
   );
 
   return (

@@ -6,9 +6,11 @@ import { Formik, Form } from "formik";
 import Button from "../Button/Button";
 import FormSchema from "./FormSchema";
 import { useEffect } from "react";
+import { TextareaProps } from "./Textarea/Textarea";
+import Textarea from "./Textarea/Textarea";
 
 export type FormProps = {
-  formFields: Array<SelectProps>;
+  formFields: Array<SelectProps | TextareaProps>;
   // | InputProps | TextareaProps>;
   cta: string;
   successHeadline: string;
@@ -25,8 +27,8 @@ export function selectComponent({ component, ...field }: any) {
     // case "input":
     //   return <Input key={field.name} {...field} />;
 
-    // case "textarea":
-    //   return <Textarea key={field.name} {...field} />;
+    case "textarea":
+      return <Textarea key={field.name} {...field} />;
 
     default:
       return null;

@@ -4,8 +4,10 @@ import IframeStyles from "./IframeStyles";
 import styled from "styled-components";
 
 type IframeProps = {
-  children: React.ReactNode;
-  head: React.ReactNode;
+  // children: React.ReactNode;
+  // head: React.ReactNode;
+  html: string;
+  css: string;
   level?: string;
   toggleSwitchLabel?: string;
   toggle: boolean;
@@ -31,8 +33,8 @@ const ToggleSwitch = styled.input<ToggleProps>`
 `;
 
 const IFrame = ({
-  children,
-  head,
+  css,
+  html,
   level,
   toggle,
   toggleSwitchLabel,
@@ -44,8 +46,30 @@ const IFrame = ({
 
   const [toggleActive, setActive] = useState<boolean>(true);
 
+  const htmlWithoutImageSRC: string =
+    level == "3"
+      ? html.includes("img")
+        ? html.replace("src", "")
+        : html
+      : html;
+
+  const newHTML: string =
+    level == "3" ? (toggleActive ? htmlWithoutImageSRC : html) : html;
+
+  const head: React.ReactNode = (
+    <style dangerouslySetInnerHTML={{ __html: css }}></style>
+  );
+
+  const body: React.ReactNode = (
+    <div
+      className="Container"
+      dangerouslySetInnerHTML={{ __html: newHTML }}
+    ></div>
+  );
+
   return (
     <IframeStyles level={level} toggleActive={toggleActive} toggle={toggle}>
+      {console.log()}
       {toggle ? (
         <div className="switch__wrapper">
           <label className="md_switch">
@@ -69,8 +93,12 @@ const IFrame = ({
         title="Visually-Rendered-Code-Editor-Output"
         aria-label="Visually-Rendered-Code-Editor-Output"
       >
-        {mountHead && createPortal(head, mountHead)}
-        {mountNode && createPortal(children, mountNode)}
+        {level == "3"
+          ? toggleActive
+            ? null
+            : mountHead && createPortal(head, mountHead)
+          : mountHead && createPortal(head, mountHead)}
+        {mountNode && createPortal(body, mountNode)}
       </iframe>
     </IframeStyles>
   );

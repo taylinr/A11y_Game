@@ -10,7 +10,10 @@ import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
 import Button from "../Button/Button";
 import { parse, HTMLElement, Node } from "node-html-parser";
-import { checkEasyLanguage } from "../Checker/FormChecker";
+import {
+  checkEasyLanguageValid,
+  getEasyLanguagePoints,
+} from "../Checker/FormChecker";
 
 type Props = {
   setValidInParent: Function;
@@ -23,15 +26,13 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
   const [points, setPoints] = useState<number>(0);
 
   const setFormInParent = (form: HTMLFormElement) => {
-    setValid(checkEasyLanguage(form));
+    setValid(checkEasyLanguageValid(form));
+    setPoints(getEasyLanguagePoints(form));
   };
 
   useEffect(() => {
     setValidInParent(valid);
-    if (valid) {
-      setPoints(3);
-    }
-  }, [valid, setValidInParent, setPoints]);
+  }, [valid, setValidInParent]);
 
   const activateModal = () => {
     setIsOpenModal(true);
@@ -82,20 +83,21 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
   const addPoints = () => {
     let submitAgain: boolean = false;
     let oldPoints: number = 0;
+    let thisPoints: number = points > 14 ? 3 : points > 12 ? 2 : 1;
 
     submitAgain = context.submittedLevel.has(8);
 
     if (!submitAgain) {
-      context.addSubmittedLevel(8, points);
+      context.addSubmittedLevel(8, thisPoints);
     } else {
       const testOldPoints = context.submittedLevel.get(8);
       if (testOldPoints) {
         oldPoints = testOldPoints;
       }
-      context.submittedLevel.set(8, points);
+      context.submittedLevel.set(8, thisPoints);
     }
 
-    const newPoints: number = points - oldPoints;
+    const newPoints: number = thisPoints - oldPoints;
     context.addPoints(newPoints);
   };
 
@@ -105,7 +107,7 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
         getNewHTML={getNewHTML}
         setFormInParent={setFormInParent}
         level="2"
-        toggleSwitchLabel="toggle"
+        toggle={false}
         initialCSS="div { padding: 30px; } h3 { font-size: 1.5em; } p { font-size: 1.2em;} span { font-weight: bold;} .blurred { filter: blur(2px); }"
         initialHTML="<div><h3> Complicated Text </h3><p>Thank you for your <span id='correspondence' class='blurred' data-val='2'>correspondence asking for permission</span> to put up <span id='placard' class='blurred' data-val='1'>advertisement placard</span> in the <span id='athenaeum' class='blurred' data-val='3'>athenaeum</span>. Before we can give you an <span id='confirmation' class='blurred' data-val='3'>confirmation</span> we will need to see a copy of the poster to make sure it won't <span id='aggrieve' class='blurred' data-val='1'>aggrieve</span> anyone.</p></div>"
         formProps={[
@@ -262,13 +264,16 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
             <h2>Great!</h2>
             <div className={"col-6"}>
               <h3>You have succeded the Color and Contrast Level with</h3>
-              <Points currVal={points} maxVal={3} />
-              {/* {contrastRatio < 16 ? (
+              <Points
+                currVal={points > 14 ? 3 : points > 12 ? 2 : 1}
+                maxVal={3}
+              />
+              {points < 15 ? (
                 <p>Try Again to get all points or try the next level!</p>
-              ) : null} */}
+              ) : null}
             </div>
             <div className={"col-6"}>
-              <Progress val={points} maxval={3} label={"Contrast Ratio"} />
+              <Progress val={points} maxval={15} label={"Easy Language"} />
             </div>
             <div className={"col-12"}>
               <div className={"col-4"}>

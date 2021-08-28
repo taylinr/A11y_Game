@@ -9,6 +9,7 @@ type FormEditorProps = {
   initialHTML: string;
   level?: string;
   toggleSwitchLabel?: string;
+  toggle: boolean;
   formProps: Array<FormProps>;
   getNewHTML: Function;
   setFormInParent: Function;
@@ -17,6 +18,7 @@ type FormEditorProps = {
 const FormEditor = ({
   level,
   toggleSwitchLabel,
+  toggle,
   initialCSS,
   initialHTML,
   formProps,
@@ -30,14 +32,11 @@ const FormEditor = ({
   const OutputIframe = () => (
     <IFrame
       level={level}
-      toggle={false}
-      head={<style dangerouslySetInnerHTML={{ __html: CSS }}></style>}
-    >
-      <div
-        className="Container"
-        dangerouslySetInnerHTML={{ __html: HTML }}
-      ></div>
-    </IFrame>
+      toggle={toggle}
+      toggleSwitchLabel={toggleSwitchLabel}
+      css={CSS}
+      html={HTML}
+    />
   );
 
   const getID = (target: Element) => {

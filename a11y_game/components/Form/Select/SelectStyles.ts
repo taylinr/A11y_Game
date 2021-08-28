@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
 const SelectStyles = styled.div`
+  float: left;
+
   * {
     float: left;
   }
@@ -13,7 +15,7 @@ const SelectStyles = styled.div`
   div select {
     font-size: 1em;
     float: left;
-    margin: ${({ theme }) => 0 + " " + theme.baseSpace * 1 + "px"};
+    /* margin: ${({ theme }) => 0 + " " + theme.baseSpace * 1 + "px"}; */
     display: flex;
     justify-content: space-between;
     border: ${({ theme }) => "1px solid " + theme.primary};
