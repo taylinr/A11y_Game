@@ -179,7 +179,7 @@ const GlobalStyle = createGlobalStyle`
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
-        min-height: calc(100vh - 110px);
+        min-height: calc(100vh - 125px);
     }
 
     h1, h2, h3, h4 {
@@ -206,9 +206,14 @@ const GlobalStyle = createGlobalStyle`
         line-height: 24px;
         max-width: 480px;
         margin-bottom: 2em;
+        font-size: 1.2em;
 
         a {
             text-decoration: underline;
+        }
+
+        @media only screen and (min-width: 768px) {
+            font-size: 1em;
         }
     }
 

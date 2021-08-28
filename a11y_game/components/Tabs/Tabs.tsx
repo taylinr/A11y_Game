@@ -34,7 +34,7 @@ interface ContentProps {
 const TabContent = styled.div<ContentProps>`
   position: absolute;
   left: 10px; /* change as needed */
-  bottom: 10px; /* change as needed */
+  bottom: -300px; /* change as needed */
   opacity: 0;
   ${({ tabActive }) =>
     tabActive &&

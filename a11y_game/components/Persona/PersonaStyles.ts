@@ -102,7 +102,7 @@ const PersonaStyles = styled.div<Props>`
     transform: scale(0);
     float: left;
     position: absolute;
-    top: -55px;
+    top: -80px;
     left: -25px;
     right: 40px;
     z-index: 99;
@@ -123,7 +123,7 @@ const PersonaStyles = styled.div<Props>`
   .speechbubble {
     background-color: rgba(220, 230, 235, 0.9);
     color: ${({ theme }) => theme.primary};
-    padding: 15px;
+    padding: 25px;
     margin-bottom: 75px;
     cursor: default;
     border-radius: 25px;
@@ -131,7 +131,7 @@ const PersonaStyles = styled.div<Props>`
     p {
       margin: 0;
       text-align: center;
-      font-size: 1em;
+      font-size: 1.2em;
     }
   }
 

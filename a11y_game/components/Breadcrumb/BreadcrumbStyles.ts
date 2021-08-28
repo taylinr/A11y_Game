@@ -6,6 +6,12 @@ const BreadcrumbStyles = styled.div`
   z-index: 9;
   position: relative;
 
+  font-size: 1.2em;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 1em;
+  }
+
   ul,
   ol {
     list-style: none;

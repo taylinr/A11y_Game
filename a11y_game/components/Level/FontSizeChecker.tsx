@@ -148,7 +148,7 @@ const FontSizeChecker = ({
       {isOpenModal ? (
         <Modal
           titleText="Color And Contrast Level Evaluation"
-          id={"contrastRatio"}
+          id={"fontSize"}
           handleClose={handleClose}
         >
           <div className={"col-12 row"}>
@@ -161,12 +161,7 @@ const FontSizeChecker = ({
               ) : null}
             </div>
             <div className={"col-6"}>
-              <Progress
-                //TODO: max points, current Points etc.
-                val={points}
-                maxval={3}
-                label={"Contrast Ratio"}
-              />
+              <Progress val={points} maxval={3} label={"Font Size"} />
             </div>
             <div className={"col-12"}>
               <div className={"col-4"}>

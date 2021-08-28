@@ -39,11 +39,6 @@ export default function Home() {
               name={"alex"}
               emotion={"neutral"}
               alt="Image of Alex"
-              text={[
-                <p key="help">
-                  Click <a href="">here</a> for help!
-                </p>,
-              ]}
               valid={valid}
               validationText={
                 valid

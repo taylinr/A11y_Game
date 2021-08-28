@@ -42,12 +42,6 @@ export default function Home() {
               name={"dave"}
               emotion={contrastRatio > 5 ? "happy" : "neutral"}
               alt="Image of Dave"
-              text={[
-                <p key="help">Change the colors in the CSS Code</p>,
-                <p key="toggle">
-                  Want to see color? <br /> Click the greyscale toggle!
-                </p>,
-              ]}
               valid={contrastRatio > 5}
               validationText={
                 contrastRatio > 5

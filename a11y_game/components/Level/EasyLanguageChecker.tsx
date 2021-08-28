@@ -255,20 +255,20 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
       {isOpenModal ? (
         <Modal
           titleText="Color And Contrast Level Evaluation"
-          id={"contrastRatio"}
+          id={"easyLanguage"}
           handleClose={handleClose}
         >
           <div className={"col-12 row"}>
             <h2>Great!</h2>
             <div className={"col-6"}>
-              <h3>You have succeded the Color and Contrast Level with</h3>
+              <h3>You have succeded the Easy Language Level with</h3>
               <Points currVal={points} maxVal={3} />
               {/* {contrastRatio < 16 ? (
                 <p>Try Again to get all points or try the next level!</p>
               ) : null} */}
             </div>
             <div className={"col-6"}>
-              <Progress val={points} maxval={3} label={"Contrast Ratio"} />
+              <Progress val={points} maxval={3} label={"Easy Language"} />
             </div>
             <div className={"col-12"}>
               <div className={"col-4"}>

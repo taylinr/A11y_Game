@@ -47,11 +47,11 @@ export default function Home() {
               primary={true}
             >
               Help
-              {levelDone(1)
+              {levelDone(4)
                 ? " Clara"
-                : levelDone(2)
+                : levelDone(6)
                 ? " Alex"
-                : levelDone(3)
+                : levelDone(8)
                 ? " Semiha"
                 : " Dave"}
               <Image src={arrowRight} alt="arrow-right-icon" />

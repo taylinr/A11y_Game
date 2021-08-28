@@ -37,12 +37,6 @@ export default function Home() {
               name={"dave"}
               emotion={fontSize > 16 ? "happy" : "neutral"}
               alt="Image of Dave"
-              text={[
-                <p key="help">Change the font-size in the CSS tab</p>,
-                <p key="toggle">
-                  Want to see clearly? <br /> Click the Blur toggle!
-                </p>,
-              ]}
               valid={fontSize >= 16}
               validationText={
                 fontSize >= 16

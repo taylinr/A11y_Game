@@ -15,7 +15,7 @@ const ButtonStyles = styled.button<Props>`
   top: 0;
   z-index: ${({ help }) => (help ? 999 : 1)};
   margin: ${({ theme, help }) =>
-    help ? "0 5em 0 0" : theme.baseSpace * 2 + "px 0"};
+    help ? "0 1em 0 0" : theme.baseSpace * 2 + "px 0"};
   display: flex;
   justify-content: space-between;
   border: ${({ theme, inactive }) =>
@@ -39,6 +39,14 @@ const ButtonStyles = styled.button<Props>`
       : theme.primary};
   box-shadow: ${({ theme, inactive }) => (inactive ? "none" : theme.boxShadow)};
   cursor: ${({ theme, inactive }) => (inactive ? "default" : "pointer")};
+
+  font-size: 1.2em;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 1em;
+    margin: ${({ theme, help }) =>
+      help ? "0 4em 0 0" : theme.baseSpace * 2 + "px 0"};
+  }
 
   :hover {
     box-shadow: ${({ theme, inactive }) =>
