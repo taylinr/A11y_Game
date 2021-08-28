@@ -16,5 +16,10 @@ const ModalStyles = styled.div<Props>`
   align-items: center;
   justify-content: center;
   display: flex;
+  padding-top: 300px;
+
+  @media only screen and (min-width: 768px) {
+    padding-top: 0;
+  }
 `;
 export default ModalStyles;

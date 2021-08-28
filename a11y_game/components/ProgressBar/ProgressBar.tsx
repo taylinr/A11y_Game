@@ -35,7 +35,7 @@ const Progress = ({ val, maxval, label }: ProgressProps) => {
           <div className="indicator">
             <p>{label}</p>
             <br />
-            <p className="number">{val.toFixed(2)}</p>
+            <p className="number">{val.toFixed(0)}</p>
           </div>
         </ProgressBar>
       </div>

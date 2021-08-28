@@ -23,9 +23,9 @@ const Persona = ({
     <PersonaStyles valid={valid}>
       <div className={"persona__wrapper"}>
         <Image
-          src={"/images/" + name + "_head_" + emotion + ".png"}
-          height={200}
-          width={200}
+          src={"/images/" + name.toLowerCase() + "_head_" + emotion + ".png"}
+          height={170}
+          width={170}
           className={"persona__image"}
           alt={alt}
           priority={true}

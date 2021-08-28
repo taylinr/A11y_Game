@@ -52,9 +52,9 @@ const Persona = ({
         <div className={"persona__wrapper"}>
           <div className="image__wrapper">
             <Image
-              src={"/images/" + name + "_head_" + emotion + ".png"}
-              height={260}
-              width={260}
+              src={"/images/" + "dave" + "_head_" + emotion + ".png"}
+              height={230}
+              width={230}
               className={"persona__image"}
               alt={alt}
               priority={true}

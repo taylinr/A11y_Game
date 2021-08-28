@@ -395,8 +395,11 @@ export function checkFontSize(code: Code) {
           fontSize =
             "" + parseInt(fontSize.substring(0, fontSize.indexOf("rem"))) * 16;
         }
+      } else if (fontSize.includes("%")) {
+        fontSize =
+          "" +
+          (parseInt(fontSize.substring(0, fontSize.indexOf("%"))) / 100) * 16;
       }
-
       if (parseInt(fontSize) < lowestFontSize) {
         lowestFontSize = parseInt(fontSize);
       }
@@ -452,7 +455,11 @@ export function checkFontSizeRelative(code: Code) {
         }
       }
 
-      if (fontSizeRelative.includes("em") || fontSizeRelative.includes("rem")) {
+      if (
+        fontSizeRelative.includes("em") ||
+        fontSizeRelative.includes("rem") ||
+        fontSizeRelative.includes("%")
+      ) {
         valid = true;
       } else {
         valid = false;

@@ -14,27 +14,12 @@ const PersonaStyles = styled.div<Props>`
   margin-top: 70px;
 
   .persona__wrapper {
-    background-color: ${({ theme, inactive }) =>
-      inactive ? theme.white : theme.primary};
-
     color: ${({ theme, inactive }) => (inactive ? theme.primary : theme.white)};
-    border: ${({ theme, inactive }) =>
-      inactive ? "1px solid " + theme.primary : "none"};
-    border-radius: 155px 155px
-      ${({ theme }) =>
-        theme.baseSpace * 1.5 + "px " + theme.baseSpace * 1.5 + "px"};
-    box-shadow: ${({ theme, inactive }) =>
-      inactive ? "none" : theme.boxShadow};
+
     max-width: 238px;
 
     margin: ${({ theme }) =>
       theme.baseSpace * 2 + "px auto " + theme.baseSpace * 2 + "px auto"};
-    :hover {
-      box-shadow: ${({ inactive }) =>
-        inactive
-          ? "none"
-          : " 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)"};
-    }
 
     position: relative;
 
@@ -50,10 +35,31 @@ const PersonaStyles = styled.div<Props>`
     }
 
     .persona__info-wrapper {
-      padding: 0
+      margin-top: -45px;
+      background-color: ${({ theme, inactive }) =>
+        inactive ? theme.white : theme.primary};
+
+      border: ${({ theme, inactive }) =>
+        inactive ? "1px solid " + theme.primary : "none"};
+
+      border-radius: 155px 155px
         ${({ theme }) =>
-          theme.baseSpace * 2 + "px " + theme.baseSpace * 2 + "px "};
+          theme.baseSpace * 1.5 + "px " + theme.baseSpace * 1.5 + "px"};
+
+      box-shadow: ${({ theme, inactive }) =>
+        inactive ? "none" : theme.boxShadow};
+
+      padding: 35px 15px 25px;
+      ${({ theme }) =>
+        theme.baseSpace * 2 + "px " + theme.baseSpace * 2 + "px "};
       /* min-height: 360px; */
+
+      :hover {
+        box-shadow: ${({ inactive }) =>
+          inactive
+            ? "none"
+            : " 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)"};
+      }
 
       p.persona__name {
         font-size: 1.5rem;
@@ -96,9 +102,9 @@ const PersonaStyles = styled.div<Props>`
     transform: scale(0);
     float: left;
     position: absolute;
-    top: -70px;
-    left: -50px;
-    right: 50px;
+    top: -55px;
+    left: -25px;
+    right: 40px;
     z-index: 99;
   }
 
@@ -117,7 +123,7 @@ const PersonaStyles = styled.div<Props>`
   .speechbubble {
     background-color: rgba(220, 230, 235, 0.9);
     color: ${({ theme }) => theme.primary};
-    padding: 25px 25px 25px 25px;
+    padding: 15px;
     margin-bottom: 75px;
     cursor: default;
     border-radius: 25px;
@@ -125,7 +131,7 @@ const PersonaStyles = styled.div<Props>`
     p {
       margin: 0;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1em;
     }
   }
 

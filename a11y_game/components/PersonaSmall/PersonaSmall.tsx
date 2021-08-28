@@ -14,9 +14,9 @@ const Persona = ({ name, alt, text, emotion }: PersonaProps) => {
     <PersonaStyles>
       <div className={"persona__wrapper"}>
         <Image
-          src={"/images/" + name + "_body_" + emotion + ".png"}
-          height={391}
-          width={240}
+          src={"/images/" + name.toLowerCase() + "_body_" + emotion + ".png"}
+          height={371}
+          width={220}
           className={"persona__image"}
           alt={alt}
           priority={true}

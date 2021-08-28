@@ -2,8 +2,19 @@ import Head from "next/head";
 import React, { useState } from "react";
 import EasyLanguageChecker from "../../../components/Level/EasyLanguageChecker";
 import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
+import Modal from "../../../components/Modal/Modal";
+import Button from "../../../components/Button/Button";
 export default function Home() {
   const [valid, setValid] = useState<boolean>(false);
+
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const activateModal = () => {
+    setIsOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setIsOpenModal(false);
+  };
   return (
     <div>
       <Head>
@@ -21,27 +32,41 @@ export default function Home() {
             </p>
           </div>
           <div className="col-3">
-            <div className="col-3">
-              <PersonaLevel
-                name={"alex"}
-                emotion={"neutral"}
-                alt="Image of Alex"
-                text={[
-                  <p key="help">
-                    Click <a href="">here</a> for help!
-                  </p>,
-                ]}
-                valid={valid}
-                validationText={
-                  valid
-                    ? "Now this is understandable!"
-                    : "Still to complicated, try other words!"
-                }
-              />
-            </div>
+            <Button help={true} primary={true} onClick={activateModal}>
+              Help
+            </Button>
+            <PersonaLevel
+              name={"alex"}
+              emotion={"neutral"}
+              alt="Image of Alex"
+              text={[
+                <p key="help">
+                  Click <a href="">here</a> for help!
+                </p>,
+              ]}
+              valid={valid}
+              validationText={
+                valid
+                  ? "Now this is understandable!"
+                  : "Still to complicated, try other words!"
+              }
+            />
           </div>
         </div>
         <EasyLanguageChecker setValidInParent={setValid} />
+        {isOpenModal ? (
+          <Modal
+            titleText="Easy Language Level Help"
+            id={"help"}
+            handleClose={handleClose}
+          >
+            <div className={"col-12 row"}>
+              <h2>Help</h2>
+              <div className={"col-6"}></div>
+              <div className={"col-6"}></div>
+            </div>
+          </Modal>
+        ) : null}
       </main>
     </div>
   );

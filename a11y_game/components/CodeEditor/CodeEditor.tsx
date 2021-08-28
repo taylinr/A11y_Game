@@ -15,6 +15,7 @@ let oneDark = EditorView.theme(
     "&": {
       color: "#3b6b76",
       backgroundColor: "#dce6eb",
+      fontSize: "16px",
     },
     ".cm-content": {
       caretColor: "#0e9",
@@ -27,8 +28,14 @@ let oneDark = EditorView.theme(
     },
     ".cm-gutters": {
       backgroundColor: "#045",
-      color: "#3b6b76",
+      color: "white",
       border: "none",
+    },
+    ".cm-activeLineGutter": {
+      color: "#3b6b76",
+    },
+    ".ͼh": {
+      color: "#000000",
     },
   },
   { dark: false }

@@ -44,6 +44,15 @@ const GlobalStyle = createGlobalStyle`
         .col-11 {width: 91.66%;}
         .col-12 {width: 100%;}
 
+        [class*="col-"] {
+            padding: 0 10px;
+        }
+
+         main {
+      
+        padding: 0 4rem 2rem 4rem;
+    }
+
         .center-horizontal {
             align-items: center;
             display: flex;
@@ -165,7 +174,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        padding: 0 4rem 2rem 4rem;
+        position: relative;
+        padding: 0 2rem 2rem 2rem;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
@@ -197,6 +207,12 @@ const GlobalStyle = createGlobalStyle`
         max-width: 480px;
         margin-bottom: 2em;
 
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    li {
         a {
             text-decoration: underline;
         }
