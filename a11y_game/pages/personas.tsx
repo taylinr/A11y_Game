@@ -36,22 +36,22 @@ export default function Home() {
             <Button
               target={
                 "/personas/" +
-                (levelDone(1)
+                (levelDone(4)
                   ? "clara"
-                  : levelDone(2)
+                  : levelDone(6)
                   ? "alex"
-                  : levelDone(3)
+                  : levelDone(8)
                   ? "semiha"
                   : "dave")
               }
               primary={true}
             >
               Help
-              {levelDone(1)
+              {levelDone(4)
                 ? " Clara"
-                : levelDone(2)
+                : levelDone(6)
                 ? " Alex"
-                : levelDone(3)
+                : levelDone(8)
                 ? " Semiha"
                 : " Dave"}
               <Image src={arrowRight} alt="arrow-right-icon" />

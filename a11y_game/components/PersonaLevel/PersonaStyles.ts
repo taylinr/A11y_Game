@@ -22,34 +22,8 @@ const PersonaStyles = styled.div<Props>`
       height: auto;
     }
   }
+
   .speechbubble__wrapper {
-    animation: 0.3s chat 2s;
-    animation-fill-mode: forwards;
-    transform: scale(0);
-    float: left;
-    position: absolute;
-    right: 95%;
-    left: -110%;
-    top: 20px;
-    z-index: 99;
-  }
-
-  .speechbubble:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 44px solid transparent;
-    border-left-color: rgba(220, 230, 235, 0.9);
-    border-right: 0;
-    border-bottom: 0;
-    margin-top: -22px;
-    margin-right: -43px;
-  }
-
-  .speechbubble__contrast__wrapper {
     animation: 0.3s chat 1s;
     animation-fill-mode: forwards;
     transform: scale(0);
@@ -57,7 +31,7 @@ const PersonaStyles = styled.div<Props>`
     position: absolute;
     right: 100%;
     left: -110%;
-    top: 130px;
+    top: 60px;
     z-index: 99;
 
     .speechbubble:after {
@@ -67,12 +41,12 @@ const PersonaStyles = styled.div<Props>`
       top: 50%;
       width: 0;
       height: 0;
-      border: 44px solid transparent;
+      border: 40px solid transparent;
       border-left-color: rgba(220, 230, 235, 0.9);
       border-right: 0;
-      border-top: 0;
-      margin-top: -22px;
-      margin-right: -42px;
+      border-bottom: 0;
+      margin-top: -20px;
+      margin-right: -39px;
     }
 
     p {
@@ -95,7 +69,7 @@ const PersonaStyles = styled.div<Props>`
   .speechbubble {
     background-color: rgba(220, 230, 235, 0.9);
     color: ${({ theme }) => theme.primary};
-    padding: 25px 25px 25px 25px;
+    padding: 25px;
     margin-bottom: 75px;
     cursor: default;
     border-radius: 25px;
@@ -106,6 +80,10 @@ const PersonaStyles = styled.div<Props>`
       text-align: center;
       font-size: 1.1em;
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
   }
 `;
 export default PersonaStyles;

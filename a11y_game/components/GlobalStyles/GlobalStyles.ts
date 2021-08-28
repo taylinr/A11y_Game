@@ -44,6 +44,15 @@ const GlobalStyle = createGlobalStyle`
         .col-11 {width: 91.66%;}
         .col-12 {width: 100%;}
 
+        [class*="col-"] {
+            padding: 0 10px;
+        }
+
+         main {
+      
+        padding: 0 4rem 2rem 4rem;
+    }
+
         .center-horizontal {
             align-items: center;
             display: flex;
@@ -165,11 +174,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     main {
-        padding: 0 4rem 2rem 4rem;
+        position: relative;
+        padding: 0 2rem 2rem 2rem;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
-        min-height: calc(100vh - 110px);
+        min-height: calc(100vh - 125px);
     }
 
     h1, h2, h3, h4 {
@@ -196,7 +206,18 @@ const GlobalStyle = createGlobalStyle`
         line-height: 24px;
         max-width: 480px;
         margin-bottom: 2em;
+        font-size: 1.2em;
 
+        a {
+            text-decoration: underline;
+        }
+
+        @media only screen and (min-width: 768px) {
+            font-size: 1em;
+        }
+    }
+
+    li {
         a {
             text-decoration: underline;
         }

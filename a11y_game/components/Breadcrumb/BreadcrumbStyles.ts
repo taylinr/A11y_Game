@@ -3,8 +3,14 @@ import styled, { css } from "styled-components";
 const BreadcrumbStyles = styled.div`
   font-family: "Poppins", sans-serif;
   color: ${({ theme }) => theme.primary};
-  z-index: 999999999;
+  z-index: 9;
   position: relative;
+
+  font-size: 1.2em;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 1em;
+  }
 
   ul,
   ol {

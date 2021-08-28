@@ -90,7 +90,7 @@ const ColorContrastChecker = ({
         toggleSwitchLabel={"Greyscale"}
         setCode={setCodeFromChild}
         initialHTML={
-          '<div class="wrapper">\n  <h1 class="hello">Hello <strong>World</strong></h1> \n</div>\n<div>\n  <p> NOOO!!!</p>\n</div>'
+          '<div class="wrapper">\n  <h1 class="hello">\n    Hello \n    <strong>World</strong>\n  </h1> \n</div>\n<div>\n  <p> NOOO!!!</p>\n</div>'
         }
         initialCSS={
           "body { \n   background-color: #dce6eb; \n } \n\n h1.hello { \n    color: blue; \n} \n\n strong{ text-decoration: underline;} \n\n p { color: green; } \n\n div { background-color: yellow; } \n\n .wrapper { background-color: green;}"
