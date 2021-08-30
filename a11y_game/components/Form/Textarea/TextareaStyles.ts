@@ -5,6 +5,12 @@ const TextareaStyles = styled.div`
     float: left;
   }
 
+  label {
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
   textarea {
     border: 2px solid #3b6b76;
     border-radius: 15px;

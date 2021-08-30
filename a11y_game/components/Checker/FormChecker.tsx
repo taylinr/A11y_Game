@@ -218,8 +218,6 @@ export const checkScreenReaderValid = (form: HTMLFormElement) => {
 
   if (textArea && valid) {
     const value = textArea.value.toLowerCase();
-    console.log(textArea);
-    console.log(value);
 
     if (
       !value.includes("sunglases") &&
@@ -232,7 +230,6 @@ export const checkScreenReaderValid = (form: HTMLFormElement) => {
     }
   }
 
-  console.log(valid);
   return valid;
 };
 
@@ -294,9 +291,6 @@ export function getScreenReaderPoints(form: HTMLFormElement) {
 
   if (textArea) {
     const value = textArea.value.toLowerCase();
-    console.log(textArea);
-    console.log(value);
-
     if (
       value.includes("sunglases") ||
       value.includes("sunglasses") ||
@@ -325,3 +319,4 @@ export function getScreenReaderPoints(form: HTMLFormElement) {
 
   return points;
 }
+

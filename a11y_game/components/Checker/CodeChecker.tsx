@@ -459,7 +459,5 @@ export function checkFontSizeRelative(code: Code) {
       }
     }
   }
-
-  console.log(valid);
   return valid;
 }

@@ -133,7 +133,7 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
                 name: "correspondence",
                 error: "error",
                 textBefore: "Thank you for your",
-                textAfter: "to",
+                textAfter: "",
               },
               {
                 options: [
@@ -154,7 +154,7 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
                 component: "select",
                 name: "placard",
                 error: "error",
-                textBefore: "put up ",
+                textBefore: "to put up ",
                 textAfter: " ",
               },
               {

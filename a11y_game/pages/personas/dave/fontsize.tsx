@@ -6,8 +6,6 @@ export default function Home() {
   const [fontSize, setFontsize] = useState<number>(0);
   const [fontSizeRelative, setFontsizeRelative] = useState<boolean>(false);
 
-  console.log(fontSizeRelative);
-
   return (
     <div>
       <Head>

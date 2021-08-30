@@ -69,7 +69,6 @@ const IFrame = ({
 
   return (
     <IframeStyles level={level} toggleActive={toggleActive} toggle={toggle}>
-      {console.log()}
       {toggle ? (
         <div className="switch__wrapper">
           <label className="md_switch">
