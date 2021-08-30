@@ -28,32 +28,30 @@ const Select = ({
 
   return (
     <SelectStyles>
-      <p>
-        <p>{textBefore}</p>
-        <Field name={name}>
-          {({ field, form }: FieldProps) => (
-            <div>
-              {/* <label htmlFor={name}>{name}</label> */}
+      <label>{textBefore}</label>
+      <Field name={name}>
+        {({ field, form }: FieldProps) => (
+          <div>
+            {/* <label htmlFor={name}>{name}</label> */}
 
-              <select id={name} {...field}>
-                <option value="" disabled>
-                  {placeholder}
+            <select id={name} {...field}>
+              <option value="" disabled>
+                {placeholder}
+              </option>
+              {options.map(({ name, value }) => (
+                <option key={value} value={value}>
+                  {name}
                 </option>
-                {options.map(({ name, value }) => (
-                  <option key={value} value={value}>
-                    {name}
-                  </option>
-                ))}
-              </select>
+              ))}
+            </select>
 
-              <ErrorMessage name={name + ""}>
-                {(msg) => <div>{error ? error : msg}</div>}
-              </ErrorMessage>
-            </div>
-          )}
-        </Field>
-        <p>{textAfter}</p>
-      </p>
+            <ErrorMessage name={name + ""}>
+              {(msg) => <div>{error ? error : msg}</div>}
+            </ErrorMessage>
+          </div>
+        )}
+      </Field>
+      <label>{textAfter}</label>
     </SelectStyles>
   );
 };
