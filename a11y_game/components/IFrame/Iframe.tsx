@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import IframeStyles from "./IframeStyles";
 import styled from "styled-components";
+import SpeechSynthesis from "../SpeechSynthesiser/SpeechSynthesiser";
 
 type IframeProps = {
   // children: React.ReactNode;
@@ -46,18 +47,27 @@ const IFrame = ({
 
   const [toggleActive, setActive] = useState<boolean>(true);
 
-  const htmlWithoutImageSRC: string =
-    level == "3"
-      ? html.includes("img")
-        ? html.replace("src", "")
+  const speakerText: string = "";
+
+  const htmlWithoutImageSRC: string = html.includes("img")
+    ? html.replace("src", "")
+    : html;
+
+  const newHTML: string =
+    level == "screenreader"
+      ? toggleActive
+        ? htmlWithoutImageSRC
         : html
       : html;
 
-  const newHTML: string =
-    level == "3" ? (toggleActive ? htmlWithoutImageSRC : html) : html;
+  const cssForAria: string =
+    ".tabcontent{display: none;} .tabcontent.active{display: block;} button {border: none; background: none; padding: 0;}";
+
+  const newCSS: string =
+    level == "aria" ? (toggleActive ? cssForAria : css) : css;
 
   const head: React.ReactNode = (
-    <style dangerouslySetInnerHTML={{ __html: css }}></style>
+    <style dangerouslySetInnerHTML={{ __html: newCSS }}></style>
   );
 
   const body: React.ReactNode = (
@@ -82,6 +92,9 @@ const IFrame = ({
             {toggleSwitchLabel}
             <span className="md_switch__toggle"></span>
           </label>
+          {level == "screenreader" || level == "aria" ? (
+            <SpeechSynthesis html={html} />
+          ) : null}
         </div>
       ) : null}
 
@@ -90,9 +103,10 @@ const IFrame = ({
         ref={setContentRef}
         width="100%"
         title="Visually-Rendered-Code-Editor-Output"
-        aria-label="Visually-Rendered-Code-Editor-Output"
+        aria-label="Visually rendered code editor output"
+        id={level}
       >
-        {level == "3"
+        {level == "screenreader"
           ? toggleActive
             ? null
             : mountHead && createPortal(head, mountHead)

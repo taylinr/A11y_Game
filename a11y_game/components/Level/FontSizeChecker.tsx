@@ -147,7 +147,7 @@ const FontSizeChecker = ({
       </div>
       {isOpenModal ? (
         <Modal
-          titleText="Color And Contrast Level Evaluation"
+          titleText="Fontsize Level Evaluation"
           id={"fontSize"}
           handleClose={handleClose}
         >

@@ -26,7 +26,7 @@ export default function Home() {
           <div className={"col-3"}></div>
           <div className={"col-6"}>
             <div className={"col-12"}>
-              <h1>Motor Disabilities</h1>
+              <h1>Motor Barriers</h1>
               <h2>Complete all the Levels to get your final Batch</h2>
             </div>
             <div className={"col-11"}>

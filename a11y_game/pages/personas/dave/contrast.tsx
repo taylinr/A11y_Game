@@ -40,11 +40,11 @@ export default function Home() {
             </Button>
             <PersonaLevel
               name={"dave"}
-              emotion={contrastRatio > 5 ? "happy" : "neutral"}
+              emotion={contrastRatio > 4.5 ? "happy" : "neutral"}
               alt="Image of Dave"
-              valid={contrastRatio > 5}
+              valid={contrastRatio > 4.5}
               validationText={
-                contrastRatio > 5
+                contrastRatio > 4.5
                   ? "Contrast Ratio of " +
                     contrastRatio?.toFixed(1) +
                     " is great!"

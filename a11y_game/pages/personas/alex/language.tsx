@@ -59,6 +59,18 @@ export default function Home() {
               <h2>Help</h2>
               <div className={"col-6"}></div>
               <div className={"col-6"}></div>
+              <div className="col-12 row">
+                <p>
+                  For Further Information look up the{" "}
+                  <a href="https://www.w3.org/WAI/standards-guidelines/">
+                    WCAG Guidelines
+                  </a>{" "}
+                  and the{" "}
+                  <a href="https://www.accessibility-developer-guide.com/">
+                    Accessibility Developer Guide
+                  </a>
+                </p>
+              </div>
             </div>
           </Modal>
         ) : null}
