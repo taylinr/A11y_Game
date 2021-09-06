@@ -135,7 +135,7 @@ const CodeEditor = ({
   const OutputIframe = () => (
     <IFrame
       level={level}
-      toggle={true}
+      toggle={toggleSwitchLabel ? true : false}
       toggleSwitchLabel={toggleSwitchLabel}
       css={CSS}
       html={HTML}
