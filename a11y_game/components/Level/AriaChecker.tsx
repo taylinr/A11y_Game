@@ -48,11 +48,11 @@ const AriaChecker = ({
 
   useEffect(() => {
     setPointsInParent(points);
-  }, [points]);
+  }, [points, setPointsInParent]);
 
   useEffect(() => {
     setValidInParent(valid);
-  }, [valid]);
+  }, [valid, setValidInParent]);
 
   const activateModal = () => {
     setIsOpenModal(true);
