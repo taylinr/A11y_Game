@@ -36,7 +36,7 @@ export default function Home() {
           <div className={"col-3"}>
             <div className="button-group">
               <Button
-                target={"/personas/dave/font"}
+                target={"/personas/clara/caption"}
                 inactive={!levelDone(4)}
                 primary={!levelDone(5)}
                 accomplished={levelDone(5)}
@@ -49,7 +49,7 @@ export default function Home() {
                 )}
               </Button>
               <Button
-                target={"/personas/dave/font"}
+                target={"/personas/clara/signlanguage"}
                 inactive={!levelDone(5)}
                 primary={!levelDone(6)}
                 accomplished={levelDone(6)}
