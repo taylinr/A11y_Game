@@ -45,20 +45,20 @@ type EditorProps = {
   setCode: Function;
   initialCSS?: string;
   initialHTML?: string;
-  initialJS?: string;
   level?: string;
   iframeFunction?: Function;
   toggleSwitchLabel?: string;
+  showCSS?: boolean;
 };
 
 const CodeEditor = ({
   toggleSwitchLabel,
   initialHTML,
   initialCSS,
-  initialJS,
   level,
   setCode,
   iframeFunction,
+  showCSS,
 }: EditorProps) => {
   // Local state
   const [editorTreeValueHTML, setEditorTreeValueHTML] = useState<string[]>([]);
@@ -149,14 +149,22 @@ const CodeEditor = ({
     <CodeEditorStyles level={level}>
       <div className="row col-12">
         <div className="col-6 editor">
-          <Tabs
-            tabkeys={["tab--html", "tab--css"]}
-            tabnames={["HTML", "CSS"]}
-            contents={[
-              <div key="0" id="codemirror-editor-wrapper-html" />,
-              <div key="1" id="codemirror-editor-wrapper-css" />,
-            ]}
-          />
+          {showCSS == true || showCSS == undefined ? (
+            <Tabs
+              tabkeys={["tab--html", "tab--css"]}
+              tabnames={["HTML", "CSS"]}
+              contents={[
+                <div key="0" id="codemirror-editor-wrapper-html" />,
+                <div key="1" id="codemirror-editor-wrapper-css" />,
+              ]}
+            />
+          ) : (
+            <Tabs
+              tabkeys={["tab--html"]}
+              tabnames={["HTML"]}
+              contents={[<div key="0" id="codemirror-editor-wrapper-html" />]}
+            />
+          )}
         </div>
         <div className="col-6 output">
           <OutputIframe />

@@ -29,7 +29,10 @@ export default function Home() {
         <div className="col-12 row ">
           <div className="col-9">
             <h1>Keyboard Only</h1>
-            <p></p>
+            <p>
+              Try to access the submit-button with keyboard only navigation and
+              finish the game. Change the code to get there!
+            </p>
           </div>
           <div className="col-3">
             <Button help={true} primary={true} onClick={activateModal}>
@@ -40,7 +43,11 @@ export default function Home() {
               emotion={valid ? "happy" : "neutral"}
               alt="Image of Semiha"
               valid={valid}
-              validationText={""}
+              validationText={
+                valid
+                  ? "Great, now enter the submit button!"
+                  : "Navigate by clicking the Tab-Button"
+              }
             />
           </div>
         </div>

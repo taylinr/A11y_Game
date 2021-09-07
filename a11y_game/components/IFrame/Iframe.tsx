@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import IframeStyles from "./IframeStyles";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 
 type IframeProps = {
   // children: React.ReactNode;
@@ -70,7 +70,7 @@ const IFrame = ({
   );
 
   useEffect(() => {
-    const button = document.querySelector("button#submit");
+    const button = document.querySelector("#submit");
 
     button?.addEventListener("keyup", (event) => {
       if ((event as KeyboardEvent).key === "Enter") {

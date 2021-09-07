@@ -33,8 +33,28 @@ const IframeStyles = styled.div<Props>`
   div.output-wrapper {
     cursor: none;
 
-    button {
+    button,
+    .button--submit {
       cursor: none;
+      width: 250px;
+      right: 0;
+      top: 0;
+      margin-top: 35%;
+      margin-right: auto;
+      margin-left: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: ${({ theme }) => theme.baseSpace * 2 + "px"};
+      border-radius: ${({ theme }) => theme.baseSpace * 1.5 + "px"};
+      color: ${({ theme }) => theme.white};
+      background-color: ${({ theme }) => theme.primary};
+      box-shadow: ${({ theme }) => theme.boxShadow};
+      font-size: 1.2em;
+
+      @media only screen and (min-width: 768px) {
+        font-size: 1em;
+      }
     }
   }
 

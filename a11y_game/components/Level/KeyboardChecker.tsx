@@ -76,10 +76,10 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
       <CodeEditor
         level={"keyboard"}
         setCode={setCodeFromChild}
-        initialHTML={"<button id='submit'></button>"}
-        initialCSS={
-          "h1.hello { \n  font-size: 12px; \n}\n div { \n padding: 50px; \n font-size: 10px;  \n }"
+        initialHTML={
+          "<div class='button--submit' id='submit'>\n  Submit \n  <svg id='arrow-right' width='18' height='13' viewBox='0 0 18 13' fill='none' xmlns='http://www.w3.org/2000/svg'>\n    <path d='M4.37114e-07 7.5L14.17 7.5L10.59 11.09L12 12.5L18 6.5L12 0.499999L10.59 1.91L14.17 5.5L6.11959e-07 5.5L4.37114e-07 7.5Z' fill='#ffffff'/>\n  </svg>\n</div>"
         }
+        showCSS={false}
         iframeFunction={activateModal}
       />
       <div className="col-12 row">
