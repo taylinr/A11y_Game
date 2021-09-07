@@ -33,9 +33,10 @@ interface ContentProps {
 
 const TabContent = styled.div<ContentProps>`
   position: absolute;
-  left: 10px; /* change as needed */
-  bottom: -300px; /* change as needed */
+  right: 0; /* change as needed */
+  bottom: 0; /* change as needed */
   opacity: 0;
+  width: 50px;
   ${({ tabActive }) =>
     tabActive &&
     `
@@ -43,6 +44,7 @@ const TabContent = styled.div<ContentProps>`
     position: relative;
     top: 0;
     left: 0;
+    width: 100%;
   `}
 `;
 

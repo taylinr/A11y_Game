@@ -468,3 +468,186 @@ export function checkFontSizeRelative(code: Code) {
   }
   return valid;
 }
+
+export function checkAriaValid(code: Code) {
+  let valid: boolean = true;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  let containsTab: boolean = false;
+  let tabNum: number = 0;
+  let containsTabPanel: boolean = false;
+  let tabPanelNum: number = 0;
+  let containsTabList: boolean = false;
+
+  htmlStylesArray.forEach((node) => {
+    if (node.node.nodeType == 1) {
+      let currentNode: HTMLElement = node.node as HTMLElement;
+
+      if (currentNode.hasAttribute("role")) {
+        let role: string | undefined = currentNode.getAttribute("role");
+        if (role == "tab") {
+          containsTab = true;
+          tabNum++;
+        }
+        if (role == "tabpanel") {
+          containsTabPanel = true;
+          tabPanelNum++;
+        }
+        if (role == "tablist") {
+          containsTabList = true;
+        }
+      }
+    }
+  });
+
+  valid =
+    containsTabList &&
+    containsTab &&
+    containsTabPanel &&
+    tabNum > 2 &&
+    tabPanelNum > 2;
+
+  return valid;
+}
+
+export function checkAriaPoints(code: Code) {
+  let points: number = 0;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  let containsTab: boolean = false;
+  let tabNum: number = 0;
+  let containsTabPanel: boolean = false;
+  let tabPanelNum: number = 0;
+  let containsSelected: boolean = false;
+  let containsHidden: boolean = false;
+  let containsTabList: boolean = false;
+
+  htmlStylesArray.forEach((node) => {
+    if (node.node.nodeType == 1) {
+      let currentNode: HTMLElement = node.node as HTMLElement;
+
+      if (currentNode.hasAttribute("role")) {
+        let role: string | undefined = currentNode.getAttribute("role");
+        if (role == "tab") {
+          containsTab = true;
+          tabNum++;
+        }
+        if (role == "tabpanel") {
+          containsTabPanel = true;
+          tabPanelNum++;
+        }
+        if (role == "tablist") {
+          containsTabList = true;
+        }
+      }
+
+      if (currentNode.hasAttribute("aria-selected")) {
+        containsSelected = true;
+      }
+
+      if (
+        currentNode.hasAttribute("aria-hidden") ||
+        currentNode.hasAttribute("hidden")
+      ) {
+        containsHidden = true;
+      }
+    }
+  });
+
+  points = containsTab && tabNum > 2 ? points + 1 : points + 0;
+  points = containsTabPanel && tabPanelNum > 2 ? points + 1 : points + 0;
+  points = containsTabList ? points + 1 : points + 0;
+  points = containsSelected ? points + 1 : points + 0;
+  points = containsHidden ? points + 1 : points + 0;
+
+  return points;
+}
+
+export function checkCaptionsValid(code: Code) {
+  let valid: boolean = true;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  let hasTrack: boolean = false;
+
+  htmlStylesArray.forEach((node) => {
+    if (node.node.nodeType == 1) {
+      let currentNode: HTMLElement = node.node as HTMLElement;
+
+      if (currentNode.rawTagName == "track") {
+        hasTrack = true;
+      }
+    }
+  });
+
+  valid = hasTrack;
+
+  return valid;
+}
+
+export function checkCaptionsPoints(code: Code) {
+  let points: number = 0;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  let hasTrack: boolean = false;
+  let hasDefault: boolean = false;
+  let hasKind: boolean = false;
+  let hasLanguage: boolean = false;
+  let hasLabel: boolean = false;
+
+  htmlStylesArray.forEach((node) => {
+    console.log(node);
+    if (node.node.nodeType == 1) {
+      let currentNode: HTMLElement = node.node as HTMLElement;
+
+      if (currentNode.rawTagName == "track") {
+        hasTrack = true;
+
+        if (currentNode.hasAttribute("default")) {
+          hasDefault = true;
+        }
+
+        if (currentNode.hasAttribute("kind")) {
+          hasKind = true;
+        }
+
+        if (currentNode.hasAttribute("srclang")) {
+          hasLanguage = true;
+        }
+
+        if (currentNode.hasAttribute("label")) {
+          hasLabel = true;
+        }
+      }
+    }
+  });
+
+  points = hasTrack ? points + 1 : points + 0;
+  points = hasDefault ? points + 1 : points + 0;
+  points = hasKind || hasLabel || hasLanguage ? points + 1 : points + 0;
+
+  return points;
+}

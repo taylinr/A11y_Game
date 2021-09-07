@@ -9,7 +9,9 @@ interface Props {
 const IframeStyles = styled.div<Props>`
   .switch__wrapper {
     height: ${({ theme }) => theme.baseSpace * 3.9 + "px "};
-    float: right;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
   }
 
   iframe,
@@ -25,6 +27,7 @@ const IframeStyles = styled.div<Props>`
     border: ${({ theme }) => "2px solid " + theme.primary};
     border-radius: ${({ theme }) => theme.baseSpace * 1.5 + "px "};
     min-height: 450px;
+    background-color: white;
 
     margin-top: ${({ toggle, theme }) =>
       toggle ? "" : theme.baseSpace * 3.9 + "px "};

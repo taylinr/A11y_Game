@@ -1,6 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import FormEditor from "../FormEditor/FormEditor";
+import React, { useEffect, useState, useContext } from "react";
+import Button from "../Button/Button";
+import CodeEditor from "../CodeEditor/CodeEditor";
+import { checkAriaValid, checkAriaPoints } from "../Checker/CodeChecker";
 import LevelStyles from "./LevelStyles";
+import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";
 import Progress from "../ProgressBar/ProgressBar";
 import Points from "../Points/Points";
@@ -8,27 +11,44 @@ import Context from "../Context/Context";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
-import Button from "../Button/Button";
-import { parse, HTMLElement, Node } from "node-html-parser";
-import {
-  checkScreenReaderValid,
-  getScreenReaderPoints,
-} from "../Checker/FormChecker";
 
-type Props = {
+type AriaLevelProps = {
   setValidInParent: Function;
+  setPointsInParent: Function;
 };
 
-const ScreenReaderChecker = ({ setValidInParent }: Props) => {
+const AriaChecker = ({
+  setValidInParent,
+  setPointsInParent,
+}: AriaLevelProps) => {
   const context = useContext(Context);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [code, setCode] = useState<Code>(new Code([""], [""]));
   const [valid, setValid] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
 
-  const setFormInParent = (form: HTMLFormElement) => {
-    setValid(checkScreenReaderValid(form));
-    setPoints(getScreenReaderPoints(form));
+  const setCodeFromChild = (code: Code) => {
+    setCode(code);
   };
+
+  useEffect(
+    function () {
+      let nowValid = checkAriaValid(code);
+      let currPoints = checkAriaPoints(code);
+
+      //max possible points = 5
+      //  3 = 1p -> madatory points for valid
+      //  4 = 2p
+      //  5 = 3p
+      setValid(nowValid);
+      setPoints(currPoints - 2);
+    },
+    [code]
+  );
+
+  useEffect(() => {
+    setPointsInParent(points);
+  }, [points, setPointsInParent]);
 
   useEffect(() => {
     setValidInParent(valid);
@@ -42,203 +62,39 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
     setIsOpenModal(false);
   };
 
-  const getNewHTML = (eventTarget: HTMLElement, HTML: string) => {
-    const id: string = eventTarget.id;
-    const tagName: string = eventTarget.tagName;
-    let newHTML = HTML;
-
-    let textareaValue: string = "";
-
-    if (tagName == "SELECT" && id == "select-alt-text") {
-      const select: HTMLSelectElement =
-        eventTarget as unknown as HTMLSelectElement;
-
-      let childs = select.options;
-      let innerhtml = "";
-
-      for (let i = 0; i < childs.length; i++) {
-        if (childs[i].selected) {
-          innerhtml = childs[i].value;
-        }
-      }
-
-      const htmlObject: HTMLElement = parse(HTML);
-
-      const image = htmlObject.querySelector("img");
-
-      image.setAttribute("alt", innerhtml);
-
-      newHTML = htmlObject.toString();
-    } else if (tagName == "TEXTAREA") {
-      const textarea: HTMLTextAreaElement =
-        eventTarget as unknown as HTMLTextAreaElement;
-
-      textareaValue = textarea.value;
-    }
-
-    if (textareaValue != "") {
-      const htmlObject: HTMLElement = parse(HTML);
-
-      const description = htmlObject.querySelector("#" + id);
-
-      description.innerHTML = textareaValue;
-
-      newHTML = htmlObject.toString();
-    }
-
-    return newHTML;
-  };
-
   const addPoints = () => {
     let submitAgain: boolean = false;
     let oldPoints: number = 0;
-    let thisPoints: number = points > 11 ? 3 : points > 9 ? 2 : 1;
 
-    submitAgain = context.submittedLevel.has(3);
+    submitAgain = context.submittedLevel.has(4);
 
     if (!submitAgain) {
-      context.addSubmittedLevel(3, thisPoints);
+      context.addSubmittedLevel(4, points);
     } else {
-      const testOldPoints = context.submittedLevel.get(3);
+      const testOldPoints = context.submittedLevel.get(4);
       if (testOldPoints) {
         oldPoints = testOldPoints;
       }
-      context.submittedLevel.set(3, thisPoints);
+      context.submittedLevel.set(4, points);
     }
 
-    const newPoints: number = thisPoints - oldPoints;
+    const newPoints: number = points - oldPoints;
     context.addPoints(newPoints);
   };
 
   return (
     <LevelStyles valid={valid}>
-      <FormEditor
-        getNewHTML={getNewHTML}
-        setFormInParent={setFormInParent}
-        level="3"
-        toggleSwitchLabel="Text"
-        toggle={true}
-        initialCSS="
-        
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-                transition: 0.3s;
-                width: 80%;
-                border-radius: 5px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 5%;
-            }
-
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            }
-
-            img {
-                width: 100%;
-                border-radius: 5px 5px 0 0;
-            }
-
-            .container {
-                padding: 2px 16px;
-            }"
-        initialHTML="<div class='card'><img src='/images/sunglasses.jpg' alt=' ' >
-                            <div class='container'>
-                                <p>Accessoires</p>
-                                <h4><b>35$</b></h4>
-                                <p id='description'>Perfect for this summer!</p>
-                            </div>
-                        </div>"
-        formProps={[
-          {
-            formFields: [
-              {
-                options: [
-                  {
-                    name: "use better images",
-                    value: "use better images",
-                  },
-                  {
-                    name: "add alt text to image",
-                    value: "add alt text to image",
-                  },
-                  {
-                    name: "add colorful fonts",
-                    value: "add colorful fonts",
-                  },
-                ],
-                placeholder: "select your answer",
-                component: "select",
-                name: "alt-text",
-                error: "error",
-                textBefore:
-                  "What could help to give screen reader users a better description of this product?",
-                textAfter: "",
-              },
-              {
-                options: [
-                  {
-                    name: "product descriptions",
-                    value: "product descriptions",
-                  },
-                  {
-                    name: "large icons",
-                    value: "large icons",
-                  },
-                  {
-                    name: "correct item order",
-                    value: "correct item order",
-                  },
-                ],
-                placeholder: "select your answer",
-                component: "select",
-                name: "descriptions",
-                error: "error",
-                textBefore: "What else could help?",
-                textAfter: "",
-              },
-              {
-                options: [
-                  {
-                    name: "person with blue nails and blouse holding sunglasses",
-                    value:
-                      "person with blue nails and blouse holding sunglasses",
-                  },
-                  {
-                    name: "feminine person holding beige retro sunglasses",
-                    value: "feminine person holding beige retro sunglasses",
-                  },
-                  {
-                    name: "summer vibes",
-                    value: "summer vibes",
-                  },
-                ],
-                placeholder: "select your answer",
-                component: "select",
-                name: "select-alt-text",
-                error: "error",
-                textBefore:
-                  "Switch the 'Text'-Toggle, what would be a good description for this product-image?",
-                textAfter: "",
-              },
-              {
-                placeholder: "type your answer here",
-                component: "textarea",
-                name: "description",
-                error: "error",
-                label:
-                  "How about the description, if you can't see the product, what would you want to know?",
-              },
-            ],
-            propSuccess: false,
-            cta: "SUBMIIITTTITITITIT",
-            successHeadline: "success!",
-            successText: "success headline!",
-            onChange: function (e) {},
-          },
-        ]}
+      <CodeEditor
+        level={"aria"}
+        toggleSwitchLabel={"Text"}
+        setCode={setCodeFromChild}
+        initialHTML={
+          "<div class='tab'>\n  <button class='tablinks active' id='london'>\n  London\n  </button>\n  <button class='tablinks' id='paris'>\n  Paris\n  </button>\n  <button class='tablinks' id='tokyo'>\n  Tokyo\n  </button>\n</div>\n <!-- Tab content -->\n<div id='London' class='tabcontent active'>\n  <h3>London</h3>\n  <p>London is the capital city of England.</p></div>\n<div id='Paris' class='tabcontent'>\n  <h3>Paris</h3>\n  <p>Paris is the capital of France.</p>\n</div>\n<div id='Tokyo' class='tabcontent'>\n<h3>Tokyo</h3>\n  <p>Tokyo is the capital of Japan.</p>\n</div>"
+        }
+        initialCSS={
+          "/* Style the tab */\n.tab {\n  overflow: hidden;  border: 1px solid #ccc;\n  background-color: #f1f1f1;\n}\n/* Style the buttons that are used to open the tab content */\n.tab button {\n  background-color: inherit;  float: left;\n  border: none;\n  outline: none;\n  cursor: pointer;\n  padding: 14px 16px;\n  transition: 0.3s;\n}\n/* Change background color of buttons on hover */\n .tab button:hover {\n  background-color: #ddd;\n}\n /* Create an active/current tablink class */\n .tab button.active {\n  background-color: #ccc;\n}\n /* Style the tab content */\n .tabcontent {\n  display: none;\n  padding: 6px 12px;\n  border: 1px solid #ccc;\n  border-top: none;\n}\n .tabcontent.active {\n  display: block;\n}"
+        }
       />
-
       <div className="col-12 row">
         <div className="col-3">
           <Button secondary={true} target={"/personas/dave"}>
@@ -262,24 +118,21 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
       </div>
       {isOpenModal ? (
         <Modal
-          titleText="Screenreader Level Evaluation"
-          id={"screenReader"}
+          titleText="Ara Level Evaluation"
+          id={"aria"}
           handleClose={handleClose}
         >
           <div className={"col-12 row"}>
             <h2>Great!</h2>
             <div className={"col-6"}>
-              <h3>You have succeded the Screenreader Level with</h3>
-              <Points
-                currVal={points > 11 ? 3 : points > 9 ? 2 : 1}
-                maxVal={3}
-              />
-              {points < 15 ? (
+              <h3>You have succeded the Aria Level with</h3>
+              <Points currVal={points} maxVal={3} />
+              {points < 3 ? (
                 <p>Try Again to get all points or try the next level!</p>
               ) : null}
             </div>
             <div className={"col-6"}>
-              <Progress val={points} maxval={12} label={"Screenreader"} />
+              <Progress val={points} maxval={3} label={"Aria"} />
             </div>
             <div className={"col-12"}>
               <div className={"col-4"}>
@@ -305,4 +158,4 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
   );
 };
 
-export default ScreenReaderChecker;
+export default AriaChecker;

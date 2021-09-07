@@ -115,7 +115,7 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
       <FormEditor
         getNewHTML={getNewHTML}
         setFormInParent={setFormInParent}
-        level="3"
+        level="screenreader"
         toggleSwitchLabel="Text"
         toggle={true}
         initialCSS="

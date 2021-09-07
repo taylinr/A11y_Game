@@ -26,7 +26,7 @@ export default function Home() {
           <div className={"col-3"}></div>
           <div className={"col-6"}>
             <div className={"col-12"}>
-              <h1>Cognitive Disabilities</h1>
+              <h1>Audio Barriers</h1>
               <h2>Complete all the Levels to get your second Batch</h2>
             </div>
             <div className={"col-11"}>
@@ -36,7 +36,7 @@ export default function Home() {
           <div className={"col-3"}>
             <div className="button-group">
               <Button
-                target={"/personas/dave/font"}
+                target={"/personas/clara/captions"}
                 inactive={!levelDone(4)}
                 primary={!levelDone(5)}
                 accomplished={levelDone(5)}
@@ -49,7 +49,7 @@ export default function Home() {
                 )}
               </Button>
               <Button
-                target={"/personas/dave/font"}
+                target={"/personas/clara/signlanguage"}
                 inactive={!levelDone(5)}
                 primary={!levelDone(6)}
                 accomplished={levelDone(6)}

@@ -34,7 +34,7 @@ const ColorContrastChecker = ({
     function () {
       setContrastratio(checkContrast(code));
 
-      if (checkContrast(code) > 5.0) {
+      if (checkContrast(code) > 4.5) {
         setValid(true);
       } else {
         setValid(false);
@@ -47,7 +47,7 @@ const ColorContrastChecker = ({
     function () {
       let newVal: number;
 
-      newVal = contrastRatio > 15 ? 3 : contrastRatio > 10 ? 2 : 1;
+      newVal = contrastRatio > 15 ? 3 : contrastRatio > 7 ? 2 : 1;
 
       setPoints(newVal);
       setContrastinParent(contrastRatio);

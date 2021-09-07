@@ -1,6 +1,5 @@
 import PointsStyles from "./PointsStyles";
 import points from "../../assets/points.svg";
-
 import Image from "next/image";
 
 type PointsProps = {
