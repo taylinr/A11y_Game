@@ -60,9 +60,60 @@ export default function Home() {
           >
             <div className={"col-12 row"}>
               <h2>Help</h2>
-              <div className={"col-6"}></div>
+              <div className={"col-6"}>
+                <h3>Keyboard Only</h3>
+                <p>
+                  Due to physical restrictions, many users cannot control a
+                  pointing device like a mouse or touch screen. So they rely on
+                  keyboard usage only, and thus, software must be fully
+                  functional with a keyboard only. In this chapter, you will
+                  learn everything you need to know about browsing websites
+                  using a keyboard only.
+                </p>
+                <h3>Keyboard Shortcuts</h3>
+                <p>
+                  For the future, we suggest you try to use keyboard shortcuts
+                  instead of your mouse. This way, you will automatically test
+                  your own implementations for keyboard only accessibility while
+                  developing them.
+                  <br />
+                  The following is a collection of some well known shortcuts
+                  <ul>
+                    <li>Tab: Next Element</li>
+                    <li>Tab + Shift: Previous Element</li>
+                    <li>Enter: Confirm</li>
+                    <li>Ctrl + C: Copy</li>
+                    <li>Ctrl + V: Paste</li>
+                    <li>Ctrl + S: Save</li>
+                  </ul>
+                </p>
+              </div>
 
-              <div className={"col-6"}></div>
+              <div className={"col-6"}>
+                <h3>Tabindex</h3>
+                <p>
+                  The default tab order provided by the DOM position of native
+                  elements is convenient, but there are times when you'll want
+                  to modify the tab order, and physically moving elements in the
+                  HTML isn't always an optimal, or even a feasible, solution.
+                  For these cases you can use the tabindex HTML attribute to
+                  explicitly set an element's tab position.
+                </p>
+
+                <h3>Anchors VS. Buttons</h3>
+                <p>
+                  Use buttons to signal clickable actions, such as “download,”
+                  “sign up,” or “log out.” You may use links for less popular or
+                  less important actions. If you want something that looks and
+                  acts like a button, try to always use the button element
+                  rather than styling a link like a button.
+                </p>
+                <p>
+                  For actual Links and if you want a user to navigate to a new
+                  page or to a different target on the same page, use an anchor
+                  element
+                </p>
+              </div>
 
               <div className="col-12 row">
                 <p>
