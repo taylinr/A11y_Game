@@ -651,3 +651,58 @@ export function checkCaptionsPoints(code: Code) {
 
   return points;
 }
+
+
+export function checkKeyboardPoints(code: Code) {
+  let points: number = 0;
+
+  const cssObject: CSSObject[] = parseCSSObjectArray(code);
+  const htmlObject: HTMLElement = parseHTMLObject(code);
+
+  htmlStylesArray = [];
+
+  recurseDomChildren(htmlObject, cssObject, htmlObject);
+
+  let hasButton: boolean = false;
+  let hasLink: boolean = false;
+  let hasTabIndex: boolean = false;
+  let hasHREF: boolean = false;
+
+  htmlStylesArray.forEach((node) => {
+    console.log(node);
+    if (node.node.nodeType == 1) {
+      let currentNode: HTMLElement = node.node as HTMLElement;
+
+      if (currentNode.rawTagName == "button") {
+        hasButton = true;
+
+        if (currentNode.hasAttribute("tabindex")) {
+          hasTabIndex = true;
+        }
+      }
+
+      if (currentNode.rawTagName == "a") {
+        hasLink = true;
+
+        if (currentNode.hasAttribute("tabindex")) {
+          hasTabIndex = true;
+        }
+
+        if (currentNode.hasAttribute("href")) {
+          hasHREF = true;
+        }
+      }
+    }
+  });
+
+  points =
+    (hasButton && hasTabIndex) || (hasLink && hasTabIndex)
+      ? 3
+      : hasButton
+      ? 2
+      : hasLink && hasHREF
+      ? 1
+      : 0;
+
+  return points;
+}

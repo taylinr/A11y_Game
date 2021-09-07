@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import Button from "../Button/Button";
 import CodeEditor from "../CodeEditor/CodeEditor";
-import { checkFontSize, checkFontSizeRelative } from "../Checker/CodeChecker";
+import { checkKeyboardPoints } from "../Checker/CodeChecker";
 import LevelStyles from "./LevelStyles";
 import { Code } from "../../model/code.model";
 import Modal from "../Modal/Modal";
@@ -30,17 +30,18 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
 
   useEffect(
     function () {
-      // let fontSize = checkFontSize(code);
-      // let fontSizeRelative = checkFontSizeRelative(code);
-      // setFontSize(fontSize);
-      // setFontSizeRelative(fontSizeRelative);
-      // if (fontSize >= 16 || fontSizeRelative) {
-      //   setValid(true);
-      // } else {
-      //   setValid(false);
-      // }
+      let newPoints = checkKeyboardPoints(code);
+      setPoints(newPoints);
+      setValid(newPoints > 0);
     },
-    [code]
+    [code, setPoints, setValid]
+  );
+
+  useEffect(
+    function () {
+      setValidInParent(valid);
+    },
+    [valid, setValidInParent]
   );
 
   const activateModal = () => {
