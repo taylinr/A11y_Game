@@ -49,7 +49,7 @@ export default function Home() {
                 )}
               </Button>
               <Button
-                target={"/personas/dave/font"}
+                target={"/personas/clara/signlanguage"}
                 inactive={!levelDone(5)}
                 primary={!levelDone(6)}
                 accomplished={levelDone(6)}

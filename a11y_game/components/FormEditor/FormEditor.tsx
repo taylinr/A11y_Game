@@ -51,7 +51,13 @@ const FormEditor = ({
   };
 
   const setProps = ({ ...field }: any) => {
-    return <FormComponent {...field} onChange={changeHTML} />;
+    return (
+      <FormComponent
+        {...field}
+        onChange={changeHTML}
+        key={"field + " + field}
+      />
+    );
   };
 
   return (

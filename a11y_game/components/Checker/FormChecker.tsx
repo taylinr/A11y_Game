@@ -320,3 +320,182 @@ export function getScreenReaderPoints(form: HTMLFormElement) {
   return points;
 }
 
+export function checkSemanticsValid(form: HTMLFormElement) {
+  let valid: boolean = true;
+
+  const meaningsSelect: HTMLSelectElement | null =
+    form.querySelector("select#meanings");
+
+  if (meaningsSelect) {
+    for (let x = 0; x < meaningsSelect.options.length; x++) {
+      if (
+        (meaningsSelect.options[x].selected &&
+          meaningsSelect.options[x].index == 3) ||
+        (meaningsSelect.options[x].selected &&
+          meaningsSelect.options[x].index == 0)
+      ) {
+        valid = false;
+      }
+    }
+  }
+
+  const descriptionsSelect: HTMLSelectElement | null = form.querySelector(
+    "select#descriptions"
+  );
+
+  if (descriptionsSelect) {
+    for (let x = 0; x < descriptionsSelect.options.length; x++) {
+      if (
+        descriptionsSelect.options[x].selected &&
+        descriptionsSelect.options[x].index !== 1
+      ) {
+        valid = false;
+      }
+    }
+  }
+
+  const walletSelect: HTMLSelectElement | null =
+    form.querySelector("select#wallet");
+
+  if (walletSelect) {
+    for (let x = 0; x < walletSelect.options.length; x++) {
+      if (
+        walletSelect.options[x].selected &&
+        walletSelect.options[x].index == 0
+      ) {
+        valid = false;
+      }
+    }
+  }
+
+  const microphoneSelect: HTMLSelectElement | null =
+    form.querySelector("select#microphone");
+
+  if (microphoneSelect) {
+    for (let x = 0; x < microphoneSelect.options.length; x++) {
+      if (
+        microphoneSelect.options[x].selected &&
+        microphoneSelect.options[x].index == 0
+      ) {
+        valid = false;
+      }
+    }
+  }
+
+  const tabSelect: HTMLSelectElement | null =
+    form.querySelector("select#addTab");
+
+  if (tabSelect) {
+    for (let x = 0; x < tabSelect.options.length; x++) {
+      if (tabSelect.options[x].selected && tabSelect.options[x].index == 0) {
+        valid = false;
+      }
+    }
+  }
+
+  const anchorSelect: HTMLSelectElement | null =
+    form.querySelector("select#anchor");
+
+  if (anchorSelect) {
+    for (let x = 0; x < anchorSelect.options.length; x++) {
+      if (
+        anchorSelect.options[x].selected &&
+        anchorSelect.options[x].index == 0
+      ) {
+        valid = false;
+      }
+    }
+  }
+
+  return valid;
+}
+
+export function getSemanticsPoints(form: HTMLFormElement) {
+  let points: number = 0;
+
+  const meaningsSelect: HTMLSelectElement | null =
+    form.querySelector("select#meanings");
+
+  if (meaningsSelect) {
+    for (let x = 0; x < meaningsSelect.options.length; x++) {
+      if (
+        (meaningsSelect.options[x].selected &&
+          meaningsSelect.options[x].index != 3) ||
+        (meaningsSelect.options[x].selected &&
+          meaningsSelect.options[x].index != 0)
+      ) {
+        points = points + 1;
+      }
+    }
+  }
+
+  const descriptionsSelect: HTMLSelectElement | null = form.querySelector(
+    "select#descriptions"
+  );
+
+  if (descriptionsSelect) {
+    for (let x = 0; x < descriptionsSelect.options.length; x++) {
+      if (
+        descriptionsSelect.options[x].selected &&
+        descriptionsSelect.options[x].index == 1
+      ) {
+        points = points + 1;
+      }
+    }
+  }
+
+  const walletSelect: HTMLSelectElement | null =
+    form.querySelector("select#wallet");
+
+  if (walletSelect) {
+    for (let x = 0; x < walletSelect.options.length; x++) {
+      if (
+        walletSelect.options[x].selected &&
+        walletSelect.options[x].index != 0
+      ) {
+        points = points + 1;
+      }
+    }
+  }
+
+  const microphoneSelect: HTMLSelectElement | null =
+    form.querySelector("select#microphone");
+
+  if (microphoneSelect) {
+    for (let x = 0; x < microphoneSelect.options.length; x++) {
+      if (
+        microphoneSelect.options[x].selected &&
+        microphoneSelect.options[x].index != 0
+      ) {
+        points = points + 1;
+      }
+    }
+  }
+
+  const tabSelect: HTMLSelectElement | null =
+    form.querySelector("select#addTab");
+
+  if (tabSelect) {
+    for (let x = 0; x < tabSelect.options.length; x++) {
+      if (tabSelect.options[x].selected && tabSelect.options[x].index != 0) {
+        points = points + 1;
+      }
+    }
+  }
+
+  const anchorSelect: HTMLSelectElement | null =
+    form.querySelector("select#anchor");
+
+  if (anchorSelect) {
+    for (let x = 0; x < anchorSelect.options.length; x++) {
+      if (
+        anchorSelect.options[x].selected &&
+        anchorSelect.options[x].index != 0
+      ) {
+        points = points + 1;
+      }
+    }
+  }
+
+  return points;
+}
