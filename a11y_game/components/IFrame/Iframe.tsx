@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import IframeStyles from "./IframeStyles";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ type IframeProps = {
   level?: string;
   toggleSwitchLabel?: string;
   toggle: boolean;
+  iframeFunction?: Function;
 };
 
 interface ToggleProps {
@@ -38,6 +39,7 @@ const IFrame = ({
   level,
   toggle,
   toggleSwitchLabel,
+  iframeFunction,
   ...props
 }: IframeProps) => {
   const [contentRef, setContentRef] = useState<any>(null);
@@ -62,10 +64,22 @@ const IFrame = ({
 
   const body: React.ReactNode = (
     <div
-      className="Container"
+      className="iframe-container"
       dangerouslySetInnerHTML={{ __html: newHTML }}
     ></div>
   );
+
+  useEffect(() => {
+    const button = document.querySelector("button#submit");
+
+    button?.addEventListener("keyup", (event) => {
+      if ((event as KeyboardEvent).key === "Enter") {
+        if (iframeFunction) {
+          iframeFunction();
+        }
+      }
+    });
+  }, [iframeFunction]);
 
   return (
     <IframeStyles level={level} toggleActive={toggleActive} toggle={toggle}>
@@ -85,20 +99,34 @@ const IFrame = ({
         </div>
       ) : null}
 
-      <iframe
-        {...props}
-        ref={setContentRef}
-        width="100%"
-        title="Visually-Rendered-Code-Editor-Output"
-        aria-label="Visually-Rendered-Code-Editor-Output"
-      >
-        {level == "3"
-          ? toggleActive
-            ? null
-            : mountHead && createPortal(head, mountHead)
-          : mountHead && createPortal(head, mountHead)}
-        {mountNode && createPortal(body, mountNode)}
-      </iframe>
+      {level != "keyboard" ? (
+        <iframe
+          {...props}
+          ref={setContentRef}
+          width="100%"
+          title="Visually-Rendered-Code-Editor-Output"
+          aria-label="Visually-Rendered-Code-Editor-Output"
+          id={level}
+        >
+          {level == "3"
+            ? toggleActive
+              ? null
+              : mountHead && createPortal(head, mountHead)
+            : mountHead && createPortal(head, mountHead)}
+          {mountNode && createPortal(body, mountNode)}
+        </iframe>
+      ) : (
+        <div
+          {...props}
+          ref={setContentRef}
+          title="Visually-Rendered-Code-Editor-Output"
+          aria-label="Visually-Rendered-Code-Editor-Output"
+          id={level}
+          className="output-wrapper"
+        >
+          {body}
+        </div>
+      )}
     </IframeStyles>
   );
 };

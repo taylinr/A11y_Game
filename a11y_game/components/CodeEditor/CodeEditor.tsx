@@ -47,6 +47,7 @@ type EditorProps = {
   initialHTML?: string;
   initialJS?: string;
   level?: string;
+  iframeFunction?: Function;
   toggleSwitchLabel?: string;
 };
 
@@ -57,6 +58,7 @@ const CodeEditor = ({
   initialJS,
   level,
   setCode,
+  iframeFunction,
 }: EditorProps) => {
   // Local state
   const [editorTreeValueHTML, setEditorTreeValueHTML] = useState<string[]>([]);
@@ -139,6 +141,7 @@ const CodeEditor = ({
       toggleSwitchLabel={toggleSwitchLabel}
       css={CSS}
       html={HTML}
+      iframeFunction={iframeFunction}
     />
   );
 

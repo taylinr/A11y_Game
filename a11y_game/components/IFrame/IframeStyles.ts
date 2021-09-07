@@ -12,7 +12,8 @@ const IframeStyles = styled.div<Props>`
     float: right;
   }
 
-  iframe {
+  iframe,
+  div.output-wrapper {
     filter: ${({ toggleActive, level }) =>
       toggleActive
         ? level == "contrast"
@@ -27,6 +28,14 @@ const IframeStyles = styled.div<Props>`
 
     margin-top: ${({ toggle, theme }) =>
       toggle ? "" : theme.baseSpace * 3.9 + "px "};
+  }
+
+  div.output-wrapper {
+    cursor: none;
+
+    button {
+      cursor: none;
+    }
   }
 
   .md_switch {
