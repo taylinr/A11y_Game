@@ -26,7 +26,7 @@ export default function Home() {
           <div className={"col-3"}></div>
           <div className={"col-6"}>
             <div className={"col-12"}>
-              <h1>Cognitive Disabilities</h1>
+              <h1>Cognitive Barriers</h1>
               <h2>Complete all the Levels to get your third Batch</h2>
             </div>
             <div className={"col-11"}>

@@ -44,7 +44,7 @@ export default function Home() {
           </div>
           <div className={"col-6"}>
             <div className={"col-12"}>
-              <h1>Visual Disabilities</h1>
+              <h1>Visual Barriers</h1>
               <h2>Complete all the Levels to get your first Batch</h2>
             </div>
             <div className={"col-11"}>

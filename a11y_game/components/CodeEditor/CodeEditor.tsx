@@ -45,7 +45,6 @@ type EditorProps = {
   setCode: Function;
   initialCSS?: string;
   initialHTML?: string;
-  initialJS?: string;
   level?: string;
   toggleSwitchLabel?: string;
 };
@@ -54,7 +53,6 @@ const CodeEditor = ({
   toggleSwitchLabel,
   initialHTML,
   initialCSS,
-  initialJS,
   level,
   setCode,
 }: EditorProps) => {
