@@ -53,9 +53,16 @@ const parseCSSObjectArray = (code: Code) => {
   const CSSArray: string[] = code.CSS;
   let CSS: string = "";
 
+ 
+
   CSSArray.forEach((line) => {
     CSS += line;
   });
+
+  let regEx =
+    /((?:^\s*)([\w#.@*,:\-.:>,*\s]+)\s*{(?:[\s]*)((?:[A-Za-z\- \s]+[:]\s*['"0-9\w .,\/()\-!%]+;?)*)*\s*}(?:\s*))/gim;
+
+  CSS.replace(regEx, "");
 
   const cssLineArray: string[] = CSS.replaceAll(/\s/g, "").split("}");
   const cssObject: CSSObject[] = [new CSSObject([], [])];
@@ -73,6 +80,9 @@ const parseCSSObjectArray = (code: Code) => {
     }
     cssObject.push(new CSSObject(selectorsArray, cssPropertiesArray));
   });
+
+
+  
 
   return cssObject;
 };
