@@ -6,6 +6,7 @@ import React, { useContext } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import checkmark from "../../assets/checkmark.svg";
 import Image from "next/image";
+import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 
 export default function Home() {
   const context = useContext(Context);
@@ -50,6 +51,26 @@ export default function Home() {
               </Button>
             </div>
           </div>
+        </div>
+        <div className="col-3">
+          <Button secondary={true} target={"/personas"}>
+            <Image src={arrowLeftDark} alt="arrow-left-icon" />
+            Personas Overview
+          </Button>
+        </div>
+        <div className="col-6">
+          {" "}
+          <p></p>{" "}
+        </div>
+        <div className="col-3">
+          {levelDone(9) ? (
+            <Button primary={true} target={"/finish"}>
+              Finish
+              <Image src={arrowRight} alt="arrow-right-icon" />
+            </Button>
+          ) : (
+            <Button inactive={true}>Finish</Button>
+          )}
         </div>
       </main>
     </div>

@@ -53,24 +53,23 @@ const parseCSSObjectArray = (code: Code) => {
   const CSSArray: string[] = code.CSS;
   let CSS: string = "";
 
- 
-
   CSSArray.forEach((line) => {
     CSS += line;
   });
+
+  const cssLineArray: string[] = CSS.replaceAll(/\s/g, "").split("}");
+  const cssObject: CSSObject[] = [new CSSObject([], [])];
 
   let regEx =
     /((?:^\s*)([\w#.@*,:\-.:>,*\s]+)\s*{(?:[\s]*)((?:[A-Za-z\- \s]+[:]\s*['"0-9\w .,\/()\-!%]+;?)*)*\s*}(?:\s*))/gim;
 
   CSS.replace(regEx, "");
 
-  const cssLineArray: string[] = CSS.replaceAll(/\s/g, "").split("}");
-  const cssObject: CSSObject[] = [new CSSObject([], [])];
-
   cssLineArray.forEach((line) => {
     let x: string[] = line.split("{");
     let selectors: string = x[0];
     let cssProperties: string = x[1];
+
     let selectorsArray: string[] = [];
     let cssPropertiesArray: string[] = [];
 
@@ -80,9 +79,6 @@ const parseCSSObjectArray = (code: Code) => {
     }
     cssObject.push(new CSSObject(selectorsArray, cssPropertiesArray));
   });
-
-
-  
 
   return cssObject;
 };
@@ -111,20 +107,30 @@ const getCSSForNode = (
 
   cssObject.forEach((selectorArray) => {
     selectorArray.Selectors.forEach((selector) => {
-      let testElements: HTMLElement[] = htmlArray.querySelectorAll(selector);
-
-      testElements.forEach((testElement) => {
-        let isSameElement: boolean =
-          testElement && element
-            ? testElement.toString() == element.toString()
-            : false;
-
-        if (isSameElement) {
-          isInCSS = true;
-
-          props = selectorArray.Properties;
+      const isSelectorValid = ((dummyElement) => (selector: string) => {
+        try {
+          dummyElement.querySelector(selector);
+        } catch {
+          return false;
         }
-      });
+        return true;
+      })(document.createDocumentFragment());
+
+      if (isSelectorValid(selector)) {
+        let testElements: HTMLElement[] = htmlArray.querySelectorAll(selector);
+        testElements.forEach((testElement) => {
+          let isSameElement: boolean =
+            testElement && element
+              ? testElement.toString() == element.toString()
+              : false;
+
+          if (isSameElement) {
+            isInCSS = true;
+
+            props = selectorArray.Properties;
+          }
+        });
+      }
     });
   });
 

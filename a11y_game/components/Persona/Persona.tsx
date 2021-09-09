@@ -48,7 +48,8 @@ const Persona = ({
           </div>
         </Link>
       ) : null}
-      <Link href={"/personas/" + target} passHref>
+
+      {inactive ? (
         <div className={"persona__wrapper"}>
           <div className="image__wrapper">
             <Image
@@ -84,7 +85,45 @@ const Persona = ({
             <p className={"persona__text"}>{text}</p> */}
           </div>
         </div>
-      </Link>
+      ) : (
+        <Link href={"/personas/" + target} passHref>
+          <div className={"persona__wrapper"}>
+            <div className="image__wrapper">
+              <Image
+                src={"/images/" + "dave" + "_head_" + emotion + ".png"}
+                height={230}
+                width={230}
+                className={"persona__image"}
+                alt={alt}
+                priority={true}
+              />
+              <div className={"badge__wrapper"}>
+                {batch == 0 || batch == undefined ? (
+                  <Image src={inactiveBatch} alt="empty batch icon" />
+                ) : batch == 1 ? (
+                  <Image src={bronzeBatch} alt="bronze batch icon" />
+                ) : batch == 2 ? (
+                  <Image src={silverBatch} alt="silver batch icon" />
+                ) : (
+                  <Image src={goldBatch} alt="gold batch icon" />
+                )}
+              </div>
+            </div>
+            <div className={"persona__info-wrapper"}>
+              <p className={"persona__name"}>{name}</p>
+
+              <p className={"persona__age"}>{age} years old</p>
+              <p className={"persona__pronouns"}>{pronouns}</p>
+              <hr />
+              <p className={"persona__disability"}>
+                <strong>{disability}</strong>
+              </p>
+              {/* <hr />
+            <p className={"persona__text"}>{text}</p> */}
+            </div>
+          </div>
+        </Link>
+      )}
     </PersonaStyles>
   );
 };
