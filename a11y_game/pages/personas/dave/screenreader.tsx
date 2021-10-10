@@ -4,7 +4,7 @@ import Button from "../../../components/Button/Button";
 import ScreenReaderChecker from "../../../components/Level/ScreenReaderChecker";
 import Modal from "../../../components/Modal/Modal";
 import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
-export default function Home() {
+const Home = () => {
   const [valid, setValid] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const activateModal = () => {
@@ -120,3 +120,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

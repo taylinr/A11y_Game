@@ -10,6 +10,8 @@ import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
 import Button from "../Button/Button";
 import { parse, HTMLElement, Node } from "node-html-parser";
+import { useRouter } from "next/router";
+import Badge from "../Badge/Badge";
 import {
   checkEasyLanguageValid,
   getEasyLanguagePoints,
@@ -24,6 +26,9 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [valid, setValid] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
+  const [showBadge, setShowBadge] = useState<boolean>(false);
+  const [badge, setBadge] = useState<number>(0);
+  const router = useRouter();
 
   const setFormInParent = (form: HTMLFormElement) => {
     setValid(checkEasyLanguageValid(form));
@@ -99,6 +104,28 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
 
     const newPoints: number = thisPoints - oldPoints;
     context.addPoints(newPoints);
+  };
+
+  const animateBadge = () => {
+    handleClose();
+    const add = async () => {
+      addPoints();
+    };
+
+    add().then(() => {
+      let badge = context.badges.get(3);
+      if (badge) {
+        setBadge(badge);
+        setShowBadge(true);
+      } else {
+        handleCloseBadge();
+      }
+    });
+  };
+
+   const handleCloseBadge = () => {
+    router.push("./");
+    setShowBadge(false);
   };
 
   return (
@@ -228,7 +255,7 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
             cta: "SUBMIIITTTITITITIT",
             successHeadline: "success!",
             successText: "success headline!",
-            onChange: function (e) {},
+            onChange: (e) => {},
           },
         ]}
       />
@@ -286,7 +313,7 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
                 <p> </p>
               </div>
               <div className={"col-4"}>
-                <Button primary={true} target={"./"} onClick={addPoints}>
+                <Button primary={true} onClick={animateBadge}>
                   Next Level
                   <Image src={arrowRight} alt="arrow-right-icon" />
                 </Button>
@@ -294,6 +321,14 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
             </div>
           </div>
         </Modal>
+        ) : null}
+        {showBadge ? (
+        <Badge
+          badge={badge}
+          titleText={"Badge for Alex"}
+          id="badge-dave"
+          handleClose={handleCloseBadge}
+        />
       ) : null}
     </LevelStyles>
   );

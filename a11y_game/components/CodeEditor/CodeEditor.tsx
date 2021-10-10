@@ -127,7 +127,7 @@ const CodeEditor = ({
   }, [initEditor, initialHTML, onUpdateHTML, initialCSS, onUpdateCSS]);
 
   useEffect(
-    function () {
+    () => {
       setCode(tree);
     },
     [editorTreeValueHTML, editorTreeValueCSS]

@@ -10,7 +10,6 @@ type ButtonProps = {
   inactive?: boolean;
   help?: boolean;
   onClick?: () => void;
-  onAddPoints?: (num: number) => void;
   type?: "button" | "submit" | "reset" | undefined;
 };
 
@@ -22,7 +21,6 @@ const Button = ({
   accomplished,
   inactive,
   onClick,
-  onAddPoints,
   type,
   help,
 }: ButtonProps) => {
@@ -39,6 +37,7 @@ const Button = ({
             type={type}
             help={help}
           >
+            
             {children}
           </ButtonStyles>
         </a>

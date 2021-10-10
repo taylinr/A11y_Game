@@ -6,7 +6,7 @@ import Image from "next/image";
 import Context from "../components/Context/Context";
 import { useContext } from "react";
 
-export default function Home() {
+const Home = () => {
   const context = useContext(Context);
 
   const levelDone = (level: number) => {
@@ -62,14 +62,13 @@ export default function Home() {
         <div className={"row col-12"}>
           <Persona
             target="dave"
-            image="/images/dave_head_neutral.png"
             alt="Image of Dave"
             disability="Visual Disability"
             name="Dave"
             age={25}
             pronouns="He / Him"
             text="I hate when products have no descriptions but many images!"
-            batch={context.batches.get(1)}
+            badge={context.badges.get(1)}
             showText={
               !(levelDone(1) && levelDone(2) && levelDone(3) && levelDone(4))
             }
@@ -77,7 +76,6 @@ export default function Home() {
           />
           <Persona
             target="clara"
-            image="/images/profile.jpg"
             alt="image of Clara"
             disability="Auditory Disability"
             name="Clara"
@@ -85,7 +83,7 @@ export default function Home() {
             pronouns="She / Her"
             text='"Social Media is great, but all these Storys and Clips without subtitles drive me nuts!"'
             inactive={!levelDone(4)}
-            batch={context.batches.get(2)}
+            badge={context.badges.get(2)}
             showText={
               levelDone(1) &&
               levelDone(2) &&
@@ -98,7 +96,6 @@ export default function Home() {
           />
           <Persona
             target="alex"
-            image="/images/profile.jpg"
             alt="image of Alex"
             disability="Cognitive Disability"
             name="Alex"
@@ -106,7 +103,7 @@ export default function Home() {
             pronouns="They / Them"
             text='"Online-Newspaper articles shouldnt riquire a masters-degree to be readable"'
             inactive={!levelDone(6)}
-            batch={context.batches.get(3)}
+            badge={context.badges.get(3)}
             showText={
               levelDone(1) &&
               levelDone(2) &&
@@ -121,7 +118,6 @@ export default function Home() {
           />
           <Persona
             target="semiha"
-            image="/images/profile.jpg"
             alt="image of Semiha"
             disability="Motor Disability"
             name="Semiha"
@@ -129,7 +125,7 @@ export default function Home() {
             pronouns="She / Her"
             text='"Online shopping with Keyboard-only is hard, but physical shops arent accessible either"'
             inactive={!levelDone(8)}
-            batch={context.batches.get(4)}
+            badge={context.badges.get(4)}
             showText={
               levelDone(1) &&
               levelDone(2) &&
@@ -148,3 +144,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

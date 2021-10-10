@@ -14,10 +14,11 @@ import Image from "next/image";
 
 type ContrastLevelProps = {
   setContrastInParent: Function;
+  setEmptyCSSInParent: Function;
 };
 
 const ColorContrastChecker = ({
-  setContrastInParent: setContrastinParent,
+  setContrastInParent: setContrastinParent, setEmptyCSSInParent
 }: ContrastLevelProps) => {
   const context = useContext(Context);
   const [code, setCode] = useState<Code>(new Code([""], [""]));
@@ -25,26 +26,46 @@ const ColorContrastChecker = ({
   const [contrastRatio, setContrastratio] = useState<number>(0);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
+  const [emptyCSS, setEmptyCSS] = useState<boolean>(false);
 
   const setCodeFromChild = (code: Code) => {
     setCode(code);
   };
 
   useEffect(
-    function () {
+    () => {
       setContrastratio(checkContrast(code));
-
       if (checkContrast(code) > 4.5) {
         setValid(true);
       } else {
         setValid(false);
       }
+
+      let CSSLine: string = "";
+
+      code.CSS.forEach((line) => {
+        CSSLine += line;
+      });
+
+      console.log(CSSLine);
+
+      if (!CSSLine.includes("color") && !CSSLine.includes("{") && !CSSLine.includes("}")) {
+        setValid(false);
+        setEmptyCSS(true);
+      } else {
+        setEmptyCSS(false);
+      }
+
     },
     [code]
   );
 
+  useEffect(() => {
+    setEmptyCSSInParent(emptyCSS);
+  }, [emptyCSS, setEmptyCSSInParent])
+
   useEffect(
-    function () {
+    () => {
       let newVal: number;
 
       newVal = contrastRatio > 15 ? 3 : contrastRatio > 7 ? 2 : 1;

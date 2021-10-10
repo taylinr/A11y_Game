@@ -234,7 +234,7 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
             cta: "SUBMIIITTTITITITIT",
             successHeadline: "success!",
             successText: "success headline!",
-            onChange: function (e) {},
+            onChange: (e) => {},
           },
         ]}
       />

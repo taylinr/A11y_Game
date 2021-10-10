@@ -19,7 +19,7 @@ export type FormProps = {
   onChange: React.FormEventHandler;
 };
 
-export function selectComponent({ component, ...field }: any) {
+export const selectComponent = ({ component, ...field }: any) => {
   switch (component) {
     case "select":
       return <Select key={field.name} {...field} />;
@@ -35,18 +35,18 @@ export function selectComponent({ component, ...field }: any) {
   }
 }
 
-export default function FormComponent({
+const FormComponent = ({
   propSuccess,
   cta,
   formFields,
   onChange,
-}: FormProps) {
+}: FormProps) => {
   const [success, setSuccess] = React.useState(propSuccess);
   useEffect(() => {
     setSuccess(propSuccess);
   }, [propSuccess]);
 
-  function getInitalValues() {
+  const getInitalValues = () => {
     const initialValues: any = {};
     formFields.forEach((field) => {
       initialValues[field.name] = "";
@@ -78,6 +78,8 @@ export default function FormComponent({
     </Formik>
   );
 }
-function preventDefault() {
+const preventDefault = () => {
   throw new Error("Function not implemented.");
 }
+
+export default FormComponent;

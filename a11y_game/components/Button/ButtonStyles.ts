@@ -38,7 +38,7 @@ const ButtonStyles = styled.button<Props>`
       ? theme.white
       : theme.primary};
   box-shadow: ${({ theme, inactive }) => (inactive ? "none" : theme.boxShadow)};
-  cursor: ${({ theme, inactive }) => (inactive ? "default" : "pointer")};
+  cursor: ${({ inactive }) => (inactive ? "default" : "pointer")};
 
   font-size: 1.2em;
 
@@ -49,7 +49,7 @@ const ButtonStyles = styled.button<Props>`
   }
 
   :hover {
-    box-shadow: ${({ theme, inactive }) =>
+    box-shadow: ${({ inactive }) =>
       inactive
         ? "none"
         : "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"};

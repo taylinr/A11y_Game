@@ -1,31 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import PersonaStyles from "./PersonaStyles";
-import inactiveBatch from "../../assets/batch-inactive.svg";
-import goldBatch from "../../assets/batch-gold.svg";
-import silverBatch from "../../assets/batch-silver.svg";
-import bronzeBatch from "../../assets/batch-bronze.svg";
+import inactivebadge from "../../assets/badge-inactive.svg";
+import goldbadge from "../../assets/badge-gold.svg";
+import silverbadge from "../../assets/badge-silver.svg";
+import bronzebadge from "../../assets/badge-bronze.svg";
 import Context from "../Context/Context";
 import { useContext } from "react";
 
 type PersonaProps = {
   target: string;
   alt: string;
-  image: string;
   disability: string;
   name: string;
   age: number;
   pronouns: string;
   text: string;
   inactive?: boolean;
-  batch?: number;
+  badge?: number;
   showText: boolean;
   emotion: string;
 };
 
 const Persona = ({
   target,
-  image,
   alt,
   disability,
   name,
@@ -33,7 +31,7 @@ const Persona = ({
   pronouns,
   text,
   inactive,
-  batch,
+  badge,
   showText,
   emotion,
 }: PersonaProps) => {
@@ -48,11 +46,12 @@ const Persona = ({
           </div>
         </Link>
       ) : null}
-      <Link href={"/personas/" + target} passHref>
+
+      {inactive ? (
         <div className={"persona__wrapper"}>
           <div className="image__wrapper">
             <Image
-              src={"/images/" + "dave" + "_head_" + emotion + ".png"}
+              src={"/images/" + target + "_head_" + emotion + ".png"}
               height={230}
               width={230}
               className={"persona__image"}
@@ -60,14 +59,14 @@ const Persona = ({
               priority={true}
             />
             <div className={"badge__wrapper"}>
-              {batch == 0 || batch == undefined ? (
-                <Image src={inactiveBatch} alt="empty batch icon" />
-              ) : batch == 1 ? (
-                <Image src={bronzeBatch} alt="bronze batch icon" />
-              ) : batch == 2 ? (
-                <Image src={silverBatch} alt="silver batch icon" />
+              {badge == 0 || badge == undefined ? (
+                <Image src={inactivebadge} alt="empty badge icon" />
+              ) : badge == 1 ? (
+                <Image src={bronzebadge} alt="bronze badge icon" />
+              ) : badge == 2 ? (
+                <Image src={silverbadge} alt="silver badge icon" />
               ) : (
-                <Image src={goldBatch} alt="gold batch icon" />
+                <Image src={goldbadge} alt="gold badge icon" />
               )}
             </div>
           </div>
@@ -84,7 +83,47 @@ const Persona = ({
             <p className={"persona__text"}>{text}</p> */}
           </div>
         </div>
-      </Link>
+      ) : (
+        <Link href={"/personas/" + target} passHref>
+          <div className={"persona__wrapper"}>
+            <div className="image__wrapper">
+              <Image
+                src={
+                  "/images/" + name.toLowerCase() + "_head_" + emotion + ".png"
+                }
+                height={230}
+                width={230}
+                className={"persona__image"}
+                alt={alt}
+                priority={true}
+              />
+              <div className={"badge__wrapper"}>
+                {badge == 0 || badge == undefined ? (
+                  <Image src={inactivebadge} alt="empty badge icon" />
+                ) : badge == 1 ? (
+                  <Image src={bronzebadge} alt="bronze badge icon" />
+                ) : badge == 2 ? (
+                  <Image src={silverbadge} alt="silver badge icon" />
+                ) : (
+                  <Image src={goldbadge} alt="gold badge icon" />
+                )}
+              </div>
+            </div>
+            <div className={"persona__info-wrapper"}>
+              <p className={"persona__name"}>{name}</p>
+
+              <p className={"persona__age"}>{age} years old</p>
+              <p className={"persona__pronouns"}>{pronouns}</p>
+              <hr />
+              <p className={"persona__disability"}>
+                <strong>{disability}</strong>
+              </p>
+              {/* <hr />
+            <p className={"persona__text"}>{text}</p> */}
+            </div>
+          </div>
+        </Link>
+      )}
     </PersonaStyles>
   );
 };

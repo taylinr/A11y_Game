@@ -7,7 +7,7 @@ import Modal from "../../../components/Modal/Modal";
 import contrast from "/images/Contrast.png";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
   const [valid, setValid] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -42,9 +42,9 @@ export default function Home() {
               Help
             </Button>
             <PersonaLevel
-              name={"dave"}
+              name={"clara"}
               emotion={valid ? "happy" : "neutral"}
-              alt="Image of Dave"
+              alt="Image of Clara"
               valid={valid}
               validationText={
                 valid
@@ -154,3 +154,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

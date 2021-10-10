@@ -34,7 +34,7 @@ const FontSizeChecker = ({
   };
 
   useEffect(
-    function () {
+    () => {
       let fontSize = checkFontSize(code);
       let fontSizeRelative = checkFontSizeRelative(code);
       setFontSize(fontSize);
@@ -50,7 +50,7 @@ const FontSizeChecker = ({
   );
 
   useEffect(
-    function () {
+    () => {
       let newVal: number;
 
       newVal =
@@ -67,7 +67,7 @@ const FontSizeChecker = ({
   );
 
   useEffect(
-    function () {
+    () => {
       let newVal: number;
 
       newVal =
