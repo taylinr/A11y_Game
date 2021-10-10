@@ -29,6 +29,10 @@ const Home = () => {
           <div className="col-9">
             <h1>Easy Language</h1>
             <p>
+              People with cognitive disabilities or people that aren't fluid in
+              a language can have problems reading complicated terms and
+              sentences.
+              <br />
               This Text could be way easier to read, get rid of all these
               complicated terms and words.
             </p>
@@ -59,8 +63,28 @@ const Home = () => {
           >
             <div className={"col-12 row"}>
               <h2>Help</h2>
-              <div className={"col-6"}></div>
-              <div className={"col-6"}></div>
+              <div className={"col-6"}>
+                <h3>Why Easy Language</h3>
+                <p>
+                  People with cognitive disabilities or people that aren't fluid
+                  in a language can have problems reading complicated terms and
+                  sentences.
+                  <br />
+                  This Text could be way easier to read, get rid of all these
+                  complicated terms and words.
+                </p>
+              </div>
+              <div className={"col-6"}>
+                <h3>How?</h3>
+                <p>
+                  Use clear content (text, images and media). This includes easy
+                  words, short sentences and blocks of text, clear images, and
+                  easy to understand video.
+                </p>
+                <p>
+                  Always use the simplest words and try to avoid long sentences.
+                </p>
+              </div>
               <div className="col-12 row">
                 <p>
                   For Further Information look up the{" "}
