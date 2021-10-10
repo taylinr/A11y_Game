@@ -108,13 +108,19 @@ const EasyLanguageChecker = ({ setValidInParent }: Props) => {
 
   const animateBadge = () => {
     handleClose();
-    addPoints();
+    const add = async () => {
+      addPoints();
+    };
 
-    let badge = context.badges.get(3);
-    if (badge) {
-      setBadge(badge);
-      setShowBadge(true);
-    }
+    add().then(() => {
+      let badge = context.badges.get(3);
+      if (badge) {
+        setBadge(badge);
+        setShowBadge(true);
+      } else {
+        handleCloseBadge();
+      }
+    });
   };
 
    const handleCloseBadge = () => {

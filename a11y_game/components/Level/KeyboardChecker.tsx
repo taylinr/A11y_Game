@@ -78,13 +78,19 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
 
   const animateBadge = () => {
     handleClose();
-    addPoints();
+    const add = async () => {
+      addPoints();
+    };
 
-    let badge = context.badges.get(4);
-    if (badge) {
-      setBadge(badge);
-      setShowBadge(true);
-    }
+    add().then(() => {
+      let badge = context.badges.get(4);
+      if (badge) {
+        setBadge(badge);
+        setShowBadge(true);
+      } else {
+        handleCloseBadge();
+      }
+    });
   };
 
   const handleCloseBadge = () => {

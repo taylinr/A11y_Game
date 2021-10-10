@@ -86,7 +86,7 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
   const addPoints = () => {
     let submitAgain: boolean = false;
     let oldPoints: number = 0;
-    let thisPoints: number =  3;
+    let thisPoints: number = 3;
 
     submitAgain = context.submittedLevel.has(6);
 
@@ -106,16 +106,22 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
 
   const animateBadge = () => {
     handleClose();
-    addPoints();
+    const add = async () => {
+      addPoints();
+    };
 
-    let badge = context.badges.get(2);
-    if (badge) {
-      setBadge(badge);
-      setShowBadge(true);
-    }
+    add().then(() => {
+      let badge = context.badges.get(2);
+      if (badge) {
+        setBadge(badge);
+        setShowBadge(true);
+      } else {
+        handleCloseBadge();
+      }
+    });
   };
 
-   const handleCloseBadge = () => {
+  const handleCloseBadge = () => {
     router.push("./");
     setShowBadge(false);
   };
@@ -127,7 +133,7 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
         setFormInParent={setFormInParent}
         level="6"
         toggle={false}
-              initialCSS="
+        initialCSS="
 
               .image__wrapper {
                   max-height: 450px;
@@ -148,7 +154,7 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
                 .blurred { filter: blur(4px); }
             
             "
-              initialHTML="
+        initialHTML="
             <div class='image__wrapper' id='understand_sentence'>
                 <img src='/images/Sign_Language/i.jpg' alt='Image of sample phrases in american sign language'>
                 <img src='/images/Sign_Language/do.jpg' alt='Image of sample phrases in american sign language'>
@@ -274,7 +280,6 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
                 textBefore: "Let's",
                 textAfter: "afterwards?",
               },
-              
             ],
             propSuccess: false,
             cta: "SUBMIIITTTITITITIT",
@@ -316,10 +321,7 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
             <h2>Great!</h2>
             <div className={"col-6"}>
               <h3>You have succeded the Sign Language Level with</h3>
-              <Points
-                currVal={3}
-                maxVal={3}
-              />
+              <Points currVal={3} maxVal={3} />
             </div>
             <div className={"col-6"}>
               <Progress val={3} maxval={3} label={"Sign Language"} />
@@ -343,8 +345,8 @@ const SignlanguageChecker = ({ setValidInParent }: Props) => {
             </div>
           </div>
         </Modal>
-        ) : null}
-        {showBadge ? (
+      ) : null}
+      {showBadge ? (
         <Badge
           badge={badge}
           titleText={"Badge for Clara"}

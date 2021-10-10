@@ -90,13 +90,19 @@ const AriaChecker = ({
 
   const animateBadge = () => {
     handleClose();
-    addPoints();
+    const add = async () => {
+      addPoints();
+    };
 
-    let badge = context.badges.get(1);
-    if (badge) {
-      setBadge(badge);
-      setShowBadge(true);
-    }
+    add().then(() => {
+      let badge = context.badges.get(1);
+      if (badge) {
+        setBadge(badge);
+        setShowBadge(true);
+      } else {
+        handleCloseBadge();
+      }
+    });    
   };
 
   return (
