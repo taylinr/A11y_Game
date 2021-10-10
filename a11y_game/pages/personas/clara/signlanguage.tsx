@@ -29,7 +29,9 @@ const Home = () => {
           <div className="col-9">
             <h1>Sign Language</h1>
             <p>
-              Translating complicated words and terms into sign language can be hard, thats why easy language is impoprtant for people with hearing disabilities.
+              Translating complicated words and terms into sign language can be
+              hard, thats why easy language is impoprtant for people with
+              hearing disabilities.
               <br />
               Select the easiest words and watch the signs.
             </p>
@@ -60,8 +62,33 @@ const Home = () => {
           >
             <div className={"col-12 row"}>
               <h2>Help</h2>
-              <div className={"col-6"}></div>
-              <div className={"col-6"}></div>
+              <div className={"col-6"}>
+                <h3>Why Easy Language for People with hearing disabilities?</h3>
+                <p>
+                  Translating complicated words and terms into sign language can
+                  be hard, thats why easy language is impoprtant for people with
+                  hearing disabilities.
+                </p>
+                <p>
+                  People with cognitive disabilities or people that aren't fluid
+                  in a language can have problems reading complicated terms and
+                  sentences.
+                  <br />
+                  This Text could be way easier to read, get rid of all these
+                  complicated terms and words.
+                </p>
+              </div>
+              <div className={"col-6"}>
+                <h3>How?</h3>
+                <p>
+                  Use clear content (text, images and media). This includes easy
+                  words, short sentences and blocks of text, clear images, and
+                  easy to understand video.
+                </p>
+                <p>
+                  Always use the simplest words and try to avoid long sentences.
+                </p>
+              </div>
               <div className="col-12 row">
                 <p>
                   For Further Information look up the{" "}

@@ -32,7 +32,7 @@ const Home = () => {
               emotion={levelDone(6) ? "happy" : "neutral"}
               alt="Image of Clara"
               text="Social Media is great, but all these Storys and Clips without subtitles drive me nuts!"
-              badge= {badge? badge : 0}
+              badge={badge ? badge : 0}
             />
           </div>
           <div className={"col-6"}>
@@ -42,12 +42,13 @@ const Home = () => {
             </div>
             <div className={"col-11"}>
               <p>
-                People with Audio Disabilities like Clara or in circumstances that don't allow to play sound and music out loud need captions.
+                People with Audio Disabilities like Clara or in circumstances
+                that don't allow to play sound and music out loud need captions.
                 <br />
-                Sign Languages can be a even better way to describe the content of a song or video, because of its possibility to transport emotions and meta-informations. </p>
-              <br /> 
-
-              Since Sign Language uses diffrent 
+                Sign Languages can be a even better way to describe the content
+                of a song or video, because of its possibility to transport
+                emotions and meta-informations.{" "}
+              </p>
             </div>
           </div>
           <div className={"col-3"}>

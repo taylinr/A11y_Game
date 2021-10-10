@@ -32,7 +32,7 @@ const Home = () => {
               emotion={levelDone(9) ? "happy" : "neutral"}
               alt="Image of Semhia"
               text="Online shopping with Keyboard-only is hard, but physical shops arent accessible either"
-              badge= {badge? badge : 0}
+              badge={badge ? badge : 0}
             />
           </div>
           <div className={"col-6"}>
@@ -41,7 +41,11 @@ const Home = () => {
               <h2>Complete all the Levels to get your final badge</h2>
             </div>
             <div className={"col-11"}>
-              <p>...tbc</p>
+              <p>
+                People affected by motor barriers often can't use mouses or
+                other input devices and have to use the keyboard or assistive
+                devices to navigate and use through a webpage.
+              </p>
             </div>
           </div>
           <div className={"col-3"}>

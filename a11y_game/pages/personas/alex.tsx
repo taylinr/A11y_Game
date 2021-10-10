@@ -33,7 +33,7 @@ const Home = () => {
               emotion={levelDone(8) ? "happy" : "neutral"}
               alt="Image of Alex"
               text="Online-Newspaper articles shouldnt riquire a masters-degree to be readable"
-              badge= {badge? badge : 0}
+              badge={badge ? badge : 0}
             />
           </div>
           <div className={"col-6"}>
@@ -42,7 +42,16 @@ const Home = () => {
               <h2>Complete all the Levels to get your third badge</h2>
             </div>
             <div className={"col-11"}>
-              <p>...tbc</p>
+              <p>
+                Cognitive barriers, could affect persons who have greater
+                difficulty with mental tasks than the average person. Cognitive
+                disabilities are by far the most common type of disability. Most
+                cognitive disabilities are rooted in biology or physiology.
+              </p>
+              <p>
+                People who aren't native speakers to a language or people from
+                diffrent cultures could also be affected by cognitive barriers.
+              </p>
             </div>
           </div>
           <div className={"col-3"}>
