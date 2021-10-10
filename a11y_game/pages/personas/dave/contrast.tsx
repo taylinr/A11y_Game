@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import ColorContrastChecker from "../../../components/Level/ColorContrastChecker";
 import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
@@ -7,9 +7,11 @@ import Modal from "../../../components/Modal/Modal";
 import contrast from "/images/Contrast.png";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
   const [contrastRatio, setContrastratio] = useState<number>(0);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [emptyCSS, setEmptyCSS] = useState<boolean>(false);
+  
   const activateModal = () => {
     setIsOpenModal(true);
   };
@@ -29,7 +31,8 @@ export default function Home() {
         <div className="col-12 row ">
           <div className="col-9">
             <h1>Color & Contrast</h1>
-            <p>
+            <p> 
+              {emptyCSS.toString()}
               Change the text- and background color in the panels below to be
               accessible, the higher the contrast ratio the better!
             </p>
@@ -40,22 +43,27 @@ export default function Home() {
             </Button>
             <PersonaLevel
               name={"dave"}
-              emotion={contrastRatio > 4.5 ? "happy" : "neutral"}
+              emotion={!emptyCSS && contrastRatio > 4.5 ? "happy" : "neutral"}
               alt="Image of Dave"
-              valid={contrastRatio > 4.5}
+              valid={!emptyCSS && contrastRatio > 4.5}
               validationText={
-                contrastRatio > 4.5
-                  ? "Contrast Ratio of " +
-                    contrastRatio?.toFixed(1) +
-                    " is great!"
-                  : "Contrast Ratio of " +
-                    contrastRatio?.toFixed(1) +
+                emptyCSS
+                  ? 
+                  "The CSS-Code must be changing the font- or background color" 
+                  :
+                  contrastRatio > 4.5
+                    ? "Contrast Ratio of " +
+                      contrastRatio?.toFixed(1) +
+                      " is great!"
+                    : "Contrast Ratio of " +
+                      contrastRatio?.toFixed(1) +
                     " is too small."
+                
               }
             />
           </div>
         </div>
-        <ColorContrastChecker setContrastInParent={setContrastratio} />
+        <ColorContrastChecker setContrastInParent={setContrastratio} setEmptyCSSInParent={setEmptyCSS}/>
         {isOpenModal ? (
           <Modal
             titleText="Color And Contrast Level Help"
@@ -139,3 +147,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

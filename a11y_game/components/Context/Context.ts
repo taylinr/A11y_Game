@@ -6,7 +6,7 @@ const Context = React.createContext({
   submittedLevel: new Map<number, number>(),
   addPoints: (num: number) => {},
   addSubmittedLevel: (level: number, points: number) => {},
-  batches: new Map<number, number>(),
+  badges: new Map<number, number>(),
 });
 
 export default Context;

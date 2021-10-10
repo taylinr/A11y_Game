@@ -11,6 +11,8 @@ import Context from "../Context/Context";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Badge from "../Badge/Badge";
 
 type FontSizeLevelProps = {
   setValidInParent: Function;
@@ -20,16 +22,18 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
   const context = useContext(Context);
   const [code, setCode] = useState<Code>(new Code([""], [""]));
   const [valid, setValid] = useState<boolean>(false);
-
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(3);
+  const [showBadge, setShowBadge] = useState<boolean>(false);
+  const [badge, setBadge] = useState<number>(0);
+  const router = useRouter();
 
   const setCodeFromChild = (code: Code) => {
     setCode(code);
   };
 
   useEffect(
-    function () {
+    () => {
       let newPoints = checkKeyboardPoints(code);
       setPoints(newPoints);
       setValid(newPoints > 0);
@@ -38,7 +42,7 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
   );
 
   useEffect(
-    function () {
+    () => {
       setValidInParent(valid);
     },
     [valid, setValidInParent]
@@ -70,6 +74,22 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
 
     const newPoints: number = points - oldPoints;
     context.addPoints(newPoints);
+  };
+
+  const animateBadge = () => {
+    handleClose();
+    addPoints();
+
+    let badge = context.badges.get(4);
+    if (badge) {
+      setBadge(badge);
+      setShowBadge(true);
+    }
+  };
+
+  const handleCloseBadge = () => {
+    router.push("./");
+    setShowBadge(false);
   };
 
   return (
@@ -120,7 +140,7 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
                 <p> </p>
               </div>
               <div className={"col-4"}>
-                <Button primary={true} target={"./"} onClick={addPoints}>
+               <Button primary={true} onClick={animateBadge}>
                   Next Level
                   <Image src={arrowRight} alt="arrow-right-icon" />
                 </Button>
@@ -128,6 +148,14 @@ const FontSizeChecker = ({ setValidInParent }: FontSizeLevelProps) => {
             </div>
           </div>
         </Modal>
+      ) : null}
+      {showBadge ? (
+        <Badge
+          badge={badge}
+          titleText={"Badge for Semiha"}
+          id="badge-dave"
+          handleClose={handleCloseBadge}
+        />
       ) : null}
     </LevelStyles>
   );

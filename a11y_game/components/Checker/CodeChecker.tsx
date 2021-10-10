@@ -169,7 +169,7 @@ const loopNodeChildren = (
   }
 };
 
-export function checkContrast(code: Code) {
+export const checkContrast = (code: Code) => {
   let valid: boolean = true;
   let lowestContrast: number = 100.0;
 
@@ -180,7 +180,7 @@ export function checkContrast(code: Code) {
 
   recurseDomChildren(htmlObject, cssObject, htmlObject);
 
-  function hexToRgb(hex: string) {
+  const hexToRgb = (hex: string) => {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? [
@@ -350,11 +350,10 @@ export function checkContrast(code: Code) {
     }
   }
 
-  // const valid : boolean = contrastRatio >= 5.0;
   return lowestContrast;
 }
 
-export function checkFontSize(code: Code) {
+export const checkFontSize = (code: Code) => {
   let valid: boolean = true;
 
   let lowestFontSize: number = 10000;
@@ -433,7 +432,7 @@ export function checkFontSize(code: Code) {
   return lowestFontSize;
 }
 
-export function checkFontSizeRelative(code: Code) {
+export const checkFontSizeRelative = (code: Code) => {
   let valid: boolean = true;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -485,7 +484,7 @@ export function checkFontSizeRelative(code: Code) {
   return valid;
 }
 
-export function checkAriaValid(code: Code) {
+export const checkAriaValid = (code: Code) => {
   let valid: boolean = true;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -532,7 +531,7 @@ export function checkAriaValid(code: Code) {
   return valid;
 }
 
-export function checkAriaPoints(code: Code) {
+export const checkAriaPoints = (code: Code) => {
   let points: number = 0;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -591,7 +590,7 @@ export function checkAriaPoints(code: Code) {
   return points;
 }
 
-export function checkCaptionsValid(code: Code) {
+export const checkCaptionsValid = (code: Code) => {
   let valid: boolean = true;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -618,7 +617,7 @@ export function checkCaptionsValid(code: Code) {
   return valid;
 }
 
-export function checkCaptionsPoints(code: Code) {
+export const checkCaptionsPoints = (code: Code) => {
   let points: number = 0;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -635,7 +634,6 @@ export function checkCaptionsPoints(code: Code) {
   let hasLabel: boolean = false;
 
   htmlStylesArray.forEach((node) => {
-    console.log(node);
     if (node.node.nodeType == 1) {
       let currentNode: HTMLElement = node.node as HTMLElement;
 
@@ -668,8 +666,7 @@ export function checkCaptionsPoints(code: Code) {
   return points;
 }
 
-
-export function checkKeyboardPoints(code: Code) {
+export const checkKeyboardPoints = (code: Code) => {
   let points: number = 0;
 
   const cssObject: CSSObject[] = parseCSSObjectArray(code);
@@ -685,7 +682,6 @@ export function checkKeyboardPoints(code: Code) {
   let hasHREF: boolean = false;
 
   htmlStylesArray.forEach((node) => {
-    console.log(node);
     if (node.node.nodeType == 1) {
       let currentNode: HTMLElement = node.node as HTMLElement;
 

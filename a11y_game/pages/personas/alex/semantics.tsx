@@ -4,7 +4,7 @@ import SemanticsChecker from "../../../components/Level/SemanticsChecker";
 import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
 import Modal from "../../../components/Modal/Modal";
 import Button from "../../../components/Button/Button";
-export default function Home() {
+const Home = () => {
   const [valid, setValid] = useState<boolean>(false);
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -103,3 +103,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

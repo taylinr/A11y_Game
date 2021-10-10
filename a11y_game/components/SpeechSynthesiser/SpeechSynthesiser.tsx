@@ -124,11 +124,8 @@ const addNodeToText = (node: HTMLElement) => {
     }
 
     if (node.hasAttribute("aria-selected")) {
-      console.log(node);
       if (node.getAttribute("aria-selected") == "true") {
         newText = newText + " " + "selected";
-
-        console.log(newText);
       }
     }
 
@@ -196,7 +193,6 @@ const SpeechSynthesis = ({ html }: Props) => {
       synth.cancel();
       setSpeaking(false);
     } else {
-      console.log(text);
       msg.text = text;
 
       synth.speak(msg);

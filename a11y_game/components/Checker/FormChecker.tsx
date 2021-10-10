@@ -74,7 +74,7 @@ export const checkEasyLanguageValid = (form: HTMLFormElement) => {
   return partialValid;
 };
 
-export function getEasyLanguagePoints(form: HTMLFormElement) {
+export const getEasyLanguagePoints = (form: HTMLFormElement) => {
   const selectArray: NodeListOf<HTMLSelectElement> =
     form.querySelectorAll("select");
 
@@ -233,7 +233,7 @@ export const checkScreenReaderValid = (form: HTMLFormElement) => {
   return valid;
 };
 
-export function getScreenReaderPoints(form: HTMLFormElement) {
+export const getScreenReaderPoints = (form: HTMLFormElement) => {
   let points: number = 0;
 
   const altTextSelect: HTMLSelectElement | null =
@@ -320,7 +320,7 @@ export function getScreenReaderPoints(form: HTMLFormElement) {
   return points;
 }
 
-export function checkSemanticsValid(form: HTMLFormElement) {
+export const checkSemanticsValid = (form: HTMLFormElement) => {
   let valid: boolean = true;
 
   const meaningsSelect: HTMLSelectElement | null =
@@ -410,7 +410,7 @@ export function checkSemanticsValid(form: HTMLFormElement) {
   return valid;
 }
 
-export function getSemanticsPoints(form: HTMLFormElement) {
+export const getSemanticsPoints = (form: HTMLFormElement) => {
   let points: number = 0;
 
   const meaningsSelect: HTMLSelectElement | null =
@@ -495,6 +495,120 @@ export function getSemanticsPoints(form: HTMLFormElement) {
         points = points + 1;
       }
     }
+  }
+
+  return points;
+}
+
+export const checkSignlanguageValid = (form: HTMLFormElement) => {
+  let partialValid = true;
+
+  const selectArray: NodeListOf<HTMLSelectElement> =
+    form.querySelectorAll("select");
+
+  for (let i = 0; i < selectArray.length && partialValid; i++) {
+
+    if (i == 0) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index !== 2
+        ) {
+          partialValid = false;
+        }
+      }
+    }
+
+    if (i == 1) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          (selectArray[i].options[x].selected &&
+            selectArray[i].options[x].index !== 3) 
+        ) {
+          partialValid = false;
+        }
+      }
+    }
+
+    if (i == 2) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index !== 2
+        ) {
+          partialValid = false;
+        }
+      }
+    }
+
+    if (i == 3) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index !== 1
+        ) {
+          partialValid = false;
+        }
+      }
+    }
+  }
+
+  return partialValid;
+};
+
+export const getSignlanguagePoints = (form: HTMLFormElement) => {
+  const selectArray: NodeListOf<HTMLSelectElement> =
+    form.querySelectorAll("select");
+
+  let points: number = 0;
+
+  for (let i = 0; i < selectArray.length; i++) {
+
+    if (i == 0) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index == 2
+        ) {
+          points = points + 1;
+        }
+      }
+    }
+
+    if (i == 1) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+         if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index == 3
+        ) {
+          points = points + 1;
+        }
+      }
+    }
+
+    if (i == 2) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+        if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index == 2
+        ) {
+          points = points + 1;
+        }
+      }
+    }
+
+
+    if (i == 3) {
+      for (let x = 0; x < selectArray[i].options.length; x++) {
+      if (
+          selectArray[i].options[x].selected &&
+          selectArray[i].options[x].index == 1
+        ) {
+          points = points + 1;
+        }
+      }
+    }
+
   }
 
   return points;

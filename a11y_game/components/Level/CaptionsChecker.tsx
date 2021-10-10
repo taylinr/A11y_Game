@@ -35,7 +35,7 @@ const CaptionsChecker = ({
   };
 
   useEffect(
-    function () {
+    () => {
       setValid(checkCaptionsValid(code));
       setPoints(checkCaptionsPoints(code));
     },
@@ -43,14 +43,14 @@ const CaptionsChecker = ({
   );
 
   useEffect(
-    function () {
+    () => {
       setValidInParent(valid);
     },
     [valid, setValidInParent]
   );
 
   useEffect(
-    function () {
+    () => {
       setPointsInParent(points);
     },
     [points, setPointsInParent]

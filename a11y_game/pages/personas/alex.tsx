@@ -9,12 +9,14 @@ import checkmark from "../../assets/checkmark.svg";
 import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
   const context = useContext(Context);
 
   const levelDone = (level: number) => {
     return context.submittedLevel.has(level);
   };
+  
+  const badge: number | undefined = context.badges.get(3);
 
   return (
     <div>
@@ -25,11 +27,19 @@ export default function Home() {
 
       <main>
         <div className={"col-12 row"}>
-          <div className={"col-3"}></div>
+          <div className={"col-3"}>
+            <PersonaSmall
+              name={"alex"}
+              emotion={levelDone(8) ? "happy" : "neutral"}
+              alt="Image of Alex"
+              text="Online-Newspaper articles shouldnt riquire a masters-degree to be readable"
+              badge= {badge? badge : 0}
+            />
+          </div>
           <div className={"col-6"}>
             <div className={"col-12"}>
               <h1>Cognitive Barriers</h1>
-              <h2>Complete all the Levels to get your third Batch</h2>
+              <h2>Complete all the Levels to get your third badge</h2>
             </div>
             <div className={"col-11"}>
               <p>...tbc</p>
@@ -90,3 +100,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

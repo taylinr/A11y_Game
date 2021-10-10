@@ -8,12 +8,14 @@ import checkmark from "../../assets/checkmark.svg";
 import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
   const context = useContext(Context);
 
   const levelDone = (level: number) => {
     return context.submittedLevel.has(level);
   };
+
+  const badge: number | undefined = context.badges.get(2);
 
   return (
     <div>
@@ -24,14 +26,28 @@ export default function Home() {
 
       <main>
         <div className={"col-12 row"}>
-          <div className={"col-3"}></div>
+          <div className={"col-3"}>
+            <PersonaSmall
+              name={"clara"}
+              emotion={levelDone(6) ? "happy" : "neutral"}
+              alt="Image of Clara"
+              text="Social Media is great, but all these Storys and Clips without subtitles drive me nuts!"
+              badge= {badge? badge : 0}
+            />
+          </div>
           <div className={"col-6"}>
             <div className={"col-12"}>
               <h1>Audio Barriers</h1>
-              <h2>Complete all the Levels to get your second Batch</h2>
+              <h2>Complete all the Levels to get your second badge</h2>
             </div>
             <div className={"col-11"}>
-              <p>...tbc</p>
+              <p>
+                People with Audio Disabilities like Clara or in circumstances that don't allow to play sound and music out loud need captions.
+                <br />
+                Sign Languages can be a even better way to describe the content of a song or video, because of its possibility to transport emotions and meta-informations. </p>
+              <br /> 
+
+              Since Sign Language uses diffrent 
             </div>
           </div>
           <div className={"col-3"}>
@@ -89,3 +105,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

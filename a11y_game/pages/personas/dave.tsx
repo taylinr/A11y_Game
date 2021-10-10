@@ -8,8 +8,10 @@ import checkmark from "../../assets/checkmark.svg";
 import Image from "next/image";
 import arrowLeftDark from "../../assets/arrow-left-dark.svg";
 
-export default function Home() {
+const Home = () => {
   const context = useContext(Context);
+
+  const badge: number | undefined = context.badges.get(1);
 
   const levelDone = (level: number) => {
     return context.submittedLevel.has(level);
@@ -41,12 +43,13 @@ export default function Home() {
               emotion={allLevelDone ? "happy" : "neutral"}
               alt="Image of Dave"
               text="I hate when products have no descriptions but many images!"
+              badge= {badge? badge : 0}
             />
           </div>
           <div className={"col-6"}>
             <div className={"col-12"}>
               <h1>Visual Barriers</h1>
-              <h2>Complete all the Levels to get your first Batch</h2>
+              <h2>Complete all the Levels to get your first badge</h2>
             </div>
             <div className={"col-11"}>
               <p>
@@ -70,13 +73,6 @@ export default function Home() {
           </div>
           <div className={"col-3"}>
             <div className="button-group">
-              {/* {console.log(
-                " accomplished={" +
-                  levelDone(1) +
-                  "} primary={ " +
-                  !levelDone(1) +
-                  "}"
-              )} */}
               <Button
                 target={"/personas/dave/contrast"}
                 accomplished={level1Done}
@@ -155,3 +151,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

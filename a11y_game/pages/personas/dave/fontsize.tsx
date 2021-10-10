@@ -4,7 +4,7 @@ import FontSizeChecker from "../../../components/Level/FontSizeChecker";
 import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
 import Modal from "../../../components/Modal/Modal";
 import Button from "../../../components/Button/Button";
-export default function Home() {
+const Home = () => {
   const [fontSize, setFontsize] = useState<number>(0);
   const [fontSizeRelative, setFontsizeRelative] = useState<boolean>(false);
 
@@ -117,3 +117,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

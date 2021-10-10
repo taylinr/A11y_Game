@@ -16,10 +16,17 @@ const PersonaStyles = styled.div<Props>`
     padding: 0;
     border-radius: 100%;
     float: left;
+    position: relative;
 
     img.persona__image {
       width: 240px;
       height: auto;
+    }
+
+    .badge__wrapper {
+      position: absolute;
+      top: 160px;
+      right: 30px;
     }
   }
   .speechbubble__wrapper {

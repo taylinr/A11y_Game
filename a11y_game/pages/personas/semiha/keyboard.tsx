@@ -6,7 +6,7 @@ import PersonaLevel from "../../../components/PersonaLevel/PersonaLevel";
 import Modal from "../../../components/Modal/Modal";
 import Image from "next/image";
 
-export default function Home() {
+const Home = () => {
   const [valid, setValid] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
@@ -39,7 +39,7 @@ export default function Home() {
               Help
             </Button>
             <PersonaLevel
-              name={"dave"}
+              name={"semiha"}
               emotion={valid ? "happy" : "neutral"}
               alt="Image of Semiha"
               valid={valid}
@@ -134,3 +134,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

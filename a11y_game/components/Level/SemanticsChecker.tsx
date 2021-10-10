@@ -277,7 +277,7 @@ const SemanticsChecker = ({ setValidInParent }: Props) => {
             cta: "",
             successHeadline: "success!",
             successText: "success headline!",
-            onChange: function (e) {},
+            onChange: (e) => {},
           },
         ]}
       />

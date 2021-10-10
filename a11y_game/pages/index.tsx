@@ -3,7 +3,7 @@ import Button from "../components/Button/Button";
 import arrowRight from "../assets/arrow-right.svg";
 import Image from "next/image";
 
-export default function Home() {
+export const Home = () => {
   return (
     <div>
       <Head>
@@ -54,3 +54,4 @@ export default function Home() {
     </div>
   );
 }
+export default Home;

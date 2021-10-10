@@ -60,7 +60,7 @@ const Tabs = ({ tabnames, contents, tabkeys }: TabsProps) => {
   return (
     <TabsStyles>
       <ul className="tab__buttons" role="tablist">
-        {tabnames.map(function (name, index) {
+        {tabnames.map( (name, index) => {
           return (
             <Tab
               key={name}
@@ -79,7 +79,7 @@ const Tabs = ({ tabnames, contents, tabkeys }: TabsProps) => {
         })}
       </ul>
       <div className="tab__contents" role="tabpanel">
-        {contents.map(function (content, index) {
+        {contents.map( (content, index) => {
           return (
             <TabContent
               key={tabkeys[index]}

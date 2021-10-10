@@ -16,7 +16,7 @@ type ModalProps = {
 const Modal = ({ children, titleText, id, handleClose }: ModalProps) => {
   const overlay = React.useRef(null);
 
-  function handleOuterClose(e: React.MouseEvent) {
+  const handleOuterClose = (e: React.MouseEvent) => {
     if (overlay.current !== e.target) return;
 
     handleClose();

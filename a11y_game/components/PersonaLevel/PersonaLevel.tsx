@@ -21,7 +21,7 @@ const Persona = ({
     <PersonaStyles valid={valid}>
       <div className={"persona__wrapper"}>
         <Image
-          src={"/images/" + name.toLowerCase() + "_head_talking.gif"}
+          src={"/images/" + name.toLowerCase() + "_head_" + emotion + ".png"}
           height={170}
           width={170}
           className={"persona__image"}

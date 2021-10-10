@@ -7,7 +7,7 @@ import theme from "../theme";
 import { useState, useEffect } from "react";
 
 const A11y = ({ Component, pageProps }: AppProps) => {
-  const [currentPoints, setPoints] = useState<number>(function () {
+  const [currentPoints, setPoints] = useState<number>(() => {
     if (typeof window !== "undefined") {
       return window.localStorage.getItem("currentPoints") === null
         ? 0
@@ -45,22 +45,22 @@ const A11y = ({ Component, pageProps }: AppProps) => {
     setLevel((map) => new Map(map.set(level, points)));
   };
 
-  const [batches, setBatches] = useState<Map<number, number>>(
+  const [badges, setbadges] = useState<Map<number, number>>(
     typeof window !== "undefined"
-      ? new Map(JSON.parse(window.localStorage.getItem("batches") + ""))
+      ? new Map(JSON.parse(window.localStorage.getItem("badges") + ""))
       : new Map<number, number>()
   );
 
   useEffect(() => {
     window.localStorage.setItem(
-      "batches",
-      JSON.stringify(Array.from(batches.entries())) + ""
+      "badges",
+      JSON.stringify(Array.from(badges.entries())) + ""
     );
-  }, [batches]);
+  }, [badges]);
 
   useEffect(() => {
     let points: number = 0;
-    let batch: number = 0;
+    let badge: number = 0;
     if (
       submittedLevel.has(1) &&
       submittedLevel.has(2) &&
@@ -79,14 +79,14 @@ const A11y = ({ Component, pageProps }: AppProps) => {
         (points4 != undefined ? points4 : 0);
 
       if (points < 5 && points > 0) {
-        batch = 1;
+        badge = 1;
       } else if (points < 9) {
-        batch = 2;
+        badge = 2;
       } else {
-        batch = 3;
+        badge = 3;
       }
 
-      setBatches((map) => new Map(map.set(1, batch)));
+      setbadges((map) => new Map(map.set(1, badge)));
     }
 
     if (submittedLevel.has(5) && submittedLevel.has(6)) {
@@ -98,14 +98,14 @@ const A11y = ({ Component, pageProps }: AppProps) => {
         (points6 != undefined ? points6 : 0);
 
       if (points < 3 && points > 0) {
-        batch = 1;
+        badge = 1;
       } else if (points < 6) {
-        batch = 2;
+        badge = 2;
       } else {
-        batch = 3;
+        badge = 3;
       }
 
-      setBatches((map) => new Map(map.set(2, batch)));
+      setbadges((map) => new Map(map.set(2, badge)));
     }
 
     if (submittedLevel.has(7) && submittedLevel.has(8)) {
@@ -117,14 +117,14 @@ const A11y = ({ Component, pageProps }: AppProps) => {
         (points8 != undefined ? points8 : 0);
 
       if (points < 3 && points > 0) {
-        batch = 1;
+        badge = 1;
       } else if (points < 6) {
-        batch = 2;
+        badge = 2;
       } else {
-        batch = 3;
+        badge = 3;
       }
 
-      setBatches((map) => new Map(map.set(3, batch)));
+      setbadges((map) => new Map(map.set(3, badge)));
     }
 
     if (submittedLevel.has(9)) {
@@ -133,14 +133,14 @@ const A11y = ({ Component, pageProps }: AppProps) => {
       points = points9 != undefined ? points9 : 0;
 
       if (points < 2 && points > 0) {
-        batch = 1;
+        badge = 1;
       } else if (points < 3) {
-        batch = 2;
+        badge = 2;
       } else {
-        batch = 3;
+        badge = 3;
       }
 
-      setBatches((map) => new Map(map.set(4, batch)));
+      setbadges((map) => new Map(map.set(4, badge)));
     }
   }, [submittedLevel]);
 
@@ -149,7 +149,7 @@ const A11y = ({ Component, pageProps }: AppProps) => {
     submittedLevel: submittedLevel,
     addPoints: addPoints,
     addSubmittedLevel: addSubmittedLevel,
-    batches: batches,
+    badges: badges,
   };
 
   return (
