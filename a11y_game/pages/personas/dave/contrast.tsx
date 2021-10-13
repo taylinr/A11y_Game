@@ -159,7 +159,7 @@ const Home = () => {
               <div className={"col-6"}>
                 <h3>How To</h3>
                 <Image
-                  src={"/images/intro/panels.png"}
+                  src={"/images/intro/panels.PNG"}
                   height={406}
                   width={786}
                   alt="image of the two editor panels"
@@ -172,7 +172,7 @@ const Home = () => {
 
                 <h3>Interaction Elements</h3>
                 <Image
-                  src={"/images/intro/additional_info.png"}
+                  src={"/images/intro/additional_info.PNG"}
                   height={48}
                   width={186}
                   alt="image of the interaction elemets with text and speaker"
@@ -187,7 +187,7 @@ const Home = () => {
               <div className={"col-6"}>
                 <h3>Help</h3>
                 <Image
-                  src={"/images/intro/help_button.png"}
+                  src={"/images/intro/help_button.PNG"}
                   height={56}
                   width={86}
                   alt="image of the help button"
@@ -200,7 +200,7 @@ const Home = () => {
 
                 <h3>Persona</h3>
                 <Image
-                  src={"/images/intro/persona.png"}
+                  src={"/images/intro/persona.PNG"}
                   height={129}
                   width={200}
                   alt="image of the two level persona"
