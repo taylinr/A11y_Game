@@ -123,11 +123,11 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
                 transition: 0.3s;
-                width: 80%;
+                width: 50%;
                 border-radius: 5px;
                 margin-left: auto;
                 margin-right: auto;
-                margin-top: 5%;
+                margin-top: 10%;
             }
 
             .card:hover {
@@ -137,6 +137,7 @@ const ScreenReaderChecker = ({ setValidInParent }: Props) => {
             img {
                 width: 100%;
                 border-radius: 5px 5px 0 0;
+                max-height: 175px;
             }
 
             .container {
