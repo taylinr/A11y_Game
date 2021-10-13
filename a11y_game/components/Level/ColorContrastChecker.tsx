@@ -47,8 +47,6 @@ const ColorContrastChecker = ({
         CSSLine += line;
       });
 
-      console.log(CSSLine);
-
       if (!CSSLine.includes("color") && !CSSLine.includes("{") && !CSSLine.includes("}")) {
         setValid(false);
         setEmptyCSS(true);
