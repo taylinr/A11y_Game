@@ -37,7 +37,6 @@ const Home = () => {
           <div className="col-9">
             <h1>Color & Contrast</h1>
             <p>
-              {emptyCSS.toString()}
               Change the text- and background color in the panels below to be
               accessible, the higher the contrast ratio the better!
             </p>
